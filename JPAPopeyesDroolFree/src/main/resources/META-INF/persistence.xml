@@ -11,10 +11,10 @@
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/FIXME?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
-			<property name="javax.persistence.jdbc.user" value="FIXME" />
-			<property name="javax.persistence.jdbc.FIXME"
-				value="student" />
+				value="jdbc:mysql://localhost:3306/insidescoop?useSSL=false&amp;useLegacyDatetimeCode=false&amp;serverTimezone=US/Mountain" />
+			<property name="javax.persistence.jdbc.user" value="scooper" />
+			<property name="javax.persistence.jdbc.password"
+				value="scoop" />
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.cj.jdbc.Driver" />
 
