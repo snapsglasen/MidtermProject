@@ -86,4 +86,10 @@ public class User {
 		return id == other.id;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
+				+ ", password=" + password + ", email=" + email + "]";
+	}
+
 }

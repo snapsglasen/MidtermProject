@@ -4,11 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Inside Scoop</title>
 </head>
 <body>
 
-<h1>Welcoom</h1>
+<h1>Welcome to Inside Scoop</h1>
+${SmokeTest }
 
 </body>
 </html>
