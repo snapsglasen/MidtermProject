@@ -12,17 +12,26 @@ public class CategoryDAOImpl implements CategoryDAO {
 	@Override
 	public void create(Category category) {
 		EntityManager em = emf.createEntityManager();
-		
+		em.getTransaction().begin();
+		em.persist(category);
+		em.flush();
+		em.getTransaction().commit();
+		em.close();
 	}
 
 	@Override
 	public Category findById(int id) {
-		return null;
+		EntityManager em = emf.createEntityManager();
+		Category category = em.find(Category.class, id);
+		em.close();
+		return category;
 	}
 
 	@Override
 	public void update(Category category) {
-
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
 	}
 
 	@Override

@@ -698,3 +698,13 @@ INSERT INTO `post_has_company` (`post_id`, `company_id`) VALUES (1, 2);
 
 COMMIT;
 
+
+-- -----------------------------------------------------
+-- Data for table `post_has_work_role`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `post_has_work_role` (`post_id`, `work_role_id`) VALUES (1, 1);
+
+COMMIT;
+
