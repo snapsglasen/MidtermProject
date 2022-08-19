@@ -72,5 +72,10 @@ class UserTest {
 //		assertEquals("google", user.getCompany().getName);
 	}
 	
+	@Test
+	void test_user_many_to_one_usercategory_mapping() {
+		assertEquals("student", user.getUserCategory().getName());
+	}
+	
 
 }

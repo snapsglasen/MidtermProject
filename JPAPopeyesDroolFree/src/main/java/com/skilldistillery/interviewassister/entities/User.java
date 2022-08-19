@@ -27,8 +27,9 @@ public class User {
 	private boolean active;
 	private String email;
 	
-	@Column(name="user_category")//Is this a foregin key? Can this be null? 
-	private Integer category;
+	@ManyToOne
+	@JoinColumn(name="user_category_id")
+	private UserCategory userCategory;
 	
 	@Column(name="create_date")
 	private LocalDateTime createDate;
@@ -118,12 +119,13 @@ public class User {
 		this.active = active;
 	}
 
-	public Integer getCategory() {
-		return category;
+	
+	public UserCategory getUserCategory() {
+		return userCategory;
 	}
 
-	public void setCategory(Integer category) {
-		this.category = category;
+	public void setUserCategory(UserCategory userCategory) {
+		this.userCategory = userCategory;
 	}
 
 	public LocalDateTime getCreateDate() {
