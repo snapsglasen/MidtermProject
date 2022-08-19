@@ -26,7 +26,7 @@ public class Post {
 	private User user;
 	private boolean active;
 	private String title;
-	private Company company;
+	//private Company company;
 	
 
 	public Post() {
