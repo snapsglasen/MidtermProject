@@ -595,9 +595,9 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `category` (`id`, `name`, `description`) VALUES (1, 'sql', NULL);
-INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'java', NULL);
-INSERT INTO `category` (`id`, `name`, `description`) VALUES (3, 'jpa', NULL);
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (1, 'sql', 'Database language');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (2, 'java', 'OOP language');
+INSERT INTO `category` (`id`, `name`, `description`) VALUES (3, 'jpa', 'For translation database entities into Java POJOs');
 
 COMMIT;
 
