@@ -190,21 +190,14 @@ CREATE TABLE IF NOT EXISTS `post` (
   `user_id` INT NOT NULL,
   `active` TINYINT NULL,
   `title` VARCHAR(90) NULL,
-  `company_id` INT NULL,
   `work_role_id` INT NULL,
   `interview_date` DATE NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_message_user1_idx` (`user_id` ASC),
-  INDEX `fk_post_company1_idx` (`company_id` ASC),
   INDEX `fk_post_work_role1_idx` (`work_role_id` ASC),
   CONSTRAINT `fk_message_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_post_company1`
-    FOREIGN KEY (`company_id`)
-    REFERENCES `company` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_post_work_role1`
@@ -494,6 +487,30 @@ CREATE TABLE IF NOT EXISTS `comment_vote` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `post_has_company`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `post_has_company` ;
+
+CREATE TABLE IF NOT EXISTS `post_has_company` (
+  `post_id` INT NOT NULL,
+  `company_id` INT NOT NULL,
+  PRIMARY KEY (`post_id`, `company_id`),
+  INDEX `fk_post_has_company_company1_idx` (`company_id` ASC),
+  INDEX `fk_post_has_company_post1_idx` (`post_id` ASC),
+  CONSTRAINT `fk_post_has_company_post1`
+    FOREIGN KEY (`post_id`)
+    REFERENCES `post` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_post_has_company_company1`
+    FOREIGN KEY (`company_id`)
+    REFERENCES `company` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS scooper@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -523,6 +540,7 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `company` (`id`, `name`, `description`, `site_url`, `logo_url`) VALUES (1, 'Google', 'A place to work', 'google.com', NULL);
+INSERT INTO `company` (`id`, `name`, `description`, `site_url`, `logo_url`) VALUES (2, 'Yahoo', 'A company that once was', 'yahoo.com', NULL);
 
 COMMIT;
 
@@ -592,7 +610,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `company_id`, `work_role_id`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', 1, 1, NULL);
+INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `work_role_id`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', 1, NULL);
 
 COMMIT;
 
@@ -603,6 +621,17 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `comment` (`id`, `content`, `user_id`, `post_id`, `date_created`, `last_updated`, `active`, `in_reply_to_id`) VALUES (1, 'This is a comment', 1, 1, NULL, NULL, 1, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `post_has_company`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `post_has_company` (`post_id`, `company_id`) VALUES (1, 1);
+INSERT INTO `post_has_company` (`post_id`, `company_id`) VALUES (1, 2);
 
 COMMIT;
 
