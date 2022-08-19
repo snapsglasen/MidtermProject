@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Post {
@@ -40,6 +41,9 @@ public class Post {
 	@Column(name="interview_date")
 	private LocalDateTime interviewDate;
 
+	@OneToMany(mappedBy="post")
+	private List<PostVote> postVotes;
+	
 	public Post() {
 		super();
 	}
@@ -124,6 +128,14 @@ public class Post {
 		this.interviewDate = interviewDate;
 	}
 	
+	public List<PostVote> getPostVotes() {
+		return postVotes;
+	}
+
+	public void setPostVotes(List<PostVote> postVotes) {
+		this.postVotes = postVotes;
+	}
+
 	public void addCompany(Company company) {
 		if (companies == null) {
 			companies = new ArrayList<>();

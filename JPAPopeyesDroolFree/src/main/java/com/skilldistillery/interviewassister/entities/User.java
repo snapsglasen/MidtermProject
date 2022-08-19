@@ -46,7 +46,10 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
-
+	
+	@OneToMany(mappedBy="user")
+	private List<PostVote> postVotes;
+	
 	public int getId() {
 		return id;
 	}
@@ -158,6 +161,14 @@ public class User {
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+	
+	public List<PostVote> getPostVotes() {
+		return postVotes;
+	}
+
+	public void setPostVotes(List<PostVote> postVotes) {
+		this.postVotes = postVotes;
 	}
 
 	public void addPost(Post post) {

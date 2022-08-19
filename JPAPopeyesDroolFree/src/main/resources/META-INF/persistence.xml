@@ -14,6 +14,7 @@
 		<class>com.skilldistillery.interviewassister.entities.Company</class>
 		<class>com.skilldistillery.interviewassister.entities.Post</class>
 		<class>com.skilldistillery.interviewassister.entities.PostVote</class>
+		<class>com.skilldistillery.interviewassister.entities.PostVoteId</class>
 		<class>com.skilldistillery.interviewassister.entities.Topic</class>
 		<class>com.skilldistillery.interviewassister.entities.WorkRole</class>
 		<class>com.skilldistillery.interviewassister.entities.UserCategory</class>
