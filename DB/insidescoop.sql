@@ -288,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `option` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `option_text` TEXT NULL,
   `question_id` INT NOT NULL,
-  `is_key` TINYINT NULL,
+  `correct` TINYINT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_answer_question1_idx` (`question_id` ASC),
   CONSTRAINT `fk_answer_question1`
