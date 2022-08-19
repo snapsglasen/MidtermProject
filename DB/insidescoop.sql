@@ -469,7 +469,7 @@ DROP TABLE IF EXISTS `comment_vote` ;
 CREATE TABLE IF NOT EXISTS `comment_vote` (
   `comment_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `value` TINYINT NULL DEFAULT NULL,
+  `liked` TINYINT NULL DEFAULT NULL,
   `vote_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`comment_id`, `user_id`),
   INDEX `fk_comment_has_user_user1_idx` (`user_id` ASC),
@@ -673,7 +673,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `question_vote` (`question_id`, `user_id`, `liked`, `vote_date`) VALUES (1, 1, NULL, NULL);
+INSERT INTO `question_vote` (`question_id`, `user_id`, `liked`, `vote_date`) VALUES (1, 1, 0, NULL);
 
 COMMIT;
 
@@ -683,7 +683,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `comment_vote` (`comment_id`, `user_id`, `value`, `vote_date`) VALUES (1, 1, 1, NULL);
+INSERT INTO `comment_vote` (`comment_id`, `user_id`, `liked`, `vote_date`) VALUES (1, 1, 1, NULL);
 
 COMMIT;
 
