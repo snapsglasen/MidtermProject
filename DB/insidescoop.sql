@@ -639,11 +639,31 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `post_vote`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `post_vote` (`value`, `user_id`, `post_id`, `vote_date`) VALUES (1, 1, 1, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `comment`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `comment` (`id`, `content`, `user_id`, `post_id`, `date_created`, `last_updated`, `active`, `in_reply_to_id`) VALUES (1, 'This is a comment', 1, 1, NULL, NULL, 1, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `comment_vote`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `comment_vote` (`comment_id`, `user_id`, `value`, `vote_date`) VALUES (1, 1, 1, NULL);
 
 COMMIT;
 
