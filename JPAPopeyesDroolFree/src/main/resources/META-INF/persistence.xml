@@ -11,6 +11,7 @@
 		<class>com.skilldistillery.interviewassister.entities.Category</class>
 		<class>com.skilldistillery.interviewassister.entities.Comment</class>
 		<class>com.skilldistillery.interviewassister.entities.CommentVote</class>
+		<class>com.skilldistillery.interviewassister.entities.CommentVoteId</class>
 		<class>com.skilldistillery.interviewassister.entities.Company</class>
 		<class>com.skilldistillery.interviewassister.entities.Post</class>
 		<class>com.skilldistillery.interviewassister.entities.PostVote</class>
