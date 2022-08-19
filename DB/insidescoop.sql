@@ -660,6 +660,16 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `post_has_category`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `post_has_category` (`post_id`, `category_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `option`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -675,7 +685,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `attempt` (`id`, `user_id`, `question_id`, `date`, `correct`) VALUES (1, 1, 1, NULL, NULL);
+INSERT INTO `attempt` (`id`, `user_id`, `question_id`, `date`, `correct`) VALUES (1, 1, 1, NULL, 1);
 
 COMMIT;
 

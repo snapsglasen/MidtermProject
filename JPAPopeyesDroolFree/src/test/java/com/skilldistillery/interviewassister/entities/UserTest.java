@@ -78,8 +78,8 @@ class UserTest {
 	}
 	
 	@Test
-	void test user_one_to_many_attempt_mapping() {
-		assertEquals(user.getAttempts().size() > 0);
+	void test_user_one_to_many_attempt_mapping() {
+		assertTrue(user.getAttempts().size() > 0);
 	}
 
 }

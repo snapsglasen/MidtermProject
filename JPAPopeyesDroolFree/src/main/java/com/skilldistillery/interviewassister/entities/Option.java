@@ -22,7 +22,6 @@ public class Option {
 	@JoinColumn(name="question_id")
 	private Question question;
 	
-	@Column(name="correct")
 	private boolean correct;
 
 	public Option() {

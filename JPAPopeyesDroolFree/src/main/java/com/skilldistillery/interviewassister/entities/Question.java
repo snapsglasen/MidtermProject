@@ -23,8 +23,9 @@ public class Question {
 	@OneToMany(mappedBy="question")
 	private List<QuestionVote> questionVotes;
 	
-	@OneToMany(mappedBy="question")
-	private List<Option> Options;
+
+//	@OneToMany(mappedBy="question")
+//	private List<Option> Options;
 	
 	@OneToMany(mappedBy="question")
 	private List<Attempt> attempts;
@@ -65,13 +66,13 @@ public class Question {
 		this.questionVotes = questionVotes;
 	}
 
-	public List<Option> getOptions() {
-		return Options;
-	}
-
-	public void setOptions(List<Option> options) {
-		Options = options;
-	}
+//	public List<Option> getOptions() {
+//		return Options;
+//	}
+//
+//	public void setOptions(List<Option> options) {
+//		Options = options;
+//	}
 
 	@Override
 	public int hashCode() {
