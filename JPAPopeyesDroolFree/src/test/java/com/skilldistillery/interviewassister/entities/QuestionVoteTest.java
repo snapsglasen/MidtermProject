@@ -1,7 +1,7 @@
 package com.skilldistillery.interviewassister.entities;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -50,7 +50,7 @@ class QuestionVoteTest {
 	
 	@Test
 	void test_QuestionVote_mappings() {
-		assertNull(questionVote.getLiked());
+		assertFalse(questionVote.getLiked());
 	}
 	
 //	@Test
