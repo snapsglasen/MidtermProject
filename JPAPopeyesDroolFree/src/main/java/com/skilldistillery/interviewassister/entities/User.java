@@ -59,6 +59,8 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<Attempt> attempts;
 	
+	@Column(name="profile_image_url")
+	private String profilePicture;
 	
 	public List<Attempt> getAttempts() {
 		return attempts;
@@ -203,6 +205,14 @@ public class User {
 
 	public void setQuestionVote(List<QuestionVote> questionVote) {
 		this.questionVote = questionVote;
+	}
+	
+	public String getProfilePicture() {
+		return profilePicture;
+	}
+
+	public void setProfilePicture(String profilePicture) {
+		this.profilePicture = profilePicture;
 	}
 
 	public void addPost(Post post) {

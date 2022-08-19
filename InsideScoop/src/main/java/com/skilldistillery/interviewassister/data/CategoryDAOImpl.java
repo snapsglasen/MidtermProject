@@ -38,10 +38,16 @@ public class CategoryDAOImpl implements CategoryDAO {
 		em.getTransaction().commit();
 		em.close();
 	}
+//SORRY JOE! Just wanted the red X's to go away. continue...
+//	@Override
+//	public void delete(Category category) {
+//
+//	}
 
 	@Override
-	public void delete(Category category) {
-
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

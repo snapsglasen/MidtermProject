@@ -10,8 +10,13 @@
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>
 	<main class="container-fluid">
-<h1>Welcome to Inside Scoop</h1>
-${SmokeTest }
+<h1>Profile</h1>
+<img alt=${profile.profilePicture} src="Profile picture">
+${profile.firstName }<br/>
+${profile.lastName }
+
+<a href="account.do">account</a>
+
 <jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>

@@ -10,8 +10,14 @@
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>
 	<main class="container-fluid">
-<h1>Welcome to Inside Scoop</h1>
-${SmokeTest }
+<h1>LOGIN</h1>
+<form action="" method="GET">
+  UserName: <input class= "form-control" type="text" name="userName" required/>
+  Password: <input class="form-control" type="password" value="password" required/>
+ <input class="bttn btn-primary" type="submit" value="Login" />
+</form>
+<a href="register.do">register?</a>
+</main>
 <jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>
