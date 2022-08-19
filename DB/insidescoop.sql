@@ -355,7 +355,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `post_vote` ;
 
 CREATE TABLE IF NOT EXISTS `post_vote` (
-  `value` TINYINT NULL DEFAULT NULL,
+  `liked` TINYINT NULL DEFAULT NULL,
   `user_id` INT NOT NULL,
   `post_id` INT NOT NULL,
   `vote_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
@@ -443,7 +443,7 @@ DROP TABLE IF EXISTS `question_vote` ;
 CREATE TABLE IF NOT EXISTS `question_vote` (
   `question_id` INT NOT NULL,
   `user_id` INT NOT NULL,
-  `value` TINYINT NULL DEFAULT NULL,
+  `liked` TINYINT NULL DEFAULT NULL,
   `vote_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`question_id`, `user_id`),
   INDEX `fk_question_has_user_user1_idx` (`user_id` ASC),
@@ -643,7 +643,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `post_vote` (`value`, `user_id`, `post_id`, `vote_date`) VALUES (1, 1, 1, NULL);
+INSERT INTO `post_vote` (`liked`, `user_id`, `post_id`, `vote_date`) VALUES (1, 1, 1, NULL);
 
 COMMIT;
 
