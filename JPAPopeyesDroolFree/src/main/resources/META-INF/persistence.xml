@@ -7,12 +7,13 @@
     </provider>
 
 		
-		<class>com.skilldistillery.interviewassister.entities.User</class>
+		<class>com.skilldistillery.interviewassister.entities.Attempt</class>
 		<class>com.skilldistillery.interviewassister.entities.Category</class>
 		<class>com.skilldistillery.interviewassister.entities.Comment</class>
 		<class>com.skilldistillery.interviewassister.entities.CommentVote</class>
 		<class>com.skilldistillery.interviewassister.entities.CommentVoteId</class>
 		<class>com.skilldistillery.interviewassister.entities.Company</class>
+		<class>com.skilldistillery.interviewassister.entities.Option</class>
 		<class>com.skilldistillery.interviewassister.entities.Post</class>
 		<class>com.skilldistillery.interviewassister.entities.PostVote</class>
 		<class>com.skilldistillery.interviewassister.entities.PostVoteId</class>
@@ -21,6 +22,7 @@
 		<class>com.skilldistillery.interviewassister.entities.QuestionVoteId</class>
 		<class>com.skilldistillery.interviewassister.entities.Topic</class>
 		<class>com.skilldistillery.interviewassister.entities.WorkRole</class>
+		<class>com.skilldistillery.interviewassister.entities.User</class>
 		<class>com.skilldistillery.interviewassister.entities.UserCategory</class>
 	
 

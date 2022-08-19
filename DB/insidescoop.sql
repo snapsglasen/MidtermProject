@@ -213,13 +213,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `post_has_category` ;
 
 CREATE TABLE IF NOT EXISTS `post_has_category` (
-  `message_id` INT NOT NULL,
+  `post_id` INT NOT NULL,
   `category_id` INT NOT NULL,
-  PRIMARY KEY (`message_id`, `category_id`),
+  PRIMARY KEY (`post_id`, `category_id`),
   INDEX `fk_message_has_category_category1_idx` (`category_id` ASC),
-  INDEX `fk_message_has_category_message1_idx` (`message_id` ASC),
+  INDEX `fk_message_has_category_message1_idx` (`post_id` ASC),
   CONSTRAINT `fk_message_has_category_message1`
-    FOREIGN KEY (`message_id`)
+    FOREIGN KEY (`post_id`)
     REFERENCES `post` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -621,6 +621,16 @@ INSERT INTO `topic` (`id`, `name`) VALUES (1, 'lambdas');
 INSERT INTO `topic` (`id`, `name`) VALUES (2, 'for loops');
 INSERT INTO `topic` (`id`, `name`) VALUES (3, 'data types');
 INSERT INTO `topic` (`id`, `name`) VALUES (4, 'object-relational mapping');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `question_has_category`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `question_has_category` (`question_id`, `category_id`) VALUES (1, 1);
 
 COMMIT;
 
