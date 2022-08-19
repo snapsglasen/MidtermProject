@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Company {
@@ -20,6 +21,9 @@ public class Company {
 	@ManyToMany
 	@JoinTable(name = "post_has_company", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
 	private List<Post> posts;
+
+	@OneToMany(mappedBy="company")
+	private List<User> users;
 
 	public Company() {
 		super();
@@ -39,6 +43,14 @@ public class Company {
 
 	public void setPosts(List<Post> posts) {
 		this.posts = posts;
+	}
+	
+	public List<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 	public void addPost(Post post) {
