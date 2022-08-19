@@ -57,7 +57,7 @@ class PostTest {
 	}
 
 	@Test
-	void test_one_to_many_workRole_mapping() {
+	void test_many_to_many_workRole_mapping() {
 		assertTrue(post.getWorkRoles().size() > 0);
 	}
 }
