@@ -22,6 +22,7 @@
 		<class>com.skilldistillery.interviewassister.entities.Topic</class>
 		<class>com.skilldistillery.interviewassister.entities.WorkRole</class>
 		<class>com.skilldistillery.interviewassister.entities.UserCategory</class>
+	
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
