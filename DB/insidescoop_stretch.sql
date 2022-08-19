@@ -562,11 +562,37 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `topic`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `topic` (`id`, `name`) VALUES (1, 'lambdas');
+INSERT INTO `topic` (`id`, `name`) VALUES (2, 'for loops');
+INSERT INTO `topic` (`id`, `name`) VALUES (3, 'data types');
+INSERT INTO `topic` (`id`, `name`) VALUES (4, 'object-relational mapping');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `category_has_topic`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (2, 1);
+INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (2, 2);
+INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (2, 3);
+INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (3, 4);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `post`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `company_id`, `work_role_id`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', 1, NULL, NULL);
+INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `company_id`, `work_role_id`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', 1, 1, NULL);
 
 COMMIT;
 
