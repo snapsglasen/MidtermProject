@@ -53,6 +53,9 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<CommentVote> commentVotes;
 	
+	@OneToMany(mappedBy="user")
+	private List<QuestionVote> questionVote;
+	
 	public int getId() {
 		return id;
 	}
@@ -180,6 +183,16 @@ public class User {
 
 	public void setCommentVotes(List<CommentVote> commentVotes) {
 		this.commentVotes = commentVotes;
+	}
+	
+	
+
+	public List<QuestionVote> getQuestionVote() {
+		return questionVote;
+	}
+
+	public void setQuestionVote(List<QuestionVote> questionVote) {
+		this.questionVote = questionVote;
 	}
 
 	public void addPost(Post post) {
