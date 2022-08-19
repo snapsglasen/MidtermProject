@@ -546,6 +546,16 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
+-- Data for table `question`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `question` (`id`, `question_text`) VALUES (1, 'Why is a mouse when it spins?');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `work_role`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -654,6 +664,16 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `comment` (`id`, `content`, `user_id`, `post_id`, `date_created`, `last_updated`, `active`, `in_reply_to_id`) VALUES (1, 'This is a comment', 1, 1, NULL, NULL, 1, NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `question_vote`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `question_vote` (`question_id`, `user_id`, `liked`, `vote_date`) VALUES (1, 1, NULL, NULL);
 
 COMMIT;
 
