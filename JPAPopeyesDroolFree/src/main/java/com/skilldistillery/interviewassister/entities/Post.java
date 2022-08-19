@@ -24,6 +24,10 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+	private boolean active;
+	private String title;
+	private Company company;
+	
 
 	public Post() {
 		super();
