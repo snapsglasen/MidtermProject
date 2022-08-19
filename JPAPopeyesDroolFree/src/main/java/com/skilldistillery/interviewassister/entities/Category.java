@@ -1,5 +1,6 @@
 package com.skilldistillery.interviewassister.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -21,6 +22,9 @@ public class Category {
 	@ManyToMany
 	@JoinTable(name = "category_has_topic", joinColumns = @JoinColumn(name = "category_id"), inverseJoinColumns = @JoinColumn(name = "topic_id"))
 	private List<Topic> topics;
+	@ManyToMany(mappedBy="categories")
+	private List<Post> posts;
+	
 
 	public Category() {
 		super();
@@ -56,6 +60,32 @@ public class Category {
 
 	public void setTopics(List<Topic> topics) {
 		this.topics = topics;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
+	}
+	
+	public void addPost(Post post) {
+		if (posts == null) {
+			posts = new ArrayList<>();
+		}
+
+		if (!posts.contains(post)) {
+			posts.add(post);
+			post.addCategory(this);
+		}
+	}
+
+	public void removePost(Post post) {
+		if (posts != null && posts.contains(post)) {
+			posts.remove(post);
+			post.removeCategory(this);
+		}
 	}
 
 	@Override

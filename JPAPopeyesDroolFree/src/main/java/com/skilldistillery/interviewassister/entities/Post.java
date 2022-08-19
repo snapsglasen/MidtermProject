@@ -44,6 +44,10 @@ public class Post {
 	@OneToMany(mappedBy="post")
 	private List<PostVote> postVotes;
 	
+	@ManyToMany
+	@JoinTable(name = "post_has_category", joinColumns=@JoinColumn(name="post_id"), inverseJoinColumns=@JoinColumn(name="category_id"))
+	private List<Category> categories;
+	
 	public Post() {
 		super();
 	}
@@ -173,6 +177,33 @@ public class Post {
 	}
 	
 	
+	
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+	
+	public void addCategory(Category category) {
+		if (categories == null) {
+			categories = new ArrayList<>();
+		}
+
+		if (!categories.contains(category)) {
+			categories.add(category);
+			category.addPost(this);
+		}
+	}
+
+	public void removeCategory(Category category) {
+		if (categories != null && categories.contains(category)) {
+			categories.remove(category);
+			category.removePost(this);
+		}
+	}
 
 	@Override
 	public int hashCode() {
