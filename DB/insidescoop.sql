@@ -309,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `attempt` (
   `user_id` INT NOT NULL,
   `question_id` INT NOT NULL,
   `date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `correct` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_attempt_user1_idx` (`user_id` ASC),
   INDEX `fk_attempt_question1_idx` (`question_id` ASC),
@@ -654,6 +655,27 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `option`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `option` (`id`, `option_text`, `question_id`, `correct`) VALUES (1, 'The answer', 1, 1);
+INSERT INTO `option` (`id`, `option_text`, `question_id`, `correct`) VALUES (2, 'Not the answer', 1, 0);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `attempt`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `attempt` (`id`, `user_id`, `question_id`, `date`, `correct`) VALUES (1, 1, 1, NULL, NULL);
 
 COMMIT;
 
