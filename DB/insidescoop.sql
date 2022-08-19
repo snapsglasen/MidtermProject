@@ -56,6 +56,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `user_category`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `user_category` ;
+
+CREATE TABLE IF NOT EXISTS `user_category` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `user`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `user` ;
@@ -67,7 +79,6 @@ CREATE TABLE IF NOT EXISTS `user` (
   `admin` TINYINT NULL,
   `active` TINYINT NULL,
   `email` VARCHAR(50) NULL,
-  `user_category` INT NULL,
   `create_date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   `last_update` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `username` VARCHAR(45) NOT NULL,
@@ -75,10 +86,12 @@ CREATE TABLE IF NOT EXISTS `user` (
   `work_role_id` INT NULL DEFAULT NULL,
   `company_id` INT NULL DEFAULT NULL,
   `profile_image_url` VARCHAR(2000) NULL,
+  `user_category_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `username_UNIQUE` (`username` ASC),
   INDEX `fk_user_work_role1_idx` (`work_role_id` ASC),
   INDEX `fk_user_company1_idx` (`company_id` ASC),
+  INDEX `fk_user_user_category1_idx` (`user_category_id` ASC),
   CONSTRAINT `fk_user_work_role1`
     FOREIGN KEY (`work_role_id`)
     REFERENCES `work_role` (`id`)
@@ -88,19 +101,12 @@ CREATE TABLE IF NOT EXISTS `user` (
     FOREIGN KEY (`company_id`)
     REFERENCES `company` (`id`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_user_category1`
+    FOREIGN KEY (`user_category_id`)
+    REFERENCES `user_category` (`id`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `user_category`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `user_category` ;
-
-CREATE TABLE IF NOT EXISTS `user_category` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `category` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -190,19 +196,12 @@ CREATE TABLE IF NOT EXISTS `post` (
   `user_id` INT NOT NULL,
   `active` TINYINT NULL,
   `title` VARCHAR(90) NULL,
-  `work_role_id` INT NULL,
   `interview_date` DATE NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_message_user1_idx` (`user_id` ASC),
-  INDEX `fk_post_work_role1_idx` (`work_role_id` ASC),
   CONSTRAINT `fk_message_user1`
     FOREIGN KEY (`user_id`)
     REFERENCES `user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_post_work_role1`
-    FOREIGN KEY (`work_role_id`)
-    REFERENCES `work_role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -511,6 +510,30 @@ CREATE TABLE IF NOT EXISTS `post_has_company` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+
+-- -----------------------------------------------------
+-- Table `post_has_work_role`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `post_has_work_role` ;
+
+CREATE TABLE IF NOT EXISTS `post_has_work_role` (
+  `post_id` INT NOT NULL,
+  `work_role_id` INT NOT NULL,
+  PRIMARY KEY (`post_id`, `work_role_id`),
+  INDEX `fk_post_has_work_role_work_role1_idx` (`work_role_id` ASC),
+  INDEX `fk_post_has_work_role_post1_idx` (`post_id` ASC),
+  CONSTRAINT `fk_post_has_work_role_post1`
+    FOREIGN KEY (`post_id`)
+    REFERENCES `post` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_post_has_work_role_work_role1`
+    FOREIGN KEY (`work_role_id`)
+    REFERENCES `work_role` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
 SET SQL_MODE = '';
 DROP USER IF EXISTS scooper@localhost;
 SET SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
@@ -546,23 +569,23 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `user`
+-- Data for table `user_category`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `admin`, `active`, `email`, `user_category`, `create_date`, `last_update`, `username`, `password`, `work_role_id`, `company_id`, `profile_image_url`) VALUES (1, 'Testy', 'Testaburn', 1, 1, 'testy@testaburn.com', 1, NULL, NULL, 'ttesta', 'testing', 1, 1, NULL);
+INSERT INTO `user_category` (`id`, `name`) VALUES (1, 'student');
+INSERT INTO `user_category` (`id`, `name`) VALUES (2, 'alumnus');
+INSERT INTO `user_category` (`id`, `name`) VALUES (3, 'instructor');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `user_category`
+-- Data for table `user`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `user_category` (`id`, `category`) VALUES (1, 'student');
-INSERT INTO `user_category` (`id`, `category`) VALUES (2, 'alumnus');
-INSERT INTO `user_category` (`id`, `category`) VALUES (3, 'instructor');
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `admin`, `active`, `email`, `create_date`, `last_update`, `username`, `password`, `work_role_id`, `company_id`, `profile_image_url`, `user_category_id`) VALUES (1, 'Testy', 'Testaburn', 1, 1, 'testy@testaburn.com', NULL, NULL, 'ttesta', 'testing', 1, 1, NULL, 1);
 
 COMMIT;
 
@@ -610,7 +633,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `work_role_id`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', 1, NULL);
+INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', NULL);
 
 COMMIT;
 
