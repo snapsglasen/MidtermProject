@@ -56,6 +56,18 @@ public class User {
 	@OneToMany(mappedBy="user")
 	private List<QuestionVote> questionVote;
 	
+	@OneToMany(mappedBy="user")
+	private List<Attempt> attempts;
+	
+	
+	public List<Attempt> getAttempts() {
+		return attempts;
+	}
+
+	public void setAttempts(List<Attempt> attempts) {
+		this.attempts = attempts;
+	}
+
 	public int getId() {
 		return id;
 	}

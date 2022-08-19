@@ -1,7 +1,7 @@
 package com.skilldistillery.interviewassister.entities;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,47 +13,46 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class QuestionTest {
+class AttemptTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private Question question;
+	private Attempt attempt;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("InsideScoop");
 	}
-
+	
 	@AfterAll
 	static void tearDownAfterClass() throws Exception {
 		emf.close();
 	}
-
+	
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp() {
 		em = emf.createEntityManager();
-		question = em.find(Question.class, 1);
+		attempt = em.find(Attempt.class, 1);
 	}
-
+	
 	@AfterEach
-	void tearDown() throws Exception {
+	void tearDown() {
 		em.close();
-		question = null;
+		attempt = null;
+	}
+	
+	@Test
+	void test_Attempt_not_null() {
+		assertNotNull(attempt);
 	}
 
 	@Test
-	void test_Comment_not_null() {
-		assertNotNull(question);
+	void test_Attempt_many_to_one_User_mapping() {
+		assertEquals("testy@testaburn.com", attempt.getUser().getEmail());
 	}
 	
 	@Test
-	void test_Comment_mappings() {
-		assertTrue(question.getQuestionVotes().size() > 0);
-		
-	}
-	
-	@Test
-	void test_one_to_many_attempt_mapping() {
-		assertTrue(question.getAttempts().size() > 0);
+	void test_Attempt_many_to_one_Question_mapping() {
+		assertEquals("Why is a mouse when it spins?", attempt.getQuestion().getQuestionText());
 	}
 
 }

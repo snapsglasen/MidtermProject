@@ -25,6 +25,17 @@ public class Question {
 	
 	@OneToMany(mappedBy="question")
 	private List<Option> Options;
+	
+	@OneToMany(mappedBy="question")
+	private List<Attempt> attempts;
+
+	public List<Attempt> getAttempts() {
+		return attempts;
+	}
+
+	public void setAttempts(List<Attempt> attempts) {
+		this.attempts = attempts;
+	}
 
 	public Question() {
 		super();

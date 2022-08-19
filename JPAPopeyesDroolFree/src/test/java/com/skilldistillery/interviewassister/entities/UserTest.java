@@ -77,5 +77,9 @@ class UserTest {
 		assertEquals("student", user.getUserCategory().getName());
 	}
 	
+	@Test
+	void test user_one_to_many_attempt_mapping() {
+		assertEquals(user.getAttempts().size() > 0);
+	}
 
 }
