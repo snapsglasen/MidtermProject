@@ -185,8 +185,6 @@ public class User {
 		this.commentVotes = commentVotes;
 	}
 	
-	
-
 	public List<QuestionVote> getQuestionVote() {
 		return questionVote;
 	}

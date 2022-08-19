@@ -18,7 +18,6 @@ public class CommentVote {
 	@EmbeddedId
 	private CommentVoteId id;
 	
-	@Column(name="value")
 	private Boolean liked;
 	
 	@Column(name="vote_date")

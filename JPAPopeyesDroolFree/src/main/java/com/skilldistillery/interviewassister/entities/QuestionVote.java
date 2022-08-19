@@ -18,7 +18,6 @@ public class QuestionVote {
 	@EmbeddedId
 	private QuestionVoteId id;
 	
-	@Column(name="value")
 	private Boolean liked;
 	
 	@Column(name="vote_date")
