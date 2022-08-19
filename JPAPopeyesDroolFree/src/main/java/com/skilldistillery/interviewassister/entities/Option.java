@@ -25,4 +25,48 @@ public class Option {
 	@Column(name="correct")
 	private boolean correct;
 
+	public Option() {
+		super();
+	}
+
+	public int getId() {
+		return Id;
+	}
+
+	public void setId(int id) {
+		Id = id;
+	}
+
+	public String getOptionText() {
+		return optionText;
+	}
+
+	public void setOptionText(String optionText) {
+		this.optionText = optionText;
+	}
+
+	public Question getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+
+	public boolean isCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(boolean correct) {
+		this.correct = correct;
+	}
+
+	@Override
+	public String toString() {
+		return "Option [Id=" + Id + ", optionText=" + optionText + ", question=" + question + ", correct=" + correct
+				+ "]";
+	}
+
+	
+	
 }
