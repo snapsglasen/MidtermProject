@@ -213,13 +213,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `post_has_category` ;
 
 CREATE TABLE IF NOT EXISTS `post_has_category` (
-  `message_id` INT NOT NULL,
+  `post_id` INT NOT NULL,
   `category_id` INT NOT NULL,
-  PRIMARY KEY (`message_id`, `category_id`),
+  PRIMARY KEY (`post_id`, `category_id`),
   INDEX `fk_message_has_category_category1_idx` (`category_id` ASC),
-  INDEX `fk_message_has_category_message1_idx` (`message_id` ASC),
+  INDEX `fk_message_has_category_message1_idx` (`post_id` ASC),
   CONSTRAINT `fk_message_has_category_message1`
-    FOREIGN KEY (`message_id`)
+    FOREIGN KEY (`post_id`)
     REFERENCES `post` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -309,6 +309,7 @@ CREATE TABLE IF NOT EXISTS `attempt` (
   `user_id` INT NOT NULL,
   `question_id` INT NOT NULL,
   `date` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
+  `correct` TINYINT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_attempt_user1_idx` (`user_id` ASC),
   INDEX `fk_attempt_question1_idx` (`question_id` ASC),
@@ -626,6 +627,16 @@ COMMIT;
 
 
 -- -----------------------------------------------------
+-- Data for table `question_has_category`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `question_has_category` (`question_id`, `category_id`) VALUES (1, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
 -- Data for table `category_has_topic`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -644,6 +655,27 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', NULL);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `option`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `option` (`id`, `option_text`, `question_id`, `correct`) VALUES (1, 'The answer', 1, 1);
+INSERT INTO `option` (`id`, `option_text`, `question_id`, `correct`) VALUES (2, 'Not the answer', 1, 0);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `attempt`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `attempt` (`id`, `user_id`, `question_id`, `date`, `correct`) VALUES (1, 1, 1, NULL, NULL);
 
 COMMIT;
 
