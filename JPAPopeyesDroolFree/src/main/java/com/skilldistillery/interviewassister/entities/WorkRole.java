@@ -11,8 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="work_role")
 public class WorkRole {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +23,9 @@ public class WorkRole {
 	@ManyToMany
 	@JoinTable(name = "post_has_work_role", joinColumns = @JoinColumn(name = "work_role_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
 	private List<Post> posts;
+	
+	@OneToMany(mappedBy="workRole")
+	private List<User> users;
 
 	public WorkRole() {
 		super();

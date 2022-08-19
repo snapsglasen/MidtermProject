@@ -14,10 +14,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class UserTest {
+class CompanyTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private User user;
+	private Company company;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -32,45 +32,35 @@ class UserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		user = em.find(User.class, 1);
+		company = em.find(Company.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
 		em.close();
-		user = null;
+		company = null;
 	}
 
 	@Test
-	void test_User_not_null() {
-		assertNotNull(user);
+	void test_Company_not_null() {
+		assertNotNull(company);
 	}
 	
 	@Test
-	void test_User_mappings() {
-		assertEquals(user.getFirstName(), "Testy");
-		assertEquals(user.getLastName(), "Testaburn");
+	void test_Company_mappings() {
+		assertEquals(1, company.getId());
 	}
 	
 	@Test
-	void test_User_Post_Relationship() {
-		assertNotNull(user.getPosts());
-		assertTrue(user.getPosts().size()>0);
+	void test_Company_Post_Relationship() {
+		assertNotNull(company.getPosts());
+		assertTrue(company.getPosts().size()>0);
 	}
 	
 	@Test
-	void test_User_WorkRole_Relationship() {
-		assertNotNull(user.getWorkRole());
-		assertEquals(1, user.getWorkRole().getId());
-//		assertEquals("database administrator", user.getWorkRole().getRole);
+	void test_Company_User_Relationship() {
+		assertNotNull(company.getUsers());
+		assertTrue(company.getUsers().size()>0);
 	}
 	
-	@Test
-	void test_User_Company_Relationship() {
-		assertNotNull(user.getCompany());
-		assertEquals(1, user.getCompany().getId());
-//		assertEquals("google", user.getCompany().getName);
-	}
-	
-
 }

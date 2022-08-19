@@ -1,5 +1,6 @@
 package com.skilldistillery.interviewassister.entities;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -9,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,11 +23,28 @@ public class User {
 	private String firstName;
 	@Column(name = "last_name")
 	private String lastName;
+	private boolean admin;
+	private boolean active;
+	private String email;
+	
+	@Column(name="user_category")//Is this a foregin key? Can this be null? 
+	private Integer category;
+	
+	@Column(name="create_date")
+	private LocalDateTime createDate;
+	@Column(name="last_update")
+	private LocalDateTime lastUpdate;
 	private String username;
 	private String password;
-	private String email;
 	@OneToMany(mappedBy="user")
 	private List<Post> posts;
+	@ManyToOne
+	@JoinColumn(name="work_role_id")
+	private WorkRole workRole;
+	
+	@ManyToOne
+	@JoinColumn(name="company_id")
+	private Company company;
 
 	public int getId() {
 		return id;
@@ -82,6 +102,62 @@ public class User {
 		this.posts = posts;
 	}
 	
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public Integer getCategory() {
+		return category;
+	}
+
+	public void setCategory(Integer category) {
+		this.category = category;
+	}
+
+	public LocalDateTime getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(LocalDateTime createDate) {
+		this.createDate = createDate;
+	}
+
+	public LocalDateTime getLastUpdate() {
+		return lastUpdate;
+	}
+
+	public void setLastUpdate(LocalDateTime lastUpdate) {
+		this.lastUpdate = lastUpdate;
+	}
+
+	public WorkRole getWorkRole() {
+		return workRole;
+	}
+
+	public void setWorkRole(WorkRole workRole) {
+		this.workRole = workRole;
+	}
+	
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
 	public void addPost(Post post) {
 		if (posts == null) {
 			posts = new ArrayList<>();

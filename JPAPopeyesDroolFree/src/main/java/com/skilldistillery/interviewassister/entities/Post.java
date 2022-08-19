@@ -36,6 +36,8 @@ public class Post {
 	@ManyToMany
 	@JoinTable(name = "post_has_work_role", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "work_role_id"))
 	private List<WorkRole> workRoles;
+	
+	@Column(name="interview_date")
 	private LocalDateTime interviewDate;
 
 	public Post() {
