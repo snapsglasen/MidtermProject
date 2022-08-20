@@ -26,7 +26,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<Post> findNewestPost() {
 		
-		String jpql = "Select p from Post p"; //come back to list a certain amount
+		String jpql = "Select p from Post p ORDER BY lastUpdate"; //come back to list a certain amount
 		System.out.println(em.createQuery(jpql, Post.class).getResultList());
 		
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();

@@ -22,7 +22,7 @@ public class UserController {
 	@RequestMapping(path= {"/","home.do","index.do"})
 	public String home(Model model) {
 		//method to find List<Post> posts
-		model.addAttribute("Posts", userDAO.findNewestPost());//Change to List<Post> posts
+		model.addAttribute("posts", userDAO.findNewestPost());//Change to List<Post> posts
 		return "index";
 	}
 	

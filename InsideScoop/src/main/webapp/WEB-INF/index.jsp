@@ -15,9 +15,10 @@
 
 <c:forEach var="p" items="${posts }" >
 
-<%-- ${p.User.firstName}
-${p.User.lastName } --%>
-${p.title }
+${p.user.firstName}
+${p.user.lastName }
+<a href="postById?postId=${p.id }">${p.title }</a>
+${p.createDate}
 ${p.lastUpdate}
 
 
