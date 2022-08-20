@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.skilldistillery.interviewassister.data.UserDAO;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.User;
+import com.skilldistillery.interviewassister.entities.UserCategory;
 
 @Controller
 public class UserController {
@@ -33,10 +34,9 @@ public class UserController {
 		return "login";
 	}
 	@RequestMapping(path = "registerAttempt.do")
-	public String registerAttempt(Model model, String firstName, String lastName, String username, String password, HttpSession session) {
+	public String registerAttempt(Model model, String firstName, String lastName, String username, String password, String category, HttpSession session) {
 		try {
-			User user = userDAO.registerUser(firstName, lastName, lastName, username, password);
-			System.out.println(user);
+			User user = userDAO.registerUser(firstName, lastName, lastName, username, password, category);
 			model.addAttribute("profile", user);
 			session.setAttribute("loggedInUser", user);
 		} catch (Exception e) {

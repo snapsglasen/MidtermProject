@@ -57,8 +57,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User registerUser(String firstName, String lastName, String email, String username, String password) {
-		User user = new User(firstName, lastName, email, username, password);
+	public User registerUser(String firstName, String lastName, String email, String username, String password, String category) {
+		User user = new User(firstName, lastName, email, username, password, category);
 		System.out.println(user);
 		em.persist(user);
 		return user;

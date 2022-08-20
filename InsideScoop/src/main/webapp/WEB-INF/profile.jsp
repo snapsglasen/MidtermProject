@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Inside Scoop</title>
-<jsp:include page="bootstrapHead.jsp" />
+<%-- <jsp:include page="bootstrapHead.jsp" /> --%>
 </head>
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>
@@ -16,7 +16,7 @@ ${profile.firstName }<br/>
 ${profile.lastName }
 
 <a href="account.do">account</a>
-
-<jsp:include page="bootstrapFoot.jsp" />
+</main>
+<%-- <jsp:include page="bootstrapFoot.jsp" /> --%>
 </body>
 </html>
