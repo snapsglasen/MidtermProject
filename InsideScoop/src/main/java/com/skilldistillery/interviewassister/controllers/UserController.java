@@ -64,8 +64,8 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "createPost.do", method = RequestMethod.POST)
-	public String createPost(Model model, String title, String content) {
-		Post post = new Post(content, userDAO.findById(1), title);
+	public String createPost(Model model, String title, String content, HttpSession session) {
+		
 		model.addAttribute("displayPost", userDAO.createPost(post));
 		return "postAdded";
 
