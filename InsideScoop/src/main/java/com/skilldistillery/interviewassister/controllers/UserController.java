@@ -52,16 +52,16 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "account.do")
-	public String accountInfo(Model model) {
-		// method to find user posts
-		model.addAttribute("account", userDAO.findById(1));
+	public String accountInfo(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		model.addAttribute("account", user);
 		return "accountInfo";
 	}
 
 	@RequestMapping(path = "profile.do")
-	public String profile(Model model) {
-		// method to find user posts
-		model.addAttribute("profile", userDAO.findById(1));
+	public String profile(Model model, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		model.addAttribute("profile", user);
 		return "profile";
 	}
 
