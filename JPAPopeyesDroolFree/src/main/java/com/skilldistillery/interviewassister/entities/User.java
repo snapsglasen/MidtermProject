@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class User {
 	@Id
@@ -31,8 +34,10 @@ public class User {
 	@JoinColumn(name="user_category_id")
 	private UserCategory userCategory;
 	
+	@CreationTimestamp
 	@Column(name="create_date")
 	private LocalDateTime createDate;
+	@UpdateTimestamp
 	@Column(name="last_update")
 	private LocalDateTime lastUpdate;
 	private String username;

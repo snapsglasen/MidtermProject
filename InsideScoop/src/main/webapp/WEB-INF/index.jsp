@@ -20,12 +20,11 @@ ${p.user.lastName }
 <a href="showPost.do?postId=${p.id }">${p.title }</a>
 ${p.createDate}
 ${p.lastUpdate}
-
+<br/>
+</c:forEach>
 <form action="createPostPage.do">
 <input class="btn btn-primary" type="submit" value="Create a Post">
 </form>
-
-</c:forEach>
 </main>
 		<jsp:include page="bootstrapFoot.jsp" />
 </body>

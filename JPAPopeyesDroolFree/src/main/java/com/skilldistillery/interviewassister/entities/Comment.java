@@ -13,6 +13,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 @Entity
 public class Comment {
 
@@ -30,9 +33,11 @@ public class Comment {
 	@JoinColumn(name="post_id")
 	private Post post;
 	
+	@CreationTimestamp
 	@Column(name="date_created")
 	private LocalDateTime dateCreated;
 	
+	@UpdateTimestamp
 	@Column(name="last_updated")
 	private LocalDateTime lastUpdated;
 	
