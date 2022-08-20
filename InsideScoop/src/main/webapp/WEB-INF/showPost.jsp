@@ -11,18 +11,27 @@
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<main class="container-fluid">
-		<h1>Welcome to Inside Scoop</h1>
-
-<c:forEach var="p" items="${posts }" >
-
-${p.user.firstName}
-${p.user.lastName }
-<a href="showPost.do?postId=${p.id }">${p.title }</a>
-${p.createDate}
-${p.lastUpdate}
+		<h1>${displayPost.title }</h1>
 
 
+${displayPost.user.firstName}
+${displayPost.user.lastName }
+${displayPost.createDate}
+${displayPost.lastUpdate}
+${displayPost.content}
+
+<c:forEach var="p" items="${displayPost.companies }">
+${p }
 </c:forEach>
+<c:forEach var="p" items="${displayPost.workRoles }">
+${p }
+</c:forEach>
+<c:forEach var="p" items="${displayPost.categories}">
+${p }
+</c:forEach>
+
+
+
 </main>
 		<jsp:include page="bootstrapFoot.jsp" />
 </body>

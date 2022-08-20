@@ -32,6 +32,11 @@ public class UserDAOImpl implements UserDAO {
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
+
+	@Override
+	public Post findByPostId(int postId) {
+		return em.find(Post.class, postId);
+	}
 		
 		
 

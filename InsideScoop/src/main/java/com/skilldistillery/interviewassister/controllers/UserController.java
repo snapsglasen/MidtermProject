@@ -49,4 +49,10 @@ public class UserController {
 		model.addAttribute("profile", userDAO.findById(1));
 		return "profile";
 	}
+	
+	@RequestMapping(path="showPost.do")
+	public String post (Model model, int postId) {
+		model.addAttribute("displayPost", userDAO.findByPostId(postId));
+		return "showPost";
+	}
 }
