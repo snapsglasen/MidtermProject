@@ -60,4 +60,9 @@ class PostTest {
 	void test_many_to_many_workRole_mapping() {
 		assertTrue(post.getWorkRoles().size() > 0);
 	}
+	
+	@Test
+	void test_one_to_many_Comment_mapping() {
+		assertTrue(post.getComments().size() > 0);
+	}
 }

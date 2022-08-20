@@ -48,7 +48,11 @@ class CommentTest {
 	@Test
 	void test_Comment_mappings() {
 		assertEquals("This is a comment", comment.getContent());
-		
+	}
+	
+	@Test
+	void test_many_to_one_Comment_Post_mappings() {
+		assertEquals("The title of a post", comment.getPost().getTitle());
 	}
 
 }

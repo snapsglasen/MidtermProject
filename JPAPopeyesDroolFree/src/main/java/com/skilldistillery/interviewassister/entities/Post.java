@@ -44,6 +44,9 @@ public class Post {
 	@OneToMany(mappedBy="post")
 	private List<PostVote> postVotes;
 	
+	@OneToMany(mappedBy="post")
+	private List<Comment> comments;
+	
 	@ManyToMany
 	@JoinTable(name = "post_has_category", joinColumns=@JoinColumn(name="post_id"), inverseJoinColumns=@JoinColumn(name="category_id"))
 	private List<Category> categories;
@@ -139,7 +142,30 @@ public class Post {
 	public void setPostVotes(List<PostVote> postVotes) {
 		this.postVotes = postVotes;
 	}
+	
+	public List<Comment> getComments() {
+		return comments;
+	}
 
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
+	public void addComment(Comment comment) {
+		if (comments == null) {
+			comments = new ArrayList<>();
+		}
+		
+		if (!comments.contains(comment)) {
+			comments.add(comment);
+		}
+	}
+	public void removeComment(Comment comment) {
+		if (comments != null && comments.contains(comment)) {
+			comments.remove(comment);
+		}
+	}
+	
 	public void addCompany(Company company) {
 		if (companies == null) {
 			companies = new ArrayList<>();
