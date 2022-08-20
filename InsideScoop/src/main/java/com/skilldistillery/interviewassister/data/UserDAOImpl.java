@@ -1,6 +1,8 @@
 package com.skilldistillery.interviewassister.data;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,6 +19,8 @@ public class UserDAOImpl implements UserDAO {
 	
 	@PersistenceContext
 	private EntityManager em;
+	
+	private Map<Integer, User> users;
 
 	@Override
 	public User findById(int userId) {
@@ -43,6 +47,28 @@ public class UserDAOImpl implements UserDAO {
 		em.persist(post);
 		return post;
 	}
+
+	@Override
+	public User userLogin(String username, String password) {
+		String jpql = "SELECT u from User u where u.username = :username AND u.password = :password";
+		User user = em.createQuery(jpql, User.class).setParameter("username", username).setParameter("password", password).getSingleResult();
+		System.out.println(user);
+		return user;
+	}
+	
+//	 @Override
+//	 public User userLogin(String username, String password) {
+//	    User u = null;
+//	    Set<Integer> keys = users.keySet();
+//	    for (Integer key : keys) {
+//	      User user = users.get(key);
+//	      if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
+//	        u = user;
+//	        break;
+//	      }
+//	    }
+//	    return u;
+//	  }
 		
 		
 

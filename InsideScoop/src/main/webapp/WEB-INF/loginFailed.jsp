@@ -10,7 +10,8 @@
 <body>
 <jsp:include page="navbar.jsp"></jsp:include>
 	<main class="container-fluid">
-<h1>LOGIN</h1>
+<h1>LOGIN Failed</h1>
+<h2>Retry LOGIN</h2>
 <form action="attemptLogin.do" method="GET">
   UserName: <input class= "form-control" type="text" name="username" required/>
   Password: <input class="form-control" type="password" name="password" required/>

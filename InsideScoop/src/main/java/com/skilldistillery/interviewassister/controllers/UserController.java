@@ -1,5 +1,7 @@
 package com.skilldistillery.interviewassister.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.interviewassister.data.UserDAO;
 import com.skilldistillery.interviewassister.entities.Post;
+import com.skilldistillery.interviewassister.entities.User;
 
 @Controller
 public class UserController {
@@ -59,15 +62,27 @@ public class UserController {
 	public String Login() {
 		return "createPost";
 	}
-	
+
 	@RequestMapping(path = "createPost.do", method = RequestMethod.POST)
 	public String createPost(Model model, String title, String content) {
-		Post post = new Post(content,userDAO.findById(1),title);
-		System.out.println(post);
+		Post post = new Post(content, userDAO.findById(1), title);
 		model.addAttribute("displayPost", userDAO.createPost(post));
-		System.out.println(post);
 		return "postAdded";
-		
+
+	}
+
+	@RequestMapping(path = "attemptLogin.do")
+	public String attemptLogin(String username, String password, Model model, HttpSession session) {
+		try {
+			User user = userDAO.userLogin(username, password);
+			model.addAttribute("attemptLogin", user);
+			session.setAttribute("loggedInUser", user);
+			return "index";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "loginFailed";
+		}
+
 	}
 
 }

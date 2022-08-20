@@ -11,5 +11,6 @@ public interface UserDAO {
 	List<Post> findNewestPost ();
 	Post findByPostId(int postId);
 	Post createPost (Post post);
+	User userLogin(String username, String password);
 
 }
