@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,20 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
+	<jsp:include page="navbar.jsp"></jsp:include>
 	<main class="container-fluid">
-<h1>Welcome to Inside Scoop</h1>
-${SmokeTest }
-<jsp:include page="bootstrapFoot.jsp" />
+		<h1>Welcome to Inside Scoop</h1>
+
+<c:forEach var="p" items="${posts }" >
+
+<%-- ${p.User.firstName}
+${p.User.lastName } --%>
+${p.title }
+${p.lastUpdate}
+
+
+</c:forEach>
+</main>
+		<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>

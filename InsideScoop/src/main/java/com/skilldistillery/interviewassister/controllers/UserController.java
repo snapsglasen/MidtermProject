@@ -17,10 +17,12 @@ public class UserController {
 //	@Autowired
 //	private CategoryDAO categoryDAO;
 	
+	
+	
 	@RequestMapping(path= {"/","home.do","index.do"})
 	public String home(Model model) {
 		//method to find List<Post> posts
-		model.addAttribute("Posts", userDAO.findById(1));//Change to List<Post> posts
+		model.addAttribute("Posts", userDAO.findNewestPost());//Change to List<Post> posts
 		return "index";
 	}
 	
