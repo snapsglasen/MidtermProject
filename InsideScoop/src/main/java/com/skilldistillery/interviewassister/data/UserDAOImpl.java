@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.UserCategory;
@@ -62,6 +63,13 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println(user);
 		em.persist(user);
 		return user;
+	}
+
+	@Override
+	public Comment createComment(String content, User user, int id) {
+		Comment comment= new Comment(content, user, em.find(Post.class, id));
+		em.persist(comment);
+		return comment;
 	}
 
 		

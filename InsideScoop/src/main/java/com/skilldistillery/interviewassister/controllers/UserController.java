@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.interviewassister.data.UserDAO;
+import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.User;
-import com.skilldistillery.interviewassister.entities.UserCategory;
 
 @Controller
 public class UserController {
@@ -84,6 +84,14 @@ public class UserController {
 		return "postAdded";
 		
 	}
+	
+	@RequestMapping(path = "createComment.do", method = RequestMethod.POST)
+	public String createComment(Model model, String content, int id, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		userDAO.createComment(content, user, id);
+		model.addAttribute("displayPost", userDAO.findByPostId(id));
+		return "showPost";
+	}
 
 
 	@RequestMapping(path = "attemptLogin.do")
@@ -99,5 +107,6 @@ public class UserController {
 		}
 
 	}
+	
 
 }

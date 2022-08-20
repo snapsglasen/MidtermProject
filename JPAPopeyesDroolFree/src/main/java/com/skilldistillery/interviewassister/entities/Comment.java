@@ -54,6 +54,13 @@ public class Comment {
 		super();
 	}
 
+	public Comment(String content, User user, Post post) {
+		super();
+		this.content = content;
+		this.user = user;
+		this.post = post;
+	}
+
 	public int getId() {
 		return id;
 	}

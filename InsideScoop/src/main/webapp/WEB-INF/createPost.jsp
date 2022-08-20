@@ -11,8 +11,8 @@
 
 	<form action="createPost.do" method="POST">
 		<div>
-			Content of Post <input type="text" name="content" /> <br /> Title <input
-				type="text" name="title" />
+			Title <input type="text"class= "form-control" name="title" /><br/>
+			Content of Post <input type="text" class= "form-control" name="content" /> <br /> 
 		</div>
 
 		<button type="submit" class="btn btn-primary">Add Post</button>

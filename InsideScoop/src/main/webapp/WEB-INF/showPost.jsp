@@ -29,6 +29,16 @@ ${p }
 <c:forEach var="p" items="${displayPost.categories}">
 ${p }
 </c:forEach>
+
+<form action="createComment.do" method="POST">
+		<div>
+			Comment:<input class= "form-control" type="text" name="content" /> <br />
+			<input type="hidden" name="id" value=${displayPost.id } /> <br />
+		</div>
+
+		<button type="submit" class="btn btn-primary">Add comment</button>
+	</form>
+
 <c:forEach var="p" items="${displayPost.comments}">
 ${p }
 </c:forEach>
