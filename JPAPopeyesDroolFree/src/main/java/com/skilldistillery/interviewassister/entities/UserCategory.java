@@ -23,14 +23,6 @@ public class UserCategory {
 	
 	private String name;
 	
-	public UserCategory(String name) {
-		super();
-		this.name = name;
-		if(name.equals("Student")) {this.id=1;}
-		else if(name.equals("Alumni")) {this.id=2;}
-		else if(name.equals("Instructor")) {this.id=3;}
-		else {this.id=4;}
-	}
 	@OneToMany(mappedBy="userCategory")
 	private List<User> users;
 

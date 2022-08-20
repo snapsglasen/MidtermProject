@@ -2,7 +2,6 @@ package com.skilldistillery.interviewassister.data;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.User;
+import com.skilldistillery.interviewassister.entities.UserCategory;
 
 @Service
 @Transactional
@@ -57,8 +57,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public User registerUser(String firstName, String lastName, String email, String username, String password, String category) {
-		User user = new User(firstName, lastName, email, username, password, category);
+	public User registerUser(String firstName, String lastName, String email, String username, String password, int category) {
+		User user = new User(firstName, lastName, email, username, password, em.find(UserCategory.class, category));
 		System.out.println(user);
 		em.persist(user);
 		return user;

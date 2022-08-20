@@ -25,10 +25,9 @@
   <input type="radio" id="Other" name=“category” value="Other" />Other -->
   <label for="category">Choose a category:</label>
 	<select name="category">
-	<option value="Student">Student</option>
-	<option value="Instructor">Instructor</option>
-	<option value="Alumni">Alumni</option>
-	<option value="Other">Other</option>
+	<option value="1">Student</option>
+	<option value="2">Instructor</option>
+	<option value="3">Alumni</option>
 	</select>
   
  <input class="bttn btn-primary" type="submit" value="register" />

@@ -75,14 +75,15 @@ public class User {
 		return attempts;
 	}
 
-	public User(String firstName, String lastName, String email, String username, String password, String category) {
+	public User(String firstName, String lastName, String email, String username,
+			String password, UserCategory userCategory) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.userCategory = userCategory;
 		this.username = username;
 		this.password = password;
-		this.userCategory= new UserCategory(category);
 	}
 
 	public void setAttempts(List<Attempt> attempts) {

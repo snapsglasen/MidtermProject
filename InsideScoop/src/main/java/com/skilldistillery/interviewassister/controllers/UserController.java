@@ -34,7 +34,7 @@ public class UserController {
 		return "login";
 	}
 	@RequestMapping(path = "registerAttempt.do")
-	public String registerAttempt(Model model, String firstName, String lastName, String username, String password, String category, HttpSession session) {
+	public String registerAttempt(Model model, String firstName, String lastName, String username, String password, int category, HttpSession session) {
 		try {
 			User user = userDAO.registerUser(firstName, lastName, lastName, username, password, category);
 			model.addAttribute("profile", user);
