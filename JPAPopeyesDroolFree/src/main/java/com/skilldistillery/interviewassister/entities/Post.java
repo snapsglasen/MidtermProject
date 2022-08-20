@@ -20,11 +20,13 @@ import javax.persistence.OneToMany;
 public class Post {
 	
 	
-	public Post(String content, String title) {
+	public Post(String content, User user, String title) {
 		super();
 		this.content = content;
+		this.user = user;
 		this.title = title;
 	}
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
