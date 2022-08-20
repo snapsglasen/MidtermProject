@@ -15,8 +15,8 @@
   First Name: <input class= "form-control" type="text" name="firstName" required/>
   Last Name: <input class= "form-control" type="text" name="lastName" required/>
   Email: <input class= "form-control" type="text" name="email" required/>
-  UserName: <input class= "form-control" type="text" name="userName" required/>
-  Password: <input class="form-control" type="password" value="password" required/>
+  UserName: <input class= "form-control" type="text" name="username" required/>
+  Password: <input class="form-control" type="password" name="password" required/>
  <input class="bttn btn-primary" type="submit" value="register" />
 </form>
 <a href="login.do">login?</a>

@@ -12,5 +12,6 @@ public interface UserDAO {
 	Post findByPostId(int postId);
 	Post createPost (Post post);
 	User userLogin(String username, String password);
+	User registerUser(String firstName, String lastName, String email, String username, String password);
 
 }

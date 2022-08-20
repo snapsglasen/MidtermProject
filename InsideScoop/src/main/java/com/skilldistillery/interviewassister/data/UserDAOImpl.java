@@ -55,21 +55,15 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println(user);
 		return user;
 	}
-	
-//	 @Override
-//	 public User userLogin(String username, String password) {
-//	    User u = null;
-//	    Set<Integer> keys = users.keySet();
-//	    for (Integer key : keys) {
-//	      User user = users.get(key);
-//	      if(user.getUsername().equals(username) && user.getPassword().equals(password)) {
-//	        u = user;
-//	        break;
-//	      }
-//	    }
-//	    return u;
-//	  }
-		
+
+	@Override
+	public User registerUser(String firstName, String lastName, String email, String username, String password) {
+		User user = new User(firstName, lastName, email, username, password);
+		System.out.println(user);
+		em.persist(user);
+		return user;
+	}
+
 		
 
 }

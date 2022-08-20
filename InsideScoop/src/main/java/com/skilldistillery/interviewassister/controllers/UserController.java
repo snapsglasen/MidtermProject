@@ -32,7 +32,20 @@ public class UserController {
 	public String Login(Model model) {
 		return "login";
 	}
-
+	@RequestMapping(path = "registerAttempt.do")
+	public String registerAttempt(Model model, String firstName, String lastName, String username, String password, HttpSession session) {
+		try {
+			User user = userDAO.registerUser(firstName, lastName, lastName, username, password);
+			System.out.println(user);
+			model.addAttribute("profile", user);
+			session.setAttribute("loggedInUser", user);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "register";
+		}
+		return "profile";
+	}
+	
 	@RequestMapping(path = "register.do")
 	public String Register(Model model) {
 		return "register";

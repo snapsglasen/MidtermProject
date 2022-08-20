@@ -48,6 +48,10 @@ public class User {
 	@JoinColumn(name="work_role_id")
 	private WorkRole workRole;
 	
+	public User() {
+		super();
+	}
+
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
@@ -69,6 +73,15 @@ public class User {
 	
 	public List<Attempt> getAttempts() {
 		return attempts;
+	}
+
+	public User(String firstName, String lastName, String email, String username, String password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.username = username;
+		this.password = password;
 	}
 
 	public void setAttempts(List<Attempt> attempts) {
