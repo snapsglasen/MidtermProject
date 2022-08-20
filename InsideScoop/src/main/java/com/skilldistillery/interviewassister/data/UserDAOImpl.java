@@ -37,6 +37,12 @@ public class UserDAOImpl implements UserDAO {
 	public Post findByPostId(int postId) {
 		return em.find(Post.class, postId);
 	}
+
+	@Override
+	public Post createPost(Post post) {
+		em.persist(post);
+		return post;
+	}
 		
 		
 

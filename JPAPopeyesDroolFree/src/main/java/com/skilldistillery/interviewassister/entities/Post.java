@@ -18,6 +18,14 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Post {
+	
+	
+	public Post(String content, String title) {
+		super();
+		this.content = content;
+		this.title = title;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

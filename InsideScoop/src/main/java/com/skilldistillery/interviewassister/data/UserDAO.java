@@ -10,5 +10,6 @@ public interface UserDAO {
 	User findById(int userId);
 	List<Post> findNewestPost ();
 	Post findByPostId(int postId);
+	Post createPost (Post post);
 
 }

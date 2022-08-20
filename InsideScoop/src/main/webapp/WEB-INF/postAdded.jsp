@@ -12,7 +12,7 @@
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<main class="container-fluid">
 		<h1>${displayPost.title }</h1>
-
+<h1>Post Successfully Created</h1>
 
 ${displayPost.user.firstName}
 ${displayPost.user.lastName }

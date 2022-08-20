@@ -21,6 +21,9 @@ ${p.user.lastName }
 ${p.createDate}
 ${p.lastUpdate}
 
+<form action="createPostPage.do">
+<input class="btn btn-primary" type="submit" value="Create a Post">
+</form>
 
 </c:forEach>
 </main>
