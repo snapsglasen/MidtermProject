@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,16 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	private String name;
+	private String description;
+	
+	@Column(name="site_url")
+	private String siteUrl;
+	
+	@Column(name="logo_url")
+	private String Logo;
+	
 	@ManyToMany
 	@JoinTable(name = "post_has_company", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
 	private List<Post> posts;
@@ -35,6 +46,38 @@ public class Company {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getSiteUrl() {
+		return siteUrl;
+	}
+
+	public void setSiteUrl(String siteUrl) {
+		this.siteUrl = siteUrl;
+	}
+
+	public String getLogo() {
+		return Logo;
+	}
+
+	public void setLogo(String logo) {
+		Logo = logo;
 	}
 
 	public List<Post> getPosts() {

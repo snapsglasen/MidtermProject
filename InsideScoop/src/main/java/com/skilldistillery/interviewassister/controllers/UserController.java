@@ -23,8 +23,9 @@ public class UserController {
 //	private CategoryDAO categoryDAO;
 
 	@RequestMapping(path = { "/", "home.do", "index.do" })
-	public String home(Model model) {
-		// method to find List<Post> posts
+	public String home(Model model, Model login, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findNewestPost());// Change to List<Post> posts
 		return "index";
 	}
@@ -66,13 +67,15 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "showPost.do")
-	public String post(Model model, int postId) {
+	public String post(Model model, Model login, HttpSession session, int postId) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		model.addAttribute("displayPost", userDAO.findByPostId(postId));
 		return "showPost";
 	}
 
 	@RequestMapping(path = "createPostPage.do")
-	public String Login() {
+	public String createPostPage() {
 		return "createPost";
 	}
 

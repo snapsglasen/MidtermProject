@@ -22,9 +22,11 @@ ${p.createDate}
 ${p.lastUpdate}
 <br/>
 </c:forEach>
+<c:if test="${not empty loginCheck }">
 <form action="createPostPage.do">
 <input class="btn btn-primary" type="submit" value="Create a Post">
 </form>
+</c:if>
 </main>
 		<jsp:include page="bootstrapFoot.jsp" />
 </body>
