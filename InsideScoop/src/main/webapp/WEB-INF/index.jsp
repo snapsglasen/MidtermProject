@@ -9,6 +9,10 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
+<form action="searchUsers.do">
+<input type="text" class= "form-control" name="search"/>
+<input class="btn btn-primary" type="submit" value="Search">
+</form>
 <c:choose>
 <c:when test="${not empty loginCheck }">
 	<jsp:include page="navbar.jsp"></jsp:include>

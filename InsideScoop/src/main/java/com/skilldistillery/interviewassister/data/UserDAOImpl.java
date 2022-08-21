@@ -1,7 +1,9 @@
 package com.skilldistillery.interviewassister.data;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -37,7 +39,7 @@ public class UserDAOImpl implements UserDAO {
 	public Comment findByCommentId(int commentId) {
 		return em.find(Comment.class, commentId);
 	}
-
+	
 	@Override
 	public List<Post> findNewestPost() {
 
@@ -62,6 +64,19 @@ public class UserDAOImpl implements UserDAO {
 				.setParameter("password", password).getSingleResult();
 		System.out.println(user);
 		return user;
+	}
+	
+	@Override
+	public Set<User> searchUsers(String search) {
+		Set<User> users = new HashSet<User>();
+		String[] searches= search.split(" ");
+		for (String splitSearch : searches) {
+			splitSearch= "%"+splitSearch+"%";
+			String jpql = "Select u from User u WHERE firstName Like :search OR lastName LIKE :search OR username LIKE :search ORDER BY firstName";
+			users.addAll(em.createQuery(jpql, User.class).setParameter("search", splitSearch).getResultList());
+			
+		}
+		return users;
 	}
 
 	// ALL CREATE METHODS

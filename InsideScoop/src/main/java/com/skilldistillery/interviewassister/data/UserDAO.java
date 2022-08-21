@@ -1,6 +1,7 @@
 package com.skilldistillery.interviewassister.data;
 
 import java.util.List;
+import java.util.Set;
 
 import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.Post;
@@ -23,5 +24,6 @@ public interface UserDAO {
 	void deleteUser(int id);
 	User updateProfile(int id, String firstName, String lastName, String email, String username, String password, int category);
 	Post updatePost(int id, String title, String content);
+	Set<User> searchUsers(String search);
 
 }

@@ -220,5 +220,14 @@ public class UserController {
 		model.addAttribute("users", userDAO.findAllUsers());
 		return"showAllUsers";
 	}
+	
+	@RequestMapping(path="searchUsers.do")
+	public String searchUsers(HttpSession session, Model model, Model login, String search) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("users", userDAO.searchUsers(search));
+		return"showAllUsers";
+	}
+	
 
 }
