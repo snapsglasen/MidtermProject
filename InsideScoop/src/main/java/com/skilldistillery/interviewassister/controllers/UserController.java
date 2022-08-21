@@ -160,5 +160,20 @@ public class UserController {
 		return "index";
 	}
 	
+	@RequestMapping(path="updateProfile.do")
+	public String updatedProfile(HttpSession session, Model model, int id) {
+		model.addAttribute("profile", userDAO.findById(id));
+		return "updateProfile";
+		
+	}
+	
+	@RequestMapping(path="updateProfileAttempt.do")
+	public String updateProfile(HttpSession session, Model model, int id, String firstName, String lastName, String email, String username, String password, int category) {
+	User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category);
+		model.addAttribute("profile", user);
+		session.setAttribute("loggedInUser", user);
+		return "profile";
+	}
+	
 
 }

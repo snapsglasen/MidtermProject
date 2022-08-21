@@ -78,14 +78,6 @@ public class UserDAOImpl implements UserDAO {
 		return comment;
 	}
 
-	@Override
-	public Comment updateComment(int commentId, String content) {
-		Comment comment=findByCommentId(commentId);
-		if(!content.equals("")&&content!=null) {
-			comment.setContent(content);
-		}
-		return comment;
-	}
 
 	@Override
 	public void deleteComment(int commentId) {
@@ -105,7 +97,42 @@ public class UserDAOImpl implements UserDAO {
 		user.setActive(false);
 	}
 
+	@Override
+	public User updateProfile(int id, String firstName, String lastName, String email, String username, String password,
+			int category) {
+		User user = findById(id);
+		if(!firstName.equals("") && firstName != null) {
+			user.setFirstName(firstName);
+		}
+		if(!lastName.equals("") && lastName != null) {
+			user.setLastName(lastName);
+		}
+		if(!email.equals("") && email != null) {
+			user.setEmail(email);
+		}
+		if(!username.equals("") && username != null) {
+			user.setUsername(username);
+		}
+		if(!password.equals("") && password != null) {
+			user.setPassword(password);
+		}
+		if(category != 0) {
+			user.setUserCategory(em.find(UserCategory.class, id));
+		}
+		
+		return user;
+		
+	}
+
 
 		
 
+	@Override
+	public Comment updateComment(int commentId, String content) {
+		Comment comment=findByCommentId(commentId);
+		if(!content.equals("")&& content!=null) {
+			comment.setContent(content);
+		}
+		return comment;
+	}
 }
