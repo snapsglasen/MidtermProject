@@ -74,9 +74,20 @@ public class UserDAOImpl implements UserDAO {
 			splitSearch= "%"+splitSearch+"%";
 			String jpql = "Select u from User u WHERE firstName Like :search OR lastName LIKE :search OR username LIKE :search ORDER BY firstName";
 			users.addAll(em.createQuery(jpql, User.class).setParameter("search", splitSearch).getResultList());
-			
 		}
 		return users;
+	}
+	
+	@Override
+	public Set<Post> searchPosts(String search) {
+		Set<Post> posts = new HashSet<Post>();
+		String[] searches= search.split(" ");
+		for (String splitSearch : searches) {
+			splitSearch= "%"+splitSearch+"%";
+			String jpql = "Select p from Post p WHERE p.title Like :search OR p.content LIKE :search OR p.user.firstName LIKE :search OR p.user.lastName LIKE :search OR p.user.username LIKE :search";
+			posts.addAll(em.createQuery(jpql, Post.class).setParameter("search", splitSearch).getResultList());
+		}
+		return posts;
 	}
 
 	// ALL CREATE METHODS
@@ -171,5 +182,4 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return user;
 	}
-
 }

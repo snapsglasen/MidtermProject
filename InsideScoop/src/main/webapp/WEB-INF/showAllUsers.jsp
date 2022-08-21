@@ -19,6 +19,12 @@
 	</c:choose>
 	<main class="container-fluid">
 		<h1>Inside scoop customers</h1>
+
+<form action="searchUsers.do">
+Need to find someone?<input type="text" class= "form-control" name="search"/>
+<input class="btn btn-primary" type="submit" value="Search profile">
+</form>
+
 <c:forEach var="p" items="${users }" >
 <c:if test="${p.active }">
 <a href="profile.do?id=${p.id }">${p.firstName} ${p.lastName }</a>

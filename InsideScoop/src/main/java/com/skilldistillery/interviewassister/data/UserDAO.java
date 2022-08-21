@@ -25,5 +25,6 @@ public interface UserDAO {
 	User updateProfile(int id, String firstName, String lastName, String email, String username, String password, int category);
 	Post updatePost(int id, String title, String content);
 	Set<User> searchUsers(String search);
+	Set<Post> searchPosts(String search);
 
 }

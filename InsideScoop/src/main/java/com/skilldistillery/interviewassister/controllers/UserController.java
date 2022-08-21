@@ -229,5 +229,13 @@ public class UserController {
 		return"showAllUsers";
 	}
 	
+	@RequestMapping(path="searchPosts.do")
+	public String searchPosts(HttpSession session, Model model, Model login, String search) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("posts", userDAO.searchPosts(search));
+		return"index";
+	}
+	
 
 }
