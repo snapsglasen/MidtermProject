@@ -42,9 +42,14 @@ public class UserDAOImpl implements UserDAO {
 	public Post findByPostId(int postId) {
 		return em.find(Post.class, postId);
 	}
+	@Override
+	public Comment findByCommentId(int commentId) {
+		return em.find(Comment.class, commentId);
+	}
 
 	@Override
 	public Post createPost(Post post) {
+		post.setActive(true);
 		em.persist(post);
 		return post;
 	}
@@ -60,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User registerUser(String firstName, String lastName, String email, String username, String password, int category) {
 		User user = new User(firstName, lastName, email, username, password, em.find(UserCategory.class, category));
-		System.out.println(user);
+		user.setActive(true);
 		em.persist(user);
 		return user;
 	}
@@ -68,9 +73,38 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public Comment createComment(String content, User user, int id) {
 		Comment comment= new Comment(content, user, em.find(Post.class, id));
+		comment.setActive(true);
 		em.persist(comment);
 		return comment;
 	}
+
+	@Override
+	public Comment updateComment(int commentId, String content) {
+		Comment comment=findByCommentId(commentId);
+		if(!content.equals("")&&content!=null) {
+			comment.setContent(content);
+		}
+		return comment;
+	}
+
+	@Override
+	public void deleteComment(int commentId) {
+		Comment comment=findByCommentId(commentId);
+		comment.setActive(false);
+	}
+	
+	@Override
+	public void deletePost(int id) {
+		Post post=findByPostId(id);
+		post.setActive(false);
+	}
+	
+	@Override
+	public void deleteUser(int id) {
+		User user=findById(id);
+		user.setActive(false);
+	}
+
 
 		
 

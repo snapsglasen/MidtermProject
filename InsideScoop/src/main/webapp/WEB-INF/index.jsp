@@ -14,19 +14,21 @@
 		<h1>Welcome to Inside Scoop</h1>
 
 <c:forEach var="p" items="${posts }" >
-
+<c:if test="${p.active }">
 ${p.user.firstName}
 ${p.user.lastName }
 <a href="showPost.do?postId=${p.id }">${p.title }</a>
 ${p.createDate}
 ${p.lastUpdate}
 <br/>
+</c:if>
 </c:forEach>
 <c:if test="${not empty loginCheck }">
 <form action="createPostPage.do">
 <input class="btn btn-primary" type="submit" value="Create a Post">
 </form>
 </c:if>
+
 </main>
 		<jsp:include page="bootstrapFoot.jsp" />
 </body>

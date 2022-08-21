@@ -89,8 +89,9 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "createComment.do", method = RequestMethod.POST)
-	public String createComment(Model model, String content, int id, HttpSession session) {
+	public String createComment(Model model, Model login, String content, int id, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		userDAO.createComment(content, user, id);
 		model.addAttribute("displayPost", userDAO.findByPostId(id));
 		return "showPost";
@@ -109,6 +110,49 @@ public class UserController {
 			return "loginFailed";
 		}
 
+	}
+	@RequestMapping(path="updateComment.do")
+	public String updateComment(Model model, Model comment, int id, int commentId ) {
+		
+		model.addAttribute("displayPost", userDAO.findByPostId(id));
+		comment.addAttribute("comment", userDAO.findByCommentId(commentId));
+		return "commentUpdate";
+	}
+		
+	@RequestMapping(path="updateCommentAttempt.do")
+	public String updatecomment(Model model, Model login, HttpSession session, int id, int commentId, String content) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.updateComment(commentId, content);
+		model.addAttribute("displayPost", userDAO.findByPostId(id));
+		return "showPost";
+	}
+	
+	@RequestMapping(path="deleteComment.do")
+	public String deleteComment(Model model, Model login, HttpSession session, int id, int commentId) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.deleteComment(commentId);
+		model.addAttribute("displayPost", userDAO.findByPostId(id));
+		return "showPost";
+	}
+	
+	@RequestMapping(path="deletePost.do")
+	public String deletePost(Model model, Model login, HttpSession session, int id) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.deletePost(id);
+		return "index";
+	}
+	
+	//Will this break everything? We will find out once we allow a user to delete their account.
+	@RequestMapping(path="deleteUser.do")
+	public String deleteUser(Model model, Model login, HttpSession session, int id) {
+		//this null below here could break stuff with a null pointer expection we will see.
+		User user = (User) session.getAttribute(null);
+		login.addAttribute("loginCheck", user);
+		userDAO.deleteUser(id);
+		return "index";
 	}
 	
 

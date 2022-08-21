@@ -11,6 +11,7 @@
 <body>
 	<jsp:include page="navbar.jsp"></jsp:include>
 	<main class="container-fluid">
+<c:if test="${displayPost.active }">
 		<h1>${displayPost.title }</h1>
 
 
@@ -64,6 +65,7 @@ ${p.name }
 	</form>
 </c:if>
 <c:forEach var="p" items="${displayPost.comments}">
+<c:if test="${p.active}">
 <br/>
 ${p.user.firstName }
 ${p.user.lastName }
@@ -73,19 +75,22 @@ ${p.lastUpdated }
 ${p.content }
 	<c:if test="${loginCheck==p.user }">
 <form action="updateComment.do" method="POST">
-			<input type="hidden" name="id" value=${displayPost.id } /> <br />
+			<input type="hidden" name="id" value=${displayPost.id } />
+			<input type="hidden" name="commentId" value=${p.id } /> 
 		<button type="submit" class="btn btn-primary">Update</button>
 	</form>
 	
 <form action="deleteComment.do" method="POST">
 			<input type="hidden" name="id" value=${displayPost.id } /> <br />
+			<input type="hidden" name="commentId" value=${p.id } /> 
 		<button type="submit" class="btn btn-primary">Delete</button>
 	</form>
 </c:if>
 <br/>
+</c:if>
 </c:forEach>
 
-
+</c:if>
 
 </main>
 		<jsp:include page="bootstrapFoot.jsp" />
