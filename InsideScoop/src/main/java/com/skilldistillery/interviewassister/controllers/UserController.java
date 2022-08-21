@@ -155,5 +155,10 @@ public class UserController {
 		return "index";
 	}
 	
+	@RequestMapping(path="logout")
+	public String logout(HttpSession session) {
+		return "index";
+	}
+	
 
 }
