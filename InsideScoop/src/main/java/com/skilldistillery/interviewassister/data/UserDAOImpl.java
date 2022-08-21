@@ -12,9 +12,11 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.interviewassister.entities.Comment;
+import com.skilldistillery.interviewassister.entities.Company;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.UserCategory;
+import com.skilldistillery.interviewassister.entities.WorkRole;
 
 @Service
 @Transactional
@@ -65,6 +67,7 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println(user);
 		return user;
 	}
+	
 	
 	@Override
 	public Set<User> searchUsers(String search) {
@@ -160,7 +163,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User updateProfile(int id, String firstName, String lastName, String email, String username, String password,
-			int category) {
+			int category, String workRole, String company) {
 		User user = findById(id);
 		if (!firstName.equals("") && firstName != null) {
 			user.setFirstName(firstName);
@@ -178,8 +181,46 @@ public class UserDAOImpl implements UserDAO {
 			user.setPassword(password);
 		}
 		if (category != 0) {
-			user.setUserCategory(em.find(UserCategory.class, id));
+			System.out.println(category);
+			user.setUserCategory(em.find(UserCategory.class, category));
+			System.out.println(user.getUserCategory());
 		}
+		if(!workRole.equals("")&& workRole !=null) {
+			user.setWorkRole(workRoleByString(workRole));
+		}
+		if(!company.equals("")&& company !=null) {
+			user.setCompany(companyByString(company));
+		}
+			System.out.println(user);
 		return user;
+	}
+	
+	@Override
+	public WorkRole workRoleByString(String workRole) {
+		try {
+		String jpql = "SELECT w from WorkRole w WHERE w.role = :workRole";
+		WorkRole wr = em.createQuery(jpql, WorkRole.class).setParameter("workRole", workRole).getSingleResult();
+		System.out.println(workRole);
+		System.out.println(wr);
+		return wr;
+		}catch(Exception e) {
+			WorkRole wr= new WorkRole(workRole);
+			em.persist(wr);
+			return wr;
+		}
+	}
+	@Override
+	public Company companyByString(String company) {
+		try {
+		String jpql = "SELECT c from Company c WHERE c.name = :company";
+		Company comp = em.createQuery(jpql, Company.class).setParameter("company", company).getSingleResult();
+		System.out.println(company);
+		System.out.println(comp);
+		return comp;
+		}catch(Exception e) {
+			Company comp= new Company(company);
+			em.persist(comp);
+			return comp;
+		}
 	}
 }

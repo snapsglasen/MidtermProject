@@ -32,17 +32,18 @@
 				class="form-control" type="text" name="username"
 				placeholder="${profile.username }" /> Password: <input
 				class="form-control" type="password" name="password"
-				placeholder="${profile.password }" /> Category:
-			<!-- <input class="form-control" type="text" name="category" required/> -->
-			<!-- <input type="radio" id="Student" name=“category” value="Student" />
-  <input type="radio" id="Alumni" name=“category” value="Alumni" />Alumni
-  <input type="radio" name=“category” value="Instructor" />Instructor
-  <input type="radio" id="Other" name=“category” value="Other" />Other -->
+				placeholder="${profile.password }" /> 
+				Work Role: <input class="form-control" type="text" name="workRole" placeholder="${profile.workRole.role }" />
+				Company: <input class="form-control" type="text" name="company" placeholder="${profile.company.name }" />
+				
+				Category:
 			<label for="category">Choose a category:</label> <select
 				name="category">
 				<option value="1">Student</option>
 				<option value="2">Instructor</option>
 				<option value="3">Alumni</option>
+				
+				
 			</select> <input class="bttn btn-primary" type="submit" value="update" />
 		</form>
 	</main>

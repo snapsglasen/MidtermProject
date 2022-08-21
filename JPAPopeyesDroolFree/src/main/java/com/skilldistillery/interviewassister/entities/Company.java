@@ -40,6 +40,13 @@ public class Company {
 		super();
 	}
 
+	
+
+	public Company(String name) {
+		super();
+		this.name = name;
+	}
+
 	public int getId() {
 		return id;
 	}

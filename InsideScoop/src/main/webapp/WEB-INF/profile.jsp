@@ -23,6 +23,8 @@
 <img alt=${profile.profilePicture } src="Profile picture">
 ${profile.firstName }<br/>
 ${profile.lastName }
+${profile.workRole.role }
+${profile.company.name }
 
 <c:if test="${loginCheck==profile }">
 <a href="account.do">account</a>

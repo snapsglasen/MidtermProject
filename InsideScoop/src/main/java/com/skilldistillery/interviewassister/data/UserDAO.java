@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Set;
 
 import com.skilldistillery.interviewassister.entities.Comment;
+import com.skilldistillery.interviewassister.entities.Company;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.User;
+import com.skilldistillery.interviewassister.entities.WorkRole;
 
 public interface UserDAO {
 	
@@ -22,9 +24,11 @@ public interface UserDAO {
 	void deleteComment(int commentId);
 	void deletePost(int id);
 	void deleteUser(int id);
-	User updateProfile(int id, String firstName, String lastName, String email, String username, String password, int category);
+	User updateProfile(int id, String firstName, String lastName, String email, String username, String password, int category, String workRole, String company);
 	Post updatePost(int id, String title, String content);
 	Set<User> searchUsers(String search);
 	Set<Post> searchPosts(String search);
+	WorkRole workRoleByString(String workRole);
+	Company companyByString(String company);
 
 }

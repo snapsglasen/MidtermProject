@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.interviewassister.data.UserDAO;
-import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.User;
+import com.skilldistillery.interviewassister.entities.WorkRole;
 
 @Controller
 public class UserController {
@@ -191,8 +191,8 @@ public class UserController {
 
 	@RequestMapping(path = "updateProfileAttempt.do")
 	public String updatedProfile(HttpSession session, Model model, int id, String firstName, String lastName,
-			String email, String username, String password, int category) {
-		User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category);
+			String email, String username, String password, int category, String workRole, String company) {
+		User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category, workRole, company);
 		model.addAttribute("profile", user);
 		session.setAttribute("loggedInUser", user);
 		return "profile";

@@ -25,6 +25,9 @@ public class WorkRole {
 	
 	private String description;
 	
+	
+	
+
 	@ManyToMany
 	@JoinTable(name = "post_has_work_role", joinColumns = @JoinColumn(name = "work_role_id"), inverseJoinColumns = @JoinColumn(name = "post_id"))
 	private List<Post> posts;
@@ -34,6 +37,10 @@ public class WorkRole {
 
 	public WorkRole() {
 		super();
+	}
+	public WorkRole(String role) {
+		super();
+		this.role = role;
 	}
 
 	public int getId() {
