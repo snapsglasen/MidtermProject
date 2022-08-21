@@ -4,12 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>Pet Finder</title>
-	<jsp:include page="bootstrapHead.jsp" />
+<meta charset="UTF-8">
+<title>Inside Scoop</title>
+<jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
-
 <c:choose>
 <c:when test="${not empty loginCheck }">
 	<jsp:include page="navbar.jsp"></jsp:include>
@@ -17,11 +16,18 @@
 	<c:otherwise>
 	<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
 	</c:otherwise>
-	</c:choose>	
-	
+	</c:choose>
 	<main class="container-fluid">
-	<!-- blah blah -->
-    </main>
-	<jsp:include page="bootstrapFoot.jsp" />
+		<h1>Inside scoop customers</h1>
+<c:forEach var="p" items="${users }" >
+<c:if test="${p.active }">
+<a href="profile.do?id=${p.id }">${p.firstName} ${p.lastName }</a>
+<br/>
+</c:if>
+</c:forEach>
+
+
+</main>
+		<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>

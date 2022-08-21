@@ -21,9 +21,8 @@
 <c:if test="${displayPost.active }">
 		<h1>${displayPost.title }</h1>
 
+<a href="profile.do?id=${displayPost.user.id }">${displayPost.user.firstName} ${displayPost.user.lastName }</a>
 
-${displayPost.user.firstName}
-${displayPost.user.lastName }
 <br/>
 ${displayPost.createDate}
 ${displayPost.lastUpdate}
@@ -49,7 +48,7 @@ ${p.name }
 </c:forEach>
 <br/>
 
-<c:if test="${loginCheck==displayPost.user }">
+<c:if test="${loginCheck==displayPost.user || loginCheck.admin }">
 <form action="updatePost.do" method="POST">
 			<input type="hidden" name="id" value=${displayPost.id } /> <br />
 		<button type="submit" class="btn btn-primary">Update</button>
@@ -80,7 +79,7 @@ ${p.user.lastName }
 ${p.lastUpdated }
 <br/>
 ${p.content }
-	<c:if test="${loginCheck==p.user }">
+	<c:if test="${loginCheck==p.user ||loginCheck.admin }">
 <form action="updateComment.do" method="POST">
 			<input type="hidden" name="id" value=${displayPost.id } />
 			<input type="hidden" name="commentId" value=${p.id } /> 

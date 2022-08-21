@@ -63,8 +63,17 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "profile.do")
-	public String profile(Model model, HttpSession session) {
+	public String profile(Model model, Model login, HttpSession session, int id) {
 		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		User profile= userDAO.findById(id);
+		model.addAttribute("profile", profile);
+		return "profile";
+	}
+	@RequestMapping(path = "loggedInProfile.do")
+	public String profile(Model model, Model login, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		model.addAttribute("profile", user);
 		return "profile";
 	}
@@ -83,11 +92,12 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "createPost.do", method = RequestMethod.POST)
-	public String createPost(Model model, String title, String content, HttpSession session) {
+	public String createPost(Model model, Model login, String title, String content, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		Post post = new Post(content, user, title);
 		model.addAttribute("displayPost", userDAO.createPost(post));
-		return "postAdded";
+		return "showPost";
 
 	}
 
@@ -101,13 +111,18 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "attemptLogin.do")
-	public String attemptLogin(String username, String password, Model model, HttpSession session) {
+	public String attemptLogin(String username, String password, Model model, Model login, HttpSession session) {
 		try {
 			User user = userDAO.userLogin(username, password);
 			if (user.isActive()) {
 
 				model.addAttribute("attemptLogin", user);
 				session.setAttribute("loggedInUser", user);
+				
+				User loggedInUser = (User) session.getAttribute("loggedInUser");
+				login.addAttribute("loginCheck", loggedInUser);
+				model.addAttribute("posts", userDAO.findNewestPost());
+				
 				return "index";
 			}
 
@@ -161,8 +176,9 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "logout.do")
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session, Model model) {
 		session.invalidate();
+		model.addAttribute("posts", userDAO.findNewestPost());
 		return "index";
 	}
 
@@ -195,7 +211,14 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		return "showPost";
-
+	}
+	
+	@RequestMapping(path="allUsers.do")
+	public String allUsers(HttpSession session, Model model, Model login) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("users", userDAO.findAllUsers());
+		return"showAllUsers";
 	}
 
 }

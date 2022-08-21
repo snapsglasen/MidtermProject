@@ -10,6 +10,7 @@ public interface UserDAO {
 	
 	User findById(int userId);
 	List<Post> findNewestPost ();
+	List<User> findAllUsers();
 	Post findByPostId(int postId);
 	Comment findByCommentId(int commentId);
 	Post createPost(Post post);

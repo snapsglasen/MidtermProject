@@ -17,25 +17,15 @@ import com.skilldistillery.interviewassister.entities.UserCategory;
 @Service
 @Transactional
 public class UserDAOImpl implements UserDAO {
-
 	@PersistenceContext
 	private EntityManager em;
-
 	private Map<Integer, User> users;
+
+	// ALL SEARCH METHODS
 
 	@Override
 	public User findById(int userId) {
 		return em.find(User.class, userId);
-	}
-
-	@Override
-	public List<Post> findNewestPost() {
-
-		String jpql = "Select p from Post p ORDER BY lastUpdate"; // come back to list a certain amount
-		System.out.println(em.createQuery(jpql, Post.class).getResultList());
-
-		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
-		return posts;
 	}
 
 	@Override
@@ -49,10 +39,20 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Post createPost(Post post) {
-		post.setActive(true);
-		em.persist(post);
-		return post;
+	public List<Post> findNewestPost() {
+
+		String jpql = "Select p from Post p ORDER BY lastUpdate";
+		System.out.println(em.createQuery(jpql, Post.class).getResultList());
+
+		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
+		return posts;
+	}
+
+	@Override
+	public List<User> findAllUsers() {
+		String jpql = "Select u from User u ORDER BY firstName";
+		List<User> users = em.createQuery(jpql, User.class).getResultList();
+		return users;
 	}
 
 	@Override
@@ -64,13 +64,12 @@ public class UserDAOImpl implements UserDAO {
 		return user;
 	}
 
+	// ALL CREATE METHODS
 	@Override
-	public User registerUser(String firstName, String lastName, String email, String username, String password,
-			int category) {
-		User user = new User(firstName, lastName, email, username, password, em.find(UserCategory.class, category));
-		user.setActive(true);
-		em.persist(user);
-		return user;
+	public Post createPost(Post post) {
+		post.setActive(true);
+		em.persist(post);
+		return post;
 	}
 
 	@Override
@@ -80,6 +79,17 @@ public class UserDAOImpl implements UserDAO {
 		em.persist(comment);
 		return comment;
 	}
+
+	@Override
+	public User registerUser(String firstName, String lastName, String email, String username, String password,
+			int category) {
+		User user = new User(firstName, lastName, email, username, password, em.find(UserCategory.class, category));
+		user.setActive(true);
+		em.persist(user);
+		return user;
+	}
+
+	// ALL DELETE METHODS
 
 	@Override
 	public void deleteComment(int commentId) {
@@ -97,6 +107,29 @@ public class UserDAOImpl implements UserDAO {
 	public void deleteUser(int id) {
 		User user = findById(id);
 		user.setActive(false);
+	}
+
+	// ALL UPDATE METHODS
+
+	@Override
+	public Comment updateComment(int commentId, String content) {
+		Comment comment = findByCommentId(commentId);
+		if (!content.equals("") && content != null) {
+			comment.setContent(content);
+		}
+		return comment;
+	}
+
+	@Override
+	public Post updatePost(int id, String title, String content) {
+		Post post = findByPostId(id);
+		if (!title.equals("") && title != null) {
+			post.setTitle(title);
+		}
+		if (!content.equals("") && content != null) {
+			post.setContent(content);
+		}
+		return post;
 	}
 
 	@Override
@@ -121,29 +154,7 @@ public class UserDAOImpl implements UserDAO {
 		if (category != 0) {
 			user.setUserCategory(em.find(UserCategory.class, id));
 		}
-
 		return user;
-
 	}
 
-	@Override
-	public Comment updateComment(int commentId, String content) {
-		Comment comment = findByCommentId(commentId);
-		if (!content.equals("") && content != null) {
-			comment.setContent(content);
-		}
-		return comment;
-	}
-
-	@Override
-	public Post updatePost(int id, String title, String content) {
-		Post post = findByPostId(id);
-		if (!title.equals("") && title != null) {
-			post.setTitle(title);
-		}
-		if (!content.equals("") && content != null) {
-			post.setContent(content);
-		}
-		return post;
-	}
 }
