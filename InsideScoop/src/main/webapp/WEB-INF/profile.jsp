@@ -8,10 +8,12 @@
 <%-- <jsp:include page="bootstrapHead.jsp" /> --%>
 </head>
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
+
+	<jsp:include page="navbar.jsp"></jsp:include>
+	
 	<main class="container-fluid">
 <h1>Profile</h1>
-<img alt=${profile.profilePicture} src="Profile picture">
+<img alt=${profile.profilePicture } src="Profile picture">
 ${profile.firstName }<br/>
 ${profile.lastName }
 

@@ -17,10 +17,10 @@ import com.skilldistillery.interviewassister.entities.UserCategory;
 @Service
 @Transactional
 public class UserDAOImpl implements UserDAO {
-	
+
 	@PersistenceContext
 	private EntityManager em;
-	
+
 	private Map<Integer, User> users;
 
 	@Override
@@ -30,10 +30,10 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<Post> findNewestPost() {
-		
-		String jpql = "Select p from Post p ORDER BY lastUpdate"; //come back to list a certain amount
+
+		String jpql = "Select p from Post p ORDER BY lastUpdate"; // come back to list a certain amount
 		System.out.println(em.createQuery(jpql, Post.class).getResultList());
-		
+
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
@@ -42,6 +42,7 @@ public class UserDAOImpl implements UserDAO {
 	public Post findByPostId(int postId) {
 		return em.find(Post.class, postId);
 	}
+
 	@Override
 	public Comment findByCommentId(int commentId) {
 		return em.find(Comment.class, commentId);
@@ -57,13 +58,15 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User userLogin(String username, String password) {
 		String jpql = "SELECT u from User u where u.username = :username AND u.password = :password";
-		User user = em.createQuery(jpql, User.class).setParameter("username", username).setParameter("password", password).getSingleResult();
+		User user = em.createQuery(jpql, User.class).setParameter("username", username)
+				.setParameter("password", password).getSingleResult();
 		System.out.println(user);
 		return user;
 	}
 
 	@Override
-	public User registerUser(String firstName, String lastName, String email, String username, String password, int category) {
+	public User registerUser(String firstName, String lastName, String email, String username, String password,
+			int category) {
 		User user = new User(firstName, lastName, email, username, password, em.find(UserCategory.class, category));
 		user.setActive(true);
 		em.persist(user);
@@ -72,28 +75,27 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Comment createComment(String content, User user, int id) {
-		Comment comment= new Comment(content, user, em.find(Post.class, id));
+		Comment comment = new Comment(content, user, em.find(Post.class, id));
 		comment.setActive(true);
 		em.persist(comment);
 		return comment;
 	}
 
-
 	@Override
 	public void deleteComment(int commentId) {
-		Comment comment=findByCommentId(commentId);
+		Comment comment = findByCommentId(commentId);
 		comment.setActive(false);
 	}
-	
+
 	@Override
 	public void deletePost(int id) {
-		Post post=findByPostId(id);
+		Post post = findByPostId(id);
 		post.setActive(false);
 	}
-	
+
 	@Override
 	public void deleteUser(int id) {
-		User user=findById(id);
+		User user = findById(id);
 		user.setActive(false);
 	}
 
@@ -101,38 +103,47 @@ public class UserDAOImpl implements UserDAO {
 	public User updateProfile(int id, String firstName, String lastName, String email, String username, String password,
 			int category) {
 		User user = findById(id);
-		if(!firstName.equals("") && firstName != null) {
+		if (!firstName.equals("") && firstName != null) {
 			user.setFirstName(firstName);
 		}
-		if(!lastName.equals("") && lastName != null) {
+		if (!lastName.equals("") && lastName != null) {
 			user.setLastName(lastName);
 		}
-		if(!email.equals("") && email != null) {
+		if (!email.equals("") && email != null) {
 			user.setEmail(email);
 		}
-		if(!username.equals("") && username != null) {
+		if (!username.equals("") && username != null) {
 			user.setUsername(username);
 		}
-		if(!password.equals("") && password != null) {
+		if (!password.equals("") && password != null) {
 			user.setPassword(password);
 		}
-		if(category != 0) {
+		if (category != 0) {
 			user.setUserCategory(em.find(UserCategory.class, id));
 		}
-		
+
 		return user;
-		
+
 	}
-
-
-		
 
 	@Override
 	public Comment updateComment(int commentId, String content) {
-		Comment comment=findByCommentId(commentId);
-		if(!content.equals("")&& content!=null) {
+		Comment comment = findByCommentId(commentId);
+		if (!content.equals("") && content != null) {
 			comment.setContent(content);
 		}
 		return comment;
+	}
+
+	@Override
+	public Post updatePost(int id, String title, String content) {
+		Post post = findByPostId(id);
+		if (!title.equals("") && title != null) {
+			post.setTitle(title);
+		}
+		if (!content.equals("") && content != null) {
+			post.setContent(content);
+		}
+		return post;
 	}
 }

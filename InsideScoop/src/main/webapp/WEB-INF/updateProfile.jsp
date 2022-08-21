@@ -8,7 +8,9 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
+
 	<jsp:include page="navbar.jsp"></jsp:include>
+	
 	<main class="container-fluid">
 		<h1>Update Profile</h1>
 		<form action="updateProfileAttempt.do" method="GET">

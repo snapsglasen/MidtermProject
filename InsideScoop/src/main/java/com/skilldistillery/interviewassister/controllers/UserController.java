@@ -26,7 +26,8 @@ public class UserController {
 	public String home(Model model, Model login, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		model.addAttribute("posts", userDAO.findNewestPost());// Change to List<Post> posts
+		model.addAttribute("posts", userDAO.findNewestPost());
+		
 		return "index";
 	}
 
@@ -34,8 +35,10 @@ public class UserController {
 	public String Login(Model model) {
 		return "login";
 	}
+
 	@RequestMapping(path = "registerAttempt.do")
-	public String registerAttempt(Model model, String firstName, String lastName, String username, String password, int category, HttpSession session) {
+	public String registerAttempt(Model model, String firstName, String lastName, String username, String password,
+			int category, HttpSession session) {
 		try {
 			User user = userDAO.registerUser(firstName, lastName, lastName, username, password, category);
 			model.addAttribute("profile", user);
@@ -46,7 +49,7 @@ public class UserController {
 		}
 		return "profile";
 	}
-	
+
 	@RequestMapping(path = "register.do")
 	public String Register(Model model) {
 		return "register";
@@ -85,9 +88,9 @@ public class UserController {
 		Post post = new Post(content, user, title);
 		model.addAttribute("displayPost", userDAO.createPost(post));
 		return "postAdded";
-		
+
 	}
-	
+
 	@RequestMapping(path = "createComment.do", method = RequestMethod.POST)
 	public String createComment(Model model, Model login, String content, int id, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
@@ -97,29 +100,34 @@ public class UserController {
 		return "showPost";
 	}
 
-
 	@RequestMapping(path = "attemptLogin.do")
 	public String attemptLogin(String username, String password, Model model, HttpSession session) {
 		try {
 			User user = userDAO.userLogin(username, password);
-			model.addAttribute("attemptLogin", user);
-			session.setAttribute("loggedInUser", user);
-			return "index";
+			if (user.isActive()) {
+
+				model.addAttribute("attemptLogin", user);
+				session.setAttribute("loggedInUser", user);
+				return "index";
+			}
+
 		} catch (Exception e) {
+
 			e.printStackTrace();
-			return "loginFailed";
 		}
+		return "loginFailed";
 
 	}
-	@RequestMapping(path="updateComment.do")
-	public String updateComment(Model model, Model comment, int id, int commentId ) {
-		
+
+	@RequestMapping(path = "updateComment.do")
+	public String updateComment(Model model, Model comment, int id, int commentId) {
+
 		model.addAttribute("displayPost", userDAO.findByPostId(id));
 		comment.addAttribute("comment", userDAO.findByCommentId(commentId));
 		return "commentUpdate";
 	}
-		
-	@RequestMapping(path="updateCommentAttempt.do")
+
+	@RequestMapping(path = "updateCommentAttempt.do")
 	public String updatecomment(Model model, Model login, HttpSession session, int id, int commentId, String content) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
@@ -127,8 +135,8 @@ public class UserController {
 		model.addAttribute("displayPost", userDAO.findByPostId(id));
 		return "showPost";
 	}
-	
-	@RequestMapping(path="deleteComment.do")
+
+	@RequestMapping(path = "deleteComment.do")
 	public String deleteComment(Model model, Model login, HttpSession session, int id, int commentId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
@@ -136,44 +144,58 @@ public class UserController {
 		model.addAttribute("displayPost", userDAO.findByPostId(id));
 		return "showPost";
 	}
-	
-	@RequestMapping(path="deletePost.do")
+
+	@RequestMapping(path = "deletePost.do")
 	public String deletePost(Model model, Model login, HttpSession session, int id) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.deletePost(id);
 		return "index";
 	}
-	
-	//Will this break everything? We will find out once we allow a user to delete their account.
-	@RequestMapping(path="deleteUser.do")
+
+	@RequestMapping(path = "deleteUser.do")
 	public String deleteUser(Model model, Model login, HttpSession session, int id) {
-		//this null below here could break stuff with a null pointer expection we will see.
-		User user = (User) session.getAttribute(null);
-		login.addAttribute("loginCheck", user);
+		session.invalidate();
 		userDAO.deleteUser(id);
 		return "index";
 	}
-	
-	@RequestMapping(path="logout")
+
+	@RequestMapping(path = "logout.do")
 	public String logout(HttpSession session) {
+		session.invalidate();
 		return "index";
 	}
-	
-	@RequestMapping(path="updateProfile.do")
-	public String updatedProfile(HttpSession session, Model model, int id) {
+
+	@RequestMapping(path = "updateProfile.do")
+	public String updateProfile(HttpSession session, Model model, int id) {
 		model.addAttribute("profile", userDAO.findById(id));
 		return "updateProfile";
-		
+
 	}
-	
-	@RequestMapping(path="updateProfileAttempt.do")
-	public String updateProfile(HttpSession session, Model model, int id, String firstName, String lastName, String email, String username, String password, int category) {
-	User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category);
+
+	@RequestMapping(path = "updateProfileAttempt.do")
+	public String updatedProfile(HttpSession session, Model model, int id, String firstName, String lastName,
+			String email, String username, String password, int category) {
+		User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category);
 		model.addAttribute("profile", user);
 		session.setAttribute("loggedInUser", user);
 		return "profile";
 	}
-	
+
+	@RequestMapping(path = "updatePost.do")
+	public String updatePost(HttpSession session, Model model, int id) {
+		model.addAttribute("post", userDAO.findByPostId(id));
+		return "updatePost";
+	}
+
+	@RequestMapping(path = "updatePostAttempt.do")
+	public String updatedPost(HttpSession session, Model model, int id, String title, String content, Model login) {
+		Post post = userDAO.updatePost(id, title, content);
+		model.addAttribute("displayPost", post);
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		return "showPost";
+
+	}
 
 }

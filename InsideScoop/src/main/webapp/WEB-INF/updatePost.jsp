@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Create Post</title>
+<title>Inside Scoop</title>
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
@@ -18,15 +18,16 @@
 	</c:otherwise>
 	</c:choose>
 	<main class="container-fluid">
+<h1>Update Post</h1>
 
-
-	<form action="createPost.do" method="POST">
+	<form action="updatePostAttempt.do" method="POST">
 		<div>
-			Title <input type="text"class= "form-control" name="title" /><br/>
-			Content of Post <input type="text" class= "form-control" name="content" /> <br /> 
+		<input type="hidden" name="id" value=${post.id } />
+			Title <input type="text"class= "form-control" name="title" placeholder="${post.title }"/><br/>
+			Content of Post <input type="text" class= "form-control" name="content" placeholder="${post.content }"/> <br /> 
 		</div>
 
-		<button type="submit" class="btn btn-primary">Add Post</button>
+		<button type="submit" class="btn btn-primary">Update Post</button>
 	</form>
 	 </main>
 	<jsp:include page="bootstrapFoot.jsp" />

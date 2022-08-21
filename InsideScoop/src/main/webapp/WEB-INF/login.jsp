@@ -8,7 +8,8 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
-<jsp:include page="navbar.jsp"></jsp:include>
+	<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
+	
 	<main class="container-fluid">
 <h1>LOGIN</h1>
 <form action="attemptLogin.do" method="GET">

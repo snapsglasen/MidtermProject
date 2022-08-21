@@ -21,6 +21,6 @@ public interface UserDAO {
 	void deletePost(int id);
 	void deleteUser(int id);
 	User updateProfile(int id, String firstName, String lastName, String email, String username, String password, int category);
-	
+	Post updatePost(int id, String title, String content);
 
 }

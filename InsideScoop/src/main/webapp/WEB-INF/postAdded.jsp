@@ -9,7 +9,14 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
+<c:choose>
+<c:when test="${not empty loginCheck }">
 	<jsp:include page="navbar.jsp"></jsp:include>
+	</c:when>
+	<c:otherwise>
+	<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
+	</c:otherwise>
+	</c:choose>
 	<main class="container-fluid">
 		<h1>${displayPost.title }</h1>
 <h1>Post Successfully Created</h1>

@@ -19,6 +19,12 @@
 			<button type="submit" class="btn btn-primary">Update</button>
 		</form>
 
+		<form action="deleteUser.do" method="POST">
+			<input type="hidden" name="id" value=${account.id } />
+
+			<button type="submit" class="btn btn-primary">Delete Account</button>
+		</form>
+
 		<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>
