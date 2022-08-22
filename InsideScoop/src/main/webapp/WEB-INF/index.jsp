@@ -9,14 +9,16 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
-<c:choose>
-<c:when test="${not empty loginCheck }">
-	<jsp:include page="navbar.jsp"></jsp:include>
-	</c:when>
-	<c:otherwise>
-	<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
-	</c:otherwise>
+
+	<c:choose>
+		<c:when test="${not empty loginCheck }">
+			<jsp:include page="navbar.jsp"/>
+		</c:when>
+		<c:otherwise>
+			<jsp:include page="loggedOutNavbar.jsp"/>
+		</c:otherwise>
 	</c:choose>
+	
 	<main class="container-fluid">
 		<h1>Welcome to Inside Scoop</h1>
 <form action="searchPosts.do">
