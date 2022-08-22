@@ -27,7 +27,20 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findNewestPost());
-		
+		return "index";
+	}
+	@RequestMapping(path = { "PostByTitle.do" })
+	public String postByTitle(Model model, Model login, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("posts", userDAO.findAlphabeticalPost());
+		return "index";
+	}
+	@RequestMapping(path = { "postByOldest.do" })
+	public String postByOldest(Model model, Model login, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("posts", userDAO.findOldestPost());
 		return "index";
 	}
 

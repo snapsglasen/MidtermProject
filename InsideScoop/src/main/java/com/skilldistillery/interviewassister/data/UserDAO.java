@@ -12,7 +12,9 @@ import com.skilldistillery.interviewassister.entities.WorkRole;
 public interface UserDAO {
 	
 	User findById(int userId);
+	List<Post> findAlphabeticalPost();
 	List<Post> findNewestPost ();
+	List<Post> findOldestPost();
 	List<User> findAllUsers();
 	Post findByPostId(int postId);
 	Comment findByCommentId(int commentId);

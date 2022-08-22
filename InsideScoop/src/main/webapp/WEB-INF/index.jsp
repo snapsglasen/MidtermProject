@@ -23,6 +23,18 @@
 Looking for a post?<input type="text" class= "form-control" name="search"/>
 <input class="btn btn-primary" type="submit" value="Search post">
 </form>
+<form action="PostByTitle.do">
+<input class="btn btn-primary" type="submit" value="Filter by Title">
+</form>
+</form>
+<form action="PostByOldest.do">
+<input class="btn btn-primary" type="submit" value="Filter by Oldest">
+</form>
+</form>
+<form action="home.do">
+<input class="btn btn-primary" type="submit" value="Filter by Newest">
+</form>
+
 <c:forEach var="p" items="${posts }" >
 <c:if test="${p.active }">
 <img src="${p.user.profilePicture }"
