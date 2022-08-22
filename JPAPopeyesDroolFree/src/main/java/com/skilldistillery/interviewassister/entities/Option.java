@@ -57,10 +57,14 @@ public class Option {
 	public boolean isCorrect() {
 		return correct;
 	}
+	public boolean getCorrect() {
+		return correct;
+	}
 
 	public void setCorrect(boolean correct) {
 		this.correct = correct;
 	}
+	
 
 	@Override
 	public String toString() {

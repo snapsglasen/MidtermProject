@@ -366,15 +366,14 @@ public class UserController {
 		return "question";
 	}
 	
-	@RequestMapping(path="questionAndAnswer")
-	public String questionAndAnswer(Model model, Model login, HttpSession session, Integer[] id, int questionId) {
+	@RequestMapping(path="questionAndAnswer.do")
+	public String questionAndAnswer(Model model, Model login, Model bool, HttpSession session, Integer[] option, int questionId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		Question question = userDAO.findQuestionById(questionId);
 		model.addAttribute("displayQuestion", question);
-		userDAO.correct(id, question);
-		
-		return "question";
+		bool.addAttribute("bool", userDAO.correct(option, question));
+		return "questionAnswer";
 		
 		
 	}

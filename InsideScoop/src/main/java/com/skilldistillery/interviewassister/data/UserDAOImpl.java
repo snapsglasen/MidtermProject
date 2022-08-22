@@ -1,6 +1,7 @@
 package com.skilldistillery.interviewassister.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,7 @@ import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.CommentVote;
 import com.skilldistillery.interviewassister.entities.CommentVoteId;
 import com.skilldistillery.interviewassister.entities.Company;
+import com.skilldistillery.interviewassister.entities.Option;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.PostVote;
 import com.skilldistillery.interviewassister.entities.PostVoteId;
@@ -114,12 +116,14 @@ public class UserDAOImpl implements UserDAO {
 		Set<Post> posts = new HashSet<Post>();
 		String[] searches = search.split(" ");
 		for (String splitSearch : searches) {
-			Company comp= findCompanyByString(splitSearch);
-			WorkRole wr= findWorkRoleByString(splitSearch);
-			Category cat= findCategoryByString(splitSearch);
+			Company comp = findCompanyByString(splitSearch);
+			WorkRole wr = findWorkRoleByString(splitSearch);
+			Category cat = findCategoryByString(splitSearch);
 			splitSearch = "%" + splitSearch + "%";
 			String jpql = "Select p from Post p WHERE p.title Like :search OR p.content LIKE :search OR p.user.firstName LIKE :search OR p.user.lastName LIKE :search OR p.user.username LIKE :search OR :searchComp MEMBER OF p.companies OR :searchWr MEMBER OF p.workRoles OR :searchCat MEMBER OF p.categories";
-			posts.addAll(em.createQuery(jpql, Post.class).setParameter("search", splitSearch).setParameter("searchComp", comp).setParameter("searchWr", wr).setParameter("searchCat", cat).getResultList());
+			posts.addAll(em.createQuery(jpql, Post.class).setParameter("search", splitSearch)
+					.setParameter("searchComp", comp).setParameter("searchWr", wr).setParameter("searchCat", cat)
+					.getResultList());
 		}
 		return posts;
 	}
@@ -196,13 +200,13 @@ public class UserDAOImpl implements UserDAO {
 		if (!content.equals("") && content != null) {
 			post.setContent(content);
 		}
-		if (!company.equals("")&& company!=null) {
+		if (!company.equals("") && company != null) {
 			post.setCompanies(getCompanySet(company));
 		}
-		if (!workRole.equals("")&& workRole!=null) {
+		if (!workRole.equals("") && workRole != null) {
 			post.setWorkRoles(getWorkRoleSet(workRole));
 		}
-		if (category.length>0) {
+		if (category.length > 0) {
 			post.setCategories(getCategoryList(category));
 		}
 		System.out.println(post);
@@ -272,6 +276,7 @@ public class UserDAOImpl implements UserDAO {
 			return null;
 		}
 	}
+
 	private WorkRole findWorkRoleByString(String workRole) {
 		try {
 			String jpql = "SELECT w from WorkRole w WHERE w.role = :workRole";
@@ -281,17 +286,17 @@ public class UserDAOImpl implements UserDAO {
 			return null;
 		}
 	}
-	
+
 	private Category findCategoryByString(String category) {
 		try {
-		String jpql = "Select c from Category c WHERE c.name= :category";
-		Category cat = em.createQuery(jpql, Category.class).setParameter("category", category).getSingleResult();
-		return cat;
-	} catch (Exception e) {
-		return null;
+			String jpql = "Select c from Category c WHERE c.name= :category";
+			Category cat = em.createQuery(jpql, Category.class).setParameter("category", category).getSingleResult();
+			return cat;
+		} catch (Exception e) {
+			return null;
+		}
 	}
-	}
-	
+
 	@Override
 	public Company companyByString(String company) {
 		try {
@@ -368,7 +373,6 @@ public class UserDAOImpl implements UserDAO {
 		return workRoleSet;
 	}
 
-
 	@Override
 	public Question createQuestion(String questionText) {
 		Question question = new Question(questionText);
@@ -396,18 +400,19 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public Question findQuestionById(int questionId) {
 		System.out.println("in the beginning");
-		return em.find(Question.class, questionId); }
+		return em.find(Question.class, questionId);
+	}
 
 	private List<Category> getCategoryList(Integer[] category) {
 		List<Category> categories = new ArrayList<Category>();
 		for (Integer integer : category) {
-			Category cat=em.find(Category.class, integer);
+			Category cat = em.find(Category.class, integer);
 			categories.add(cat);
 		}
 		return categories;
 
 	}
-	
+
 	@Override
 	public List<Question> findAllQuestions() {
 		String jpql = "Select q from Question q";
@@ -417,7 +422,19 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Boolean correct(Integer[] selectedOptions, Question question) {
-		
-		return null;
+		List<Integer> userSelectedOption = new ArrayList<>(Arrays.asList(selectedOptions));
+		for (Option option : question.getOptions()) {
+			if (userSelectedOption.contains(option.getId())) {
+				if (option.isCorrect()) {
+				} else {
+					return false;
+				}
+			} else {
+				if (option.isCorrect()) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
