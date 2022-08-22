@@ -24,14 +24,8 @@
 <a href="profile.do?id=${displayPost.user.id }">${displayPost.user.firstName} ${displayPost.user.lastName }</a>
 
 
-<c:if test="${not empty loginCheck}">
-<form action="upvotePost.do">
-			<input type="hidden" name="userId" value=${loginCheck.id } /> 
-			<input type="hidden" name="postId" value=${displayPost.id } /> 
-		<button type="submit" class="btn btn-primary">Like</button>
-	</form>
-</c:if>
-<c:if test="${loginCheck==displayPost.user || loginCheck.admin }">
+
+<c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }">
 <form action="updatePost.do" method="POST">
 			<input type="hidden" name="id" value=${displayPost.id } /> <br />
 		<button type="submit" class="btn btn-primary">Update</button>
@@ -43,16 +37,7 @@
 	</form>
 </c:if>
 
-<c:if test="${not empty loginCheck }">
-<form action="createComment.do" method="POST">
-		<div>
-			Comment:<input class= "form-control" type="text" name="content" /> <br />
-			<input type="hidden" name="id" value=${displayPost.id } /> <br />
-		</div>
 
-		<button type="submit" class="btn btn-primary">Add comment</button>
-	</form>
-</c:if>
 <c:forEach var="p" items="${displayPost.comments}">
 <c:if test="${p.active}">
 <br/>
@@ -63,13 +48,7 @@ ${p.lastUpdated }
 <br/>
 ${p.content }
 Likes: ${p.likes }
-<c:if test="${not empty loginCheck}">
-<form action="upvoteComment.do">
-			<input type="hidden" name="userId" value=${loginCheck.id } /> 
-			<input type="hidden" name="commentId" value=${p.id } /> 
-			<input type="hidden" name="postId" value=${displayPost.id } /> 
-		<button type="submit" class="btn btn-primary">Like</button>
-	</form>
+
 </c:if>
 	<c:if test="${loginCheck==p.user ||loginCheck.admin }">
 <form action="updateComment.do" method="POST">

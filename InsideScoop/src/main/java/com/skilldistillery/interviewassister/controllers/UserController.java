@@ -243,14 +243,13 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updatePostAttempt.do")
-	public String updatedPost(HttpSession session, Model model, int id, String title, String content, String company, String workRole, Model login) {
-		Post post = userDAO.updatePost(id, title, content);
+	public String updatedPost(HttpSession session, Model model, int id, String title, String content, String company, String workRole, Integer[] category, Model login) {
+		Post post = userDAO.updatePost(id, title, content, company, workRole, category);
 		model.addAttribute("displayPost", post);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		return "showPost";
 	}
-	
 	@RequestMapping(path="allUsers.do")
 	public String allUsers(HttpSession session, Model model, Model login) {
 		User user = (User) session.getAttribute("loggedInUser");
@@ -295,6 +294,16 @@ public class UserController {
 		return "showPost";
 	}
 	
+	@RequestMapping(path = "createQuestionPage.do")
+	public String createQuestionPage(HttpSession session, Model login, Model model) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("categories", userDAO.findCategories());
+		return "createQuestion";
+	}
+	
+	
+	
 	@RequestMapping(path = "createQuestion.do", method = RequestMethod.POST)
 	public String createQuestion(Model model, HttpSession session, Model login, String questionText) {
 		User user = (User) session.getAttribute("loggedInUser");
@@ -304,4 +313,6 @@ public class UserController {
 
 	}
 
+
+	
 }
