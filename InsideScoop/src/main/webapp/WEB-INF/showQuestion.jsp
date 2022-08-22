@@ -24,6 +24,11 @@
 		<%-- <a href="profile.do?id=${displayPost.user.id }">${displayPost.user.firstName}
 				${displayPost.user.lastName }</a>
  --%>
+ 
+ 
+ <c:forEach var="question" items="${listOfQuestions}">
+ ${question.questionText}
+ </c:forEach>
 
 
 		<%-- <c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }"> --%>
