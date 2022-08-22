@@ -1,5 +1,7 @@
 package com.skilldistillery.interviewassister.controllers;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.interviewassister.data.UserDAO;
+import com.skilldistillery.interviewassister.entities.Category;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.User;
-import com.skilldistillery.interviewassister.entities.WorkRole;
 
 @Controller
 public class UserController {
@@ -109,17 +111,18 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "createPostPage.do")
-	public String createPostPage(HttpSession session, Model login) {
+	public String createPostPage(HttpSession session, Model login, Model model) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
+		model.addAttribute("categories", userDAO.findCategories());
 		return "createPost";
 	}
 
 	@RequestMapping(path = "createPost.do", method = RequestMethod.POST)
-	public String createPost(Model model, Model login, String title, String content, String company, String workRole, HttpSession session) {
+	public String createPost(Model model, Model login, String title, String content, String company, String workRole, Integer[] category, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		model.addAttribute("displayPost", userDAO.createPost(content, user, title, company, workRole));
+		model.addAttribute("displayPost", userDAO.createPost(content, user, title, company, workRole, category));
 		return "showPost";
 
 	}
@@ -240,7 +243,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updatePostAttempt.do")
-	public String updatedPost(HttpSession session, Model model, int id, String title, String content, Model login) {
+	public String updatedPost(HttpSession session, Model model, int id, String title, String content, String company, String workRole, Model login) {
 		Post post = userDAO.updatePost(id, title, content);
 		model.addAttribute("displayPost", post);
 		User user = (User) session.getAttribute("loggedInUser");
