@@ -27,7 +27,9 @@
  
  
  <c:forEach var="question" items="${questions}">
- <a href="questionOptions">${question.questionText}</a>
+
+ <a href="question.do?id=${question.id }"> ${question.questionText}</a>
+
  <br/>
  </c:forEach>
 
