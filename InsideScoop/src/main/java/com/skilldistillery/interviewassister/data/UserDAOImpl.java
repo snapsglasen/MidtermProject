@@ -1,5 +1,6 @@
 package com.skilldistillery.interviewassister.data;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.interviewassister.entities.Category;
 import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.CommentVote;
 import com.skilldistillery.interviewassister.entities.CommentVoteId;
@@ -49,12 +51,17 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<Post> findNewestPost() {
-
 		String jpql = "Select p from Post p ORDER BY lastUpdate DESC";
 		System.out.println(em.createQuery(jpql, Post.class).getResultList());
-
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
+	}
+
+	@Override
+	public List<Category> findCategories() {
+		String jpql = "Select c from Category c";
+		List<Category> categories = em.createQuery(jpql, Category.class).getResultList();
+		return categories;
 	}
 
 	@Override
@@ -116,13 +123,24 @@ public class UserDAOImpl implements UserDAO {
 
 	// ALL CREATE METHODS
 	@Override
-	public Post createPost(String content, User user, String title, String company, String workRole) {
+	public Post createPost(String content, User user, String title, String company, String workRole,
+			Integer[] category) {
 		Set<Company> companySet = getCompanySet(company);
 		Set<WorkRole> workRoleSet = getWorkRoleSet(workRole);
-		Post post = new Post(content, user, title, companySet, workRoleSet);
+		List<Category> categories = getCategoryList(category);
+		Post post = new Post(content, user, title, companySet, workRoleSet, categories);
 		post.setActive(true);
 		em.persist(post);
 		return post;
+	}
+
+	private List<Category> getCategoryList(Integer[] category) {
+		List<Category> categories = new ArrayList<Category>();
+		for (Integer integer : category) {
+			Category cat = em.find(Category.class, integer);
+			categories.add(cat);
+		}
+		return categories;
 	}
 
 	@Override
@@ -327,14 +345,18 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void deleteQuestion(int id) {
-Question question = findQuestionById(id);
-question.setActive(false);
+		Question question = findQuestionById(id);
+		question.setActive(false);
 	}
 
 	@Override
 	public Question updateQuestion(int id, String questionText) {
-		// TODO Auto-generated method stub
-		return null;
+		Question question = findQuestionById(id);
+		if (!questionText.equals("") && questionText != null) {
+			question.setQuestionText(questionText);
+		}
+
+		return question;
 	}
 
 	@Override

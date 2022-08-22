@@ -23,6 +23,7 @@ DROP TABLE IF EXISTS `question` ;
 CREATE TABLE IF NOT EXISTS `question` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `question_text` TEXT NULL,
+  `active` TINYINT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -551,10 +552,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `question` (`id`, `question_text`) VALUES (1, 'Why is a mouse when it spins?');
-INSERT INTO `question` (`id`, `question_text`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?');
-INSERT INTO `question` (`id`, `question_text`) VALUES (3, 'Which of the following options makes Java portable and secure?');
-INSERT INTO `question` (`id`, `question_text`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?');
+INSERT INTO `question` (`id`, `question_text`, `active`) VALUES (1, 'Why is a mouse when it spins?', NULL);
+INSERT INTO `question` (`id`, `question_text`, `active`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?', NULL);
+INSERT INTO `question` (`id`, `question_text`, `active`) VALUES (3, 'Which of the following options makes Java portable and secure?', NULL);
+INSERT INTO `question` (`id`, `question_text`, `active`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?', NULL);
 
 COMMIT;
 

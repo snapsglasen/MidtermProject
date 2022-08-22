@@ -88,6 +88,17 @@ public class Post {
 		this.title = title;
 		this.companies = companies;
 	}
+	
+	public Post(String content, User user, String title, Set<Company> companies, Set<WorkRole> workRoles,
+			List<Category> categories) {
+		super();
+		this.content = content;
+		this.user = user;
+		this.title = title;
+		this.companies = companies;
+		this.workRoles = workRoles;
+		this.categories = categories;
+	}
 
 	public int getId() {
 		return id;
