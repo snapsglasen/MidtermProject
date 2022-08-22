@@ -3,7 +3,7 @@ ul {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background-color: #FFFDD0;
+	background-color: #F3E0B0;
 	position: fixed;
 	top: 0;
 	width: 100%;
@@ -11,25 +11,39 @@ ul {
 
 li {
 	float: left;
-	border-right: 1px solid #bbb;
+	border-right: 1px solid ##FFF9FB;
 }
 
 li a {
 	display: block;
-	color: white;
+	color: #A57E56;
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
 }
 
 li a:hover {
-	background-color: #F3E0B0;
+	background-color: #FFFDD0;
+	color: #A57E56;
 }
 
 .active {
-	background-color: #F3E0B0;
+	background-color: #FFFDD0;
 }
 
 body {
-	background-color: white;
+	background-color: #FFF9FB;
+	color: #A57E56;
+}
+
+.btn {
+	background-color: #F63BDC !important;
+	outline-color: #F63BDC !important;
+	color: #FFF9FB !important;
+}
+
+.btn-primary {
+	background-color: #F63BDC !important;
+	outline-color: #F63BDC !important;
+	color: #FFF9FB !important;
 }

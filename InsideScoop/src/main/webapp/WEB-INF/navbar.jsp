@@ -8,7 +8,7 @@
    		<li class="nav"> <a href="allUsers.do">Show Profiles</a>  </li>
     	<li class="nav"> <a href="loggedInProfile.do">Profile</a>  </li>
     	<li class="nav"> <a href="logout.do">Logout</a>  </li>
-    	<li> <a href="loggedInProfile.do"><img class="topright" src="${loginCheck.profilePicture }" width="50" height="50"/></a></li>-->
+    	<li> <a href="loggedInProfile.do"><img class="topright" src="${loginCheck.profilePicture }" width="50" height="50"/></a></li>
 	</ul>
 </div>
 	
