@@ -131,15 +131,6 @@ public class UserDAOImpl implements UserDAO {
 		return post;
 	}
 
-	private List<Category> getCategoryList(Integer[] category) {
-		List<Category> categories = new ArrayList<Category>();
-		for (Integer integer : category) {
-			Category cat=em.find(Category.class, integer);
-			categories.add(cat);
-		}
-		return categories;
-	}
-
 	@Override
 	public Comment createComment(String content, User user, int id) {
 		Comment comment = new Comment(content, user, em.find(Post.class, id));
@@ -191,7 +182,11 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Post updatePost(int id, String title, String content) {
+	public Post updatePost(int id, String title, String content, String company, String workRole, Integer[] category) {
+		System.out.println("********************* In DAOIMPL Top");
+		System.out.println(company);
+		System.out.println(workRole);
+		System.out.println(category);
 		Post post = findByPostId(id);
 		if (!title.equals("") && title != null) {
 			post.setTitle(title);
@@ -199,6 +194,16 @@ public class UserDAOImpl implements UserDAO {
 		if (!content.equals("") && content != null) {
 			post.setContent(content);
 		}
+		if (!company.equals("")&& company!=null) {
+			post.setCompanies(getCompanySet(company));
+		}
+		if (!workRole.equals("")&& workRole!=null) {
+			post.setWorkRoles(getWorkRoleSet(workRole));
+		}
+		if (category.length>0) {
+			post.setCategories(getCategoryList(category));
+		}
+		System.out.println(post);
 		return post;
 	}
 
@@ -330,5 +335,13 @@ public class UserDAOImpl implements UserDAO {
 			workRoleSet.add(workRoleByString(wr));
 		}
 		return workRoleSet;
+	}
+	private List<Category> getCategoryList(Integer[] category) {
+		List<Category> categories = new ArrayList<Category>();
+		for (Integer integer : category) {
+			Category cat=em.find(Category.class, integer);
+			categories.add(cat);
+		}
+		return categories;
 	}
 }

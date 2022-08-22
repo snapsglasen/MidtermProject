@@ -235,16 +235,18 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updatePost.do")
-	public String updatePost(HttpSession session, Model model, Model login, int id) {
+	public String updatePost(HttpSession session, Model model, Model login, Model cat, int id) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("post", userDAO.findByPostId(id));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "updatePost";
 	}
 
 	@RequestMapping(path = "updatePostAttempt.do")
-	public String updatedPost(HttpSession session, Model model, int id, String title, String content, String company, String workRole, Model login) {
-		Post post = userDAO.updatePost(id, title, content);
+	public String updatedPost(HttpSession session, Model model, int id, String title, String content, String company, String workRole, Integer[] category, Model login) {
+		System.out.println("****************** IN controller");
+		Post post = userDAO.updatePost(id, title, content, company, workRole, category);
 		model.addAttribute("displayPost", post);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);

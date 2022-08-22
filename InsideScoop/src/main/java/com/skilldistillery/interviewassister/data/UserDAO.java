@@ -28,7 +28,7 @@ public interface UserDAO {
 	void deletePost(int id);
 	void deleteUser(int id);
 	User updateProfile(int id, String firstName, String lastName, String email, String username, String password, int category, String workRole, String company, String profilePicture);
-	Post updatePost(int id, String title, String content);
+	Post updatePost(int id, String title, String content, String company, String workRole, Integer[] category);
 	Set<User> searchUsers(String search);
 	Set<Post> searchPosts(String search);
 	WorkRole workRoleByString(String workRole);
