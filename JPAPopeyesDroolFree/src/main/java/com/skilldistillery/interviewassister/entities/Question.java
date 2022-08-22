@@ -23,17 +23,17 @@ public class Question {
 	@OneToMany(mappedBy="question")
 	private List<QuestionVote> questionVotes;
 	
-	private boolean active;
+	private Boolean active;
 	
 
 //	@OneToMany(mappedBy="question")
 //	private List<Option> Options;
 	
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 

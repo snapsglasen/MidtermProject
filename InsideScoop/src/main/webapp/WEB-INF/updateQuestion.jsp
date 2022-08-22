@@ -18,20 +18,16 @@
 	</c:otherwise>
 	</c:choose>
 	<main class="container-fluid">
-<h1>Update Post</h1>
+<h1>Update Question</h1>
 
-	<form action="updatePostAttempt.do" method="POST">
+	<form action="updateQuestionAttempt.do" method="POST">
 		<div>
-		<input type="hidden" name="id" value=${post.id } />
-			Title <input type="text"class= "form-control" name="title" placeholder="${post.title }"/><br/>
-			Content of Post <input type="text" class= "form-control" name="content" placeholder="${post.content }"/> <br /> 
-			Does this post have to deal with any companies in particular? <br/>
-			<input type="text" class= "form-control" name="company" placeholder="${post.company }"/> <br /> 
-			Does this post have to deal with any specific work role? <br/>
-			<input type="text" class= "form-control" name="workRole" placeholder="${post.workRole }"/> <br />
+		<input type="hidden" name="id" value=${question.id } />
+			Question Text <input type="text"class= "form-control" name="questionText" placeholder="${question.questionText }"/>
+			
 		</div>
 
-		<button type="submit" class="btn btn-primary">Update Post</button>
+		<button type="submit" class="btn btn-primary">Update Question</button>
 	</form>
 	 </main>
 	<jsp:include page="bootstrapFoot.jsp" />
