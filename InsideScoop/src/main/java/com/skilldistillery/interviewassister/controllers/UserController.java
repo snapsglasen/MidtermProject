@@ -1,6 +1,6 @@
 package com.skilldistillery.interviewassister.controllers;
 
-import java.util.Arrays;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.skilldistillery.interviewassister.data.UserDAO;
-import com.skilldistillery.interviewassister.entities.Category;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.Question;
 import com.skilldistillery.interviewassister.entities.User;
@@ -363,6 +362,15 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("displayQuestion", userDAO.findQuestionById(id));
+		return "question";
+	}
+	@RequestMapping(path= "randomQuestion.do")
+	public String question(Model model, Model login, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		List<Question> questions=userDAO.findAllQuestions();
+		int randomId= (int) (Math.random()*questions.size());
+		model.addAttribute("displayQuestion", questions.get(randomId));
 		return "question";
 	}
 	

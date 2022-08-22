@@ -21,10 +21,9 @@
 
 		<h1>${displayQuestion.questionText }</h1>
 
-		<%-- <a href="profile.do?id=${displayPost.user.id }">${displayPost.user.firstName}
-				${displayPost.user.lastName }</a>
- --%>
- 
+ <form action="randomQuestion.do">
+ <button type="submit" class="btn btn-primary">to random question</button>
+ </form>
  
  <c:forEach var="question" items="${questions}">
 

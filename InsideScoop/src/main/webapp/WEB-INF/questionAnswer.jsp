@@ -29,7 +29,9 @@ ${displayQuestion.questionText }<br/>
 <c:if test="${option.correct }">${option.optionText }<br/></c:if>
  </c:forEach>
  
- 
+ <form action="randomQuestion.do">
+ <button type="submit" class="btn btn-primary">to random question</button>
+ </form>
 </main>
 	<jsp:include page="bootstrapFoot.jsp" />
 </body>

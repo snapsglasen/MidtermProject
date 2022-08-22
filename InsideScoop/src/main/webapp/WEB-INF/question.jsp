@@ -31,6 +31,10 @@ ${displayQuestion.questionText }
  <input type="hidden" value="${displayQuestion.id }" name="questionId" /> 
  <button type="submit" class="btn btn-primary">Submit answer</button>
  </form>
+ 
+ <form action="randomQuestion.do">
+ <button type="submit" class="btn btn-primary">to random question</button>
+ </form>
 </main>
 	<jsp:include page="bootstrapFoot.jsp" />
 </body>
