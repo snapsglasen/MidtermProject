@@ -23,10 +23,20 @@ public class Question {
 	@OneToMany(mappedBy="question")
 	private List<QuestionVote> questionVotes;
 	
+	private boolean active;
+	
 
 //	@OneToMany(mappedBy="question")
 //	private List<Option> Options;
 	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	@OneToMany(mappedBy="question")
 	private List<Attempt> attempts;
 
@@ -40,6 +50,9 @@ public class Question {
 
 	public Question() {
 		super();
+	}
+
+	public Question(String questionText2) {
 	}
 
 	public int getId() {

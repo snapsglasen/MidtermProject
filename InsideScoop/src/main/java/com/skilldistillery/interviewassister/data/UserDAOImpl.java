@@ -20,6 +20,7 @@ import com.skilldistillery.interviewassister.entities.Company;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.PostVote;
 import com.skilldistillery.interviewassister.entities.PostVoteId;
+import com.skilldistillery.interviewassister.entities.Question;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.UserCategory;
 import com.skilldistillery.interviewassister.entities.WorkRole;
@@ -55,6 +56,7 @@ public class UserDAOImpl implements UserDAO {
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
+
 	@Override
 	public List<Category> findCategories() {
 		String jpql = "Select c from Category c";
@@ -121,10 +123,11 @@ public class UserDAOImpl implements UserDAO {
 
 	// ALL CREATE METHODS
 	@Override
-	public Post createPost(String content, User user, String title, String company, String workRole, Integer[] category) {
+	public Post createPost(String content, User user, String title, String company, String workRole,
+			Integer[] category) {
 		Set<Company> companySet = getCompanySet(company);
 		Set<WorkRole> workRoleSet = getWorkRoleSet(workRole);
-		List<Category> categories= getCategoryList(category);
+		List<Category> categories = getCategoryList(category);
 		Post post = new Post(content, user, title, companySet, workRoleSet, categories);
 		post.setActive(true);
 		em.persist(post);
@@ -336,6 +339,36 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return workRoleSet;
 	}
+
+
+	@Override
+	public Question createQuestion(String questionText) {
+		Question question = new Question(questionText);
+		em.persist(question);
+		return question;
+
+	}
+
+	@Override
+	public void deleteQuestion(int id) {
+		Question question = findQuestionById(id);
+		question.setActive(false);
+	}
+
+	@Override
+	public Question updateQuestion(int id, String questionText) {
+		Question question = findQuestionById(id);
+		if (!questionText.equals("") && questionText != null) {
+			question.setQuestionText(questionText);
+		}
+
+		return question;
+	}
+
+	@Override
+	public Question findQuestionById(int questionId) {
+		return em.find(Question.class, questionId); }
+
 	private List<Category> getCategoryList(Integer[] category) {
 		List<Category> categories = new ArrayList<Category>();
 		for (Integer integer : category) {
@@ -343,5 +376,6 @@ public class UserDAOImpl implements UserDAO {
 			categories.add(cat);
 		}
 		return categories;
+
 	}
 }
