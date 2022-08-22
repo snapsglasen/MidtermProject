@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name="post_vote")
 public class PostVote {
@@ -19,6 +21,7 @@ public class PostVote {
 	
 	private Boolean liked;
 	
+	@CreationTimestamp
 	@Column(name="vote_date")
 	private LocalDateTime voteDate;
 	
@@ -36,6 +39,27 @@ public class PostVote {
 	public PostVote() {
 		super();
 	}
+	
+	
+
+	public PostVote(PostVoteId id, Boolean liked, User user, Post post) {
+		super();
+		this.id = id;
+		this.liked = liked;
+		this.user = user;
+		this.post = post;
+	}
+
+
+
+	public PostVote(Boolean liked, User user, Post post) {
+		super();
+		this.liked = liked;
+		this.user = user;
+		this.post = post;
+	}
+
+
 
 	public Boolean getLiked() {
 		return liked;
@@ -52,6 +76,38 @@ public class PostVote {
 	public void setVoteDate(LocalDateTime voteDate) {
 		this.voteDate = voteDate;
 	}
+
+	public PostVoteId getId() {
+		return id;
+	}
+
+
+
+	public void setId(PostVoteId id) {
+		this.id = id;
+	}
+
+
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+
 
 	@Override
 	public String toString() {

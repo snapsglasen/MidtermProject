@@ -30,5 +30,7 @@ public interface UserDAO {
 	Set<Post> searchPosts(String search);
 	WorkRole workRoleByString(String workRole);
 	Company companyByString(String company);
+	void addUpvotePost(int userId, int postId);
+	void addUpvoteComment(int userId, int commentId);
 
 }

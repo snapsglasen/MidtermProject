@@ -12,8 +12,12 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import com.skilldistillery.interviewassister.entities.Comment;
+import com.skilldistillery.interviewassister.entities.CommentVote;
+import com.skilldistillery.interviewassister.entities.CommentVoteId;
 import com.skilldistillery.interviewassister.entities.Company;
 import com.skilldistillery.interviewassister.entities.Post;
+import com.skilldistillery.interviewassister.entities.PostVote;
+import com.skilldistillery.interviewassister.entities.PostVoteId;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.UserCategory;
 import com.skilldistillery.interviewassister.entities.WorkRole;
@@ -41,7 +45,7 @@ public class UserDAOImpl implements UserDAO {
 	public Comment findByCommentId(int commentId) {
 		return em.find(Comment.class, commentId);
 	}
-	
+
 	@Override
 	public List<Post> findNewestPost() {
 
@@ -67,26 +71,25 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println(user);
 		return user;
 	}
-	
-	
+
 	@Override
 	public Set<User> searchUsers(String search) {
 		Set<User> users = new HashSet<User>();
-		String[] searches= search.split(" ");
+		String[] searches = search.split(" ");
 		for (String splitSearch : searches) {
-			splitSearch= "%"+splitSearch+"%";
+			splitSearch = "%" + splitSearch + "%";
 			String jpql = "Select u from User u WHERE firstName Like :search OR lastName LIKE :search OR username LIKE :search ORDER BY firstName";
 			users.addAll(em.createQuery(jpql, User.class).setParameter("search", splitSearch).getResultList());
 		}
 		return users;
 	}
-	
+
 	@Override
 	public Set<Post> searchPosts(String search) {
 		Set<Post> posts = new HashSet<Post>();
-		String[] searches= search.split(" ");
+		String[] searches = search.split(" ");
 		for (String splitSearch : searches) {
-			splitSearch= "%"+splitSearch+"%";
+			splitSearch = "%" + splitSearch + "%";
 			String jpql = "Select p from Post p WHERE p.title Like :search OR p.content LIKE :search OR p.user.firstName LIKE :search OR p.user.lastName LIKE :search OR p.user.username LIKE :search";
 			posts.addAll(em.createQuery(jpql, Post.class).setParameter("search", splitSearch).getResultList());
 		}
@@ -114,7 +117,8 @@ public class UserDAOImpl implements UserDAO {
 			int category) {
 		User user = new User(firstName, lastName, email, username, password, em.find(UserCategory.class, category));
 		user.setActive(true);
-		user.setProfilePicture("https://images.assetsdelivery.com/compings_v2/anyashalygina/anyashalygina2108/anyashalygina210800036.jpg");
+		user.setProfilePicture(
+				"https://images.assetsdelivery.com/compings_v2/anyashalygina/anyashalygina2108/anyashalygina210800036.jpg");
 		em.persist(user);
 		return user;
 	}
@@ -186,45 +190,84 @@ public class UserDAOImpl implements UserDAO {
 			user.setUserCategory(em.find(UserCategory.class, category));
 			System.out.println(user.getUserCategory());
 		}
-		if(!workRole.equals("")&& workRole !=null) {
+		if (!workRole.equals("") && workRole != null) {
 			user.setWorkRole(workRoleByString(workRole));
 		}
-		if(!company.equals("")&& company !=null) {
+		if (!company.equals("") && company != null) {
 			user.setCompany(companyByString(company));
 		}
-		if(!profilePicture.equals("")&&profilePicture !=null) {
-			user.setProfilePicture(profilePicture);;
+		if (!profilePicture.equals("") && profilePicture != null) {
+			user.setProfilePicture(profilePicture);
+			;
 		}
-			System.out.println(user);
+		System.out.println(user);
 		return user;
 	}
-	
+
 	@Override
 	public WorkRole workRoleByString(String workRole) {
 		try {
-		String jpql = "SELECT w from WorkRole w WHERE w.role = :workRole";
-		WorkRole wr = em.createQuery(jpql, WorkRole.class).setParameter("workRole", workRole).getSingleResult();
-		System.out.println(workRole);
-		System.out.println(wr);
-		return wr;
-		}catch(Exception e) {
-			WorkRole wr= new WorkRole(workRole);
+			String jpql = "SELECT w from WorkRole w WHERE w.role = :workRole";
+			WorkRole wr = em.createQuery(jpql, WorkRole.class).setParameter("workRole", workRole).getSingleResult();
+			System.out.println(workRole);
+			System.out.println(wr);
+			return wr;
+		} catch (Exception e) {
+			e.printStackTrace();
+			WorkRole wr = new WorkRole(workRole);
 			em.persist(wr);
 			return wr;
 		}
 	}
+
 	@Override
 	public Company companyByString(String company) {
 		try {
-		String jpql = "SELECT c from Company c WHERE c.name = :company";
-		Company comp = em.createQuery(jpql, Company.class).setParameter("company", company).getSingleResult();
-		System.out.println(company);
-		System.out.println(comp);
-		return comp;
-		}catch(Exception e) {
-			Company comp= new Company(company);
+			String jpql = "SELECT c from Company c WHERE c.name = :company";
+			Company comp = em.createQuery(jpql, Company.class).setParameter("company", company).getSingleResult();
+			System.out.println(company);
+			System.out.println(comp);
+			return comp;
+		} catch (Exception e) {
+			e.printStackTrace();
+			Company comp = new Company(company);
 			em.persist(comp);
 			return comp;
+		}
+	}
+
+	@Override
+	public void addUpvotePost(int userId, int postId) {
+		System.out.println("********************* METHOD");
+		Post post = findByPostId(postId);
+		User user = findById(userId);
+
+		String jpql = "SELECT pv FROM PostVote pv WHERE pv.user=:user AND pv.post=:post";
+		List<PostVote> testingKeys = em.createQuery(jpql, PostVote.class).setParameter("user", user)
+				.setParameter("post", post).getResultList();
+		if (testingKeys.isEmpty()) {
+			System.out.println("********************* IN IF");
+			PostVoteId pvi = new PostVoteId(userId, postId);
+			PostVote pv = new PostVote(pvi, true, user, post);
+			em.persist(pv);
+			post.addPostVote(pv);
+		}
+	}
+	@Override
+	public void addUpvoteComment(int userId, int commentId) {
+		System.out.println("********************* METHOD");
+		Comment comment = findByCommentId(commentId);
+		User user = findById(userId);
+		
+		String jpql = "SELECT cv FROM CommentVote cv WHERE cv.user=:user AND cv.comment=:comment";
+		List<CommentVote> testingKeys = em.createQuery(jpql, CommentVote.class).setParameter("user", user)
+				.setParameter("comment", comment).getResultList();
+		if (testingKeys.isEmpty()) {
+			System.out.println("********************* IN IF");
+			CommentVoteId cvi = new CommentVoteId(userId, commentId);
+			CommentVote cv = new CommentVote(cvi, true, user, comment);
+			em.persist(cv);
+			comment.addCommentVote(cv);
 		}
 	}
 }

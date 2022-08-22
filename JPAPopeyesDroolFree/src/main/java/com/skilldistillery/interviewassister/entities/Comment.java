@@ -1,6 +1,7 @@
 package com.skilldistillery.interviewassister.entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -125,6 +126,32 @@ public class Comment {
 
 	public void setCommentVotes(List<CommentVote> commentVotes) {
 		this.commentVotes = commentVotes;
+	}
+	
+	public void addCommentVote(CommentVote commentVote) {
+		if (commentVotes == null) {
+			commentVotes = new ArrayList<>();
+		}
+		
+		if (!commentVotes.contains(commentVote)) {
+			commentVotes.add(commentVote);
+		}
+	}
+	
+	public Integer getLikes() {
+		
+		try {
+			return commentVotes.size();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public void removeCommentVote(CommentVote commentVote) {
+		if (commentVotes != null && commentVotes.contains(commentVote)) {
+			commentVotes.remove(commentVote);
+		}
 	}
 	
 	@Override

@@ -19,6 +19,14 @@ public class CommentVoteId implements Serializable {
 	public CommentVoteId() {
 		super();
 	}
+	
+	public CommentVoteId(int commentId, int userId) {
+		super();
+		this.commentId = commentId;
+		this.userId = userId;
+	}
+
+
 
 	public int getUserId() {
 		return userId;

@@ -19,6 +19,14 @@ public class PostVoteId implements Serializable {
 	public PostVoteId() {
 		super();
 	}
+	
+	public PostVoteId(int userId, int postId) {
+		super();
+		this.userId = userId;
+		this.postId = postId;
+	}
+
+
 
 	public int getUserId() {
 		return userId;

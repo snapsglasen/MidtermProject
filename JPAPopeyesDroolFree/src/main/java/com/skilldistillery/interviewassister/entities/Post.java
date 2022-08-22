@@ -245,6 +245,29 @@ public class Post {
 			category.removePost(this);
 		}
 	}
+	public void addPostVote(PostVote postVote) {
+		if (postVotes == null) {
+			postVotes = new ArrayList<>();
+		}
+		
+		if (!postVotes.contains(postVote)) {
+			postVotes.add(postVote);
+		}
+	}
+	public int getLikes() {
+		try {
+			return postVotes.size();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public void removePostVote(PostVote postVote) {
+		if (postVotes != null && postVotes.contains(postVote)) {
+			postVotes.remove(postVote);
+		}
+	}
 
 	@Override
 	public int hashCode() {

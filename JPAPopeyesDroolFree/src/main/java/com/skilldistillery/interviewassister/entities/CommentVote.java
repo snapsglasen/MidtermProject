@@ -40,6 +40,14 @@ public class CommentVote {
 	public CommentVote() {
 		super();
 	}
+	
+	public CommentVote(CommentVoteId id, Boolean liked, User user, Comment comment) {
+		super();
+		this.id = id;
+		this.liked = liked;
+		this.user = user;
+		this.comment = comment;
+	}
 
 	public Boolean getLiked() {
 		return liked;

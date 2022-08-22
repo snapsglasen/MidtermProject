@@ -237,5 +237,24 @@ public class UserController {
 		return"index";
 	}
 	
+	@RequestMapping(path="upvotePost.do")
+	public String upvotePost(HttpSession session, Model model, Model login, int userId, int postId){
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.addUpvotePost(userId, postId);
+		model.addAttribute("displayPost", userDAO.findByPostId(postId));
+		return "showPost";
+	}
+	
+	@RequestMapping(path="upvoteComment.do")
+	public String upvoteComment(HttpSession session, Model model, Model login, int userId, int commentId, int postId){
+		System.out.println("***********************In controller");
+		System.out.println("***********************"+userId+""+commentId);
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.addUpvoteComment(userId, commentId);
+		model.addAttribute("displayPost", userDAO.findByPostId(postId));
+		return "showPost";
+	}
 
 }
