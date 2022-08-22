@@ -27,7 +27,7 @@ public class Question {
 	
 
 	@OneToMany(mappedBy="question")
-	private List<Option> Options;
+	private List<Option> options;
 	
 	public Boolean isActive() {
 		return active;
@@ -80,11 +80,15 @@ public class Question {
 	}
 
 	public List<Option> getOptions() {
-		return Options;
+		return options;
 	}
 
 	public void setOptions(List<Option> options) {
-		Options = options;
+		this.options = options;
+	}
+
+	public Boolean getActive() {
+		return active;
 	}
 
 	@Override
