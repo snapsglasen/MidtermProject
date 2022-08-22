@@ -191,8 +191,8 @@ public class UserController {
 
 	@RequestMapping(path = "updateProfileAttempt.do")
 	public String updatedProfile(HttpSession session, Model model, int id, String firstName, String lastName,
-			String email, String username, String password, int category, String workRole, String company) {
-		User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category, workRole, company);
+			String email, String username, String password, int category, String workRole, String company, String profilePicture) {
+		User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category, workRole, company, profilePicture);
 		model.addAttribute("profile", user);
 		session.setAttribute("loggedInUser", user);
 		return "profile";

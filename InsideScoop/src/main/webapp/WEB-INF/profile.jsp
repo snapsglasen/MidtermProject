@@ -20,7 +20,8 @@
 	
 	<main class="container-fluid">
 <h1>Profile</h1>
-<img alt=${profile.profilePicture } src="Profile picture">
+<img src="${profile.profilePicture }" alt="Profile picture"
+width="50" height= "50">
 ${profile.firstName }<br/>
 ${profile.lastName }
 ${profile.workRole.role }

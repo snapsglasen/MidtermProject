@@ -35,8 +35,8 @@
 				placeholder="${profile.password }" /> 
 				Work Role: <input class="form-control" type="text" name="workRole" placeholder="${profile.workRole.role }" />
 				Company: <input class="form-control" type="text" name="company" placeholder="${profile.company.name }" />
+				Profile picture URL: <input class="form-control" type="text" name="profilePicture" placeholder="${profile.profilePicture }" />
 				
-				Category:
 			<label for="category">Choose a category:</label> <select
 				name="category">
 				<option value="1">Student</option>

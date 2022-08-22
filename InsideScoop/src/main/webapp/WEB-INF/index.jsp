@@ -18,18 +18,15 @@
 	</c:otherwise>
 	</c:choose>
 	<main class="container-fluid">
-<form action="searchUsers.do">
-Need to find someone?<input type="text" class= "form-control" name="search"/>
-<input class="btn btn-primary" type="submit" value="Search profile">
-</form>
 		<h1>Welcome to Inside Scoop</h1>
 <form action="searchPosts.do">
 Looking for a post?<input type="text" class= "form-control" name="search"/>
 <input class="btn btn-primary" type="submit" value="Search post">
 </form>
-
 <c:forEach var="p" items="${posts }" >
 <c:if test="${p.active }">
+<img src="${p.user.profilePicture }"
+width="40" height= "40">
 <a href="profile.do?id=${p.user.id }">${p.user.firstName} ${p.user.lastName }</a>
 <a href="showPost.do?postId=${p.id }">${p.title }</a>
 ${p.createDate}

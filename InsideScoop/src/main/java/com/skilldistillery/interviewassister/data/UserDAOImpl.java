@@ -114,6 +114,7 @@ public class UserDAOImpl implements UserDAO {
 			int category) {
 		User user = new User(firstName, lastName, email, username, password, em.find(UserCategory.class, category));
 		user.setActive(true);
+		user.setProfilePicture("https://images.assetsdelivery.com/compings_v2/anyashalygina/anyashalygina2108/anyashalygina210800036.jpg");
 		em.persist(user);
 		return user;
 	}
@@ -163,7 +164,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User updateProfile(int id, String firstName, String lastName, String email, String username, String password,
-			int category, String workRole, String company) {
+			int category, String workRole, String company, String profilePicture) {
 		User user = findById(id);
 		if (!firstName.equals("") && firstName != null) {
 			user.setFirstName(firstName);
@@ -190,6 +191,9 @@ public class UserDAOImpl implements UserDAO {
 		}
 		if(!company.equals("")&& company !=null) {
 			user.setCompany(companyByString(company));
+		}
+		if(!profilePicture.equals("")&&profilePicture !=null) {
+			user.setProfilePicture(profilePicture);;
 		}
 			System.out.println(user);
 		return user;
