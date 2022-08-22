@@ -28,6 +28,11 @@
 			<input type="text" class= "form-control" name="company" /> <br /> 
 			Does this post have to deal with any specific work role? <br/>
 			<input type="text" class= "form-control" name="workRole" /> <br />
+			Which category does this post fall into?
+			<c:forEach var="p" items="${categories }">
+			<input type="checkbox" id="category" value="${p.id}" name="category">
+			<label for="category">${p.name }</label>
+			</c:forEach>
 		</div>
 
 		<button type="submit" class="btn btn-primary">Add Post</button>

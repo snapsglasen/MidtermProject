@@ -25,6 +25,10 @@
 		<input type="hidden" name="id" value=${post.id } />
 			Title <input type="text"class= "form-control" name="title" placeholder="${post.title }"/><br/>
 			Content of Post <input type="text" class= "form-control" name="content" placeholder="${post.content }"/> <br /> 
+			Does this post have to deal with any companies in particular? <br/>
+			<input type="text" class= "form-control" name="company" placeholder="${post.company }"/> <br /> 
+			Does this post have to deal with any specific work role? <br/>
+			<input type="text" class= "form-control" name="workRole" placeholder="${post.workRole }"/> <br />
 		</div>
 
 		<button type="submit" class="btn btn-primary">Update Post</button>
