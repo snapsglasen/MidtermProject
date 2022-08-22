@@ -26,8 +26,8 @@ public class Question {
 	private Boolean active;
 	
 
-//	@OneToMany(mappedBy="question")
-//	private List<Option> Options;
+	@OneToMany(mappedBy="question")
+	private List<Option> Options;
 	
 	public Boolean isActive() {
 		return active;
@@ -79,13 +79,13 @@ public class Question {
 		this.questionVotes = questionVotes;
 	}
 
-//	public List<Option> getOptions() {
-//		return Options;
-//	}
-//
-//	public void setOptions(List<Option> options) {
-//		Options = options;
-//	}
+	public List<Option> getOptions() {
+		return Options;
+	}
+
+	public void setOptions(List<Option> options) {
+		Options = options;
+	}
 
 	@Override
 	public int hashCode() {

@@ -407,4 +407,11 @@ public class UserDAOImpl implements UserDAO {
 		return categories;
 
 	}
+	
+	@Override
+	public List<Question> findAllQuestions() {
+		String jpql = "Select q from Question q";
+		List<Question> questions = em.createQuery(jpql, Question.class).getResultList();
+		return questions;
+	}
 }

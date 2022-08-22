@@ -358,4 +358,12 @@ public class UserController {
 		System.out.println("in end of controller");
 		return "showQuestion";
 	}
+	
+	@RequestMapping(path = { "displayAllQuestions.do" })
+	public String displayQuestions(Model model, Model login, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("questions", userDAO.findAllQuestions());
+		return "showQuestion";
+	}
 }
