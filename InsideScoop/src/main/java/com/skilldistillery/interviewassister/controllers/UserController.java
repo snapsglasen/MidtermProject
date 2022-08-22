@@ -350,20 +350,13 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "showQuestion.do")
-	public String displayQuestion(Model model, Model login, HttpSession session) {
+	public String displayQuestion(Model model, Model display, Model login, HttpSession session) {
 		System.out.println("in the beginning of controller");
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("displayQuestion", userDAO.findQuestionById(1));
 		System.out.println("in end of controller");
-		return "showQuestion";
-	}
-	
-	@RequestMapping(path = { "displayAllQuestions.do" })
-	public String displayQuestions(Model model, Model login, HttpSession session) {
-		User user = (User) session.getAttribute("loggedInUser");
-		login.addAttribute("loginCheck", user);
-		model.addAttribute("questions", userDAO.findAllQuestions());
+		display.addAttribute("questions", userDAO.findAllQuestions());
 		return "showQuestion";
 	}
 }

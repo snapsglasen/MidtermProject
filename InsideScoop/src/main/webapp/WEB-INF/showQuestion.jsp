@@ -26,8 +26,9 @@
  --%>
  
  
- <c:forEach var="question" items="${listOfQuestions}">
+ <c:forEach var="question" items="${questions}">
  ${question.questionText}
+ <br/>
  </c:forEach>
 
 
