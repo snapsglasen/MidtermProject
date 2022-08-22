@@ -332,13 +332,13 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `option_has_attempt` ;
 
 CREATE TABLE IF NOT EXISTS `option_has_attempt` (
-  `alternative_id` INT NOT NULL,
+  `question_option_id` INT NOT NULL,
   `attempt_id` INT NOT NULL,
-  PRIMARY KEY (`alternative_id`, `attempt_id`),
+  PRIMARY KEY (`question_option_id`, `attempt_id`),
   INDEX `fk_alternative_has_attempt_attempt1_idx` (`attempt_id` ASC),
-  INDEX `fk_alternative_has_attempt_alternative1_idx` (`alternative_id` ASC),
+  INDEX `fk_alternative_has_attempt_alternative1_idx` (`question_option_id` ASC),
   CONSTRAINT `fk_alternative_has_attempt_alternative1`
-    FOREIGN KEY (`alternative_id`)
+    FOREIGN KEY (`question_option_id`)
     REFERENCES `question_option` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -552,6 +552,9 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `question` (`id`, `question_text`) VALUES (1, 'Why is a mouse when it spins?');
+INSERT INTO `question` (`id`, `question_text`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?');
+INSERT INTO `question` (`id`, `question_text`) VALUES (3, 'Which of the following options makes Java portable and secure?');
+INSERT INTO `question` (`id`, `question_text`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?');
 
 COMMIT;
 
@@ -622,6 +625,7 @@ INSERT INTO `topic` (`id`, `name`) VALUES (1, 'lambdas');
 INSERT INTO `topic` (`id`, `name`) VALUES (2, 'for loops');
 INSERT INTO `topic` (`id`, `name`) VALUES (3, 'data types');
 INSERT INTO `topic` (`id`, `name`) VALUES (4, 'object-relational mapping');
+INSERT INTO `topic` (`id`, `name`) VALUES (5, 'data definition language(DDL)');
 
 COMMIT;
 
@@ -632,6 +636,10 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `question_has_category` (`question_id`, `category_id`) VALUES (1, 1);
+INSERT INTO `question_has_category` (`question_id`, `category_id`) VALUES (2, 1);
+INSERT INTO `question_has_category` (`question_id`, `category_id`) VALUES (3, 2);
+INSERT INTO `question_has_category` (`question_id`, `category_id`) VALUES (4, 3);
+INSERT INTO `question_has_category` (`question_id`, `category_id`) VALUES (4, 2);
 
 COMMIT;
 
@@ -645,6 +653,7 @@ INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (2, 1);
 INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (2, 2);
 INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (2, 3);
 INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (3, 4);
+INSERT INTO `category_has_topic` (`category_id`, `topic_id`) VALUES (1, 5);
 
 COMMIT;
 
@@ -666,6 +675,18 @@ START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (1, 'The answer', 1, 1);
 INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (2, 'Not the answer', 1, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (3, 'TRUNCATE', 2, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (4, 'ALTER', 2, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (5, 'CREATE', 2, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (6, 'UPDATE', 2, 1);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (7, 'Bytecode is executed by the JVM', 3, 1);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (8, 'The use of exception handling', 3, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (9, 'Data binding between objects', 3, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (10, 'persist', 4, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (11, 'flush', 4, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (12, 'contains', 4, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (13, 'delete', 4, 1);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (14, 'find', 4, 0);
 
 COMMIT;
 
@@ -676,6 +697,22 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `attempt` (`id`, `user_id`, `question_id`, `date`, `correct`) VALUES (1, 1, 1, NULL, 1);
+INSERT INTO `attempt` (`id`, `user_id`, `question_id`, `date`, `correct`) VALUES (2, 1, 2, NULL, 0);
+INSERT INTO `attempt` (`id`, `user_id`, `question_id`, `date`, `correct`) VALUES (3, 1, 3, NULL, 1);
+INSERT INTO `attempt` (`id`, `user_id`, `question_id`, `date`, `correct`) VALUES (4, 1, 4, NULL, 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `option_has_attempt`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `option_has_attempt` (`question_option_id`, `attempt_id`) VALUES (2, 1);
+INSERT INTO `option_has_attempt` (`question_option_id`, `attempt_id`) VALUES (5, 2);
+INSERT INTO `option_has_attempt` (`question_option_id`, `attempt_id`) VALUES (7, 3);
+INSERT INTO `option_has_attempt` (`question_option_id`, `attempt_id`) VALUES (13, 4);
 
 COMMIT;
 
