@@ -27,7 +27,7 @@
  
  
  <c:forEach var="question" items="${questions}">
- ${question.questionText}
+ <a href="questionOptions">${question.questionText}</a>
  <br/>
  </c:forEach>
 
