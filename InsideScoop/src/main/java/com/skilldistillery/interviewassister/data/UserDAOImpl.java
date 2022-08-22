@@ -55,14 +55,16 @@ public class UserDAOImpl implements UserDAO {
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
+
 	@Override
 	public List<Post> findOldestPost() {
-		
+
 		String jpql = "Select p from Post p ORDER BY lastUpdate";
 		System.out.println(em.createQuery(jpql, Post.class).getResultList());
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
+
 	@Override
 	public List<Post> findAlphabeticalPost() {
 		String jpql = "Select p from Post p ORDER BY title";
@@ -113,19 +115,10 @@ public class UserDAOImpl implements UserDAO {
 
 	// ALL CREATE METHODS
 	@Override
-	public Post createPost(String content, User user, String title, String company) {
-		Set<Company> companySet= new HashSet<Company>();
-		String[] companies=company.split(", ");
-		for (String comp : companies) {
-			companySet.add(companyByString(comp));
-		}
-		if(companySet.size()<2) {
-			companies=company.split(" ");
-			for (String comp : companies) {
-				companySet.add(companyByString(comp));
-			}
-		}
-		Post post= new Post(content, user, title, companySet);
+	public Post createPost(String content, User user, String title, String company, String workRole) {
+		Set<Company> companySet = getCompanySet(company);
+		Set<WorkRole> workRoleSet = getWorkRoleSet(workRole);
+		Post post = new Post(content, user, title, companySet, workRoleSet);
 		post.setActive(true);
 		em.persist(post);
 		return post;
@@ -280,12 +273,13 @@ public class UserDAOImpl implements UserDAO {
 			post.addPostVote(pv);
 		}
 	}
+
 	@Override
 	public void addUpvoteComment(int userId, int commentId) {
 		System.out.println("********************* METHOD");
 		Comment comment = findByCommentId(commentId);
 		User user = findById(userId);
-		
+
 		String jpql = "SELECT cv FROM CommentVote cv WHERE cv.user=:user AND cv.comment=:comment";
 		List<CommentVote> testingKeys = em.createQuery(jpql, CommentVote.class).setParameter("user", user)
 				.setParameter("comment", comment).getResultList();
@@ -296,5 +290,29 @@ public class UserDAOImpl implements UserDAO {
 			em.persist(cv);
 			comment.addCommentVote(cv);
 		}
+	}
+
+	private Set<Company> getCompanySet(String company) {
+		Set<Company> companySet = new HashSet<Company>();
+		String[] companies = company.split(", ");
+		if (companies.length < 2) {
+			companies = company.split(" ");
+		}
+		for (String comp : companies) {
+			companySet.add(companyByString(comp));
+		}
+		return companySet;
+	}
+
+	private Set<WorkRole> getWorkRoleSet(String workRole) {
+		Set<WorkRole> workRoleSet = new HashSet<WorkRole>();
+		String[] workRoles = workRole.split(", ");
+		if (workRoles.length < 2) {
+			workRoles = workRole.split(" ");
+		}
+		for (String wr : workRoles) {
+			workRoleSet.add(workRoleByString(wr));
+		}
+		return workRoleSet;
 	}
 }
