@@ -18,7 +18,7 @@ public interface UserDAO {
 	List<User> findAllUsers();
 	Post findByPostId(int postId);
 	Comment findByCommentId(int commentId);
-	Post createPost(Post post);
+	Post createPost(String content, User user, String title, String company);
 	User userLogin(String username, String password);
 	User registerUser(String firstName, String lastName, String email, String username, String password, int category);
 	Comment createComment(String content, User user, int id);

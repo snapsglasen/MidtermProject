@@ -2,8 +2,10 @@ package com.skilldistillery.interviewassister.entities;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -48,10 +50,10 @@ public class Post {
 	private String title;
 	@ManyToMany
 	@JoinTable(name = "post_has_company", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "company_id"))
-	private List<Company> companies;
+	private Set<Company> companies;
 	@ManyToMany
 	@JoinTable(name = "post_has_work_role", joinColumns = @JoinColumn(name = "post_id"), inverseJoinColumns = @JoinColumn(name = "work_role_id"))
-	private List<WorkRole> workRoles;
+	private Set<WorkRole> workRoles;
 	
 	@Column(name="interview_date")
 	private LocalDateTime interviewDate;
@@ -69,6 +71,18 @@ public class Post {
 	public Post() {
 		super();
 	}
+	
+	
+
+	public Post(String content, User user, String title, Set<Company> companies) {
+		super();
+		this.content = content;
+		this.user = user;
+		this.title = title;
+		this.companies = companies;
+	}
+
+
 
 	public int getId() {
 		return id;
@@ -126,21 +140,31 @@ public class Post {
 		this.title = title;
 	}
 
-	public List<Company> getCompanies() {
+	
+
+	public Set<Company> getCompanies() {
 		return companies;
 	}
 
-	public void setCompanies(List<Company> companies) {
+
+
+	public void setCompanies(Set<Company> companies) {
 		this.companies = companies;
 	}
 
-	public List<WorkRole> getWorkRoles() {
+
+
+	public Set<WorkRole> getWorkRoles() {
 		return workRoles;
 	}
 
-	public void setWorkRoles(List<WorkRole> workRoles) {
+
+
+	public void setWorkRoles(Set<WorkRole> workRoles) {
 		this.workRoles = workRoles;
 	}
+
+
 
 	public LocalDateTime getInterviewDate() {
 		return interviewDate;
@@ -183,7 +207,7 @@ public class Post {
 	
 	public void addCompany(Company company) {
 		if (companies == null) {
-			companies = new ArrayList<>();
+			companies = new HashSet<>();
 		}
 
 		if (!companies.contains(company)) {
@@ -201,7 +225,7 @@ public class Post {
 	
 	public void addWorkRole(WorkRole workRole) {
 		if (workRoles == null) {
-			workRoles = new ArrayList<>();
+			workRoles = new HashSet<>();
 		}
 
 		if (!workRoles.contains(workRole)) {

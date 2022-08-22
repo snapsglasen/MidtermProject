@@ -116,11 +116,10 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "createPost.do", method = RequestMethod.POST)
-	public String createPost(Model model, Model login, String title, String content, HttpSession session) {
+	public String createPost(Model model, Model login, String title, String content, String company, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		Post post = new Post(content, user, title);
-		model.addAttribute("displayPost", userDAO.createPost(post));
+		model.addAttribute("displayPost", userDAO.createPost(content, user, title, company));
 		return "showPost";
 
 	}

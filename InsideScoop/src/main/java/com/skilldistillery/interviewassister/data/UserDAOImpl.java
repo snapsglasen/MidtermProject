@@ -113,7 +113,19 @@ public class UserDAOImpl implements UserDAO {
 
 	// ALL CREATE METHODS
 	@Override
-	public Post createPost(Post post) {
+	public Post createPost(String content, User user, String title, String company) {
+		Set<Company> companySet= new HashSet<Company>();
+		String[] companies=company.split(", ");
+		for (String comp : companies) {
+			companySet.add(companyByString(comp));
+		}
+		if(companySet.size()<2) {
+			companies=company.split(" ");
+			for (String comp : companies) {
+				companySet.add(companyByString(comp));
+			}
+		}
+		Post post= new Post(content, user, title, companySet);
 		post.setActive(true);
 		em.persist(post);
 		return post;
