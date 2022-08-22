@@ -30,6 +30,12 @@ ${profile.company.name }
 <c:if test="${loginCheck==profile }">
 <a href="account.do">account</a>
 </c:if>
+<c:if test="${loginCheck.admin}">
+<form action="adminAccount.do">
+<input type= "hidden" name="id" value="${profile.id }"/>
+<input class="btn btn-primary" type="submit" value="To user's account page">
+</form>
+</c:if>
 </main>
 <jsp:include page="bootstrapFoot.jsp" />
 </body>

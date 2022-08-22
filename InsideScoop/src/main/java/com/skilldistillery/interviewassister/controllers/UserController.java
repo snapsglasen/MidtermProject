@@ -50,12 +50,13 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "registerAttempt.do")
-	public String registerAttempt(Model model, String firstName, String lastName, String username, String password,
+	public String registerAttempt(Model model, Model login, String firstName, String lastName, String username, String password,
 			int category, HttpSession session) {
 		try {
 			User user = userDAO.registerUser(firstName, lastName, lastName, username, password, category);
 			model.addAttribute("profile", user);
 			session.setAttribute("loggedInUser", user);
+			login.addAttribute("loginCheck", user);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "register";
@@ -73,6 +74,13 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("account", user);
+		return "accountInfo";
+	}
+	@RequestMapping(path = "adminAccount.do")
+	public String accountInfo(Model model, Model login, HttpSession session, int id) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("account", userDAO.findById(id));
 		return "accountInfo";
 	}
 
@@ -187,8 +195,14 @@ public class UserController {
 
 	@RequestMapping(path = "deleteUser.do")
 	public String deleteUser(Model model, Model login, HttpSession session, int id) {
+		User user = (User) session.getAttribute("loggedInUser");
+		if(user.getId()==id){
 		session.invalidate();
+		}else {
+			login.addAttribute("loginCheck", user);
+		}
 		userDAO.deleteUser(id);
+		model.addAttribute("posts", userDAO.findNewestPost());
 		return "index";
 	}
 

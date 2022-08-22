@@ -60,7 +60,6 @@ public class UserDAOImpl implements UserDAO {
 		
 		String jpql = "Select p from Post p ORDER BY lastUpdate";
 		System.out.println(em.createQuery(jpql, Post.class).getResultList());
-		
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
