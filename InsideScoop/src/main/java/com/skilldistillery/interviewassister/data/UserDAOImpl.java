@@ -414,4 +414,10 @@ public class UserDAOImpl implements UserDAO {
 		List<Question> questions = em.createQuery(jpql, Question.class).getResultList();
 		return questions;
 	}
+
+	@Override
+	public Boolean correct(Integer[] selectedOptions, Question question) {
+		
+		return null;
+	}
 }

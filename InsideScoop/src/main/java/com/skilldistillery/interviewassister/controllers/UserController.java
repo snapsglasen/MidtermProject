@@ -372,6 +372,7 @@ public class UserController {
 		login.addAttribute("loginCheck", user);
 		Question question = userDAO.findQuestionById(questionId);
 		model.addAttribute("displayQuestion", question);
+		userDAO.correct(id, question);
 		
 		return "question";
 		
