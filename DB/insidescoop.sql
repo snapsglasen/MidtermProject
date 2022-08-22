@@ -129,7 +129,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `topic` ;
 
 CREATE TABLE IF NOT EXISTS `topic` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -280,11 +280,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `option`
+-- Table `question_option`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `option` ;
+DROP TABLE IF EXISTS `question_option` ;
 
-CREATE TABLE IF NOT EXISTS `option` (
+CREATE TABLE IF NOT EXISTS `question_option` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `option_text` TEXT NULL,
   `question_id` INT NOT NULL,
@@ -339,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `option_has_attempt` (
   INDEX `fk_alternative_has_attempt_alternative1_idx` (`alternative_id` ASC),
   CONSTRAINT `fk_alternative_has_attempt_alternative1`
     FOREIGN KEY (`alternative_id`)
-    REFERENCES `option` (`id`)
+    REFERENCES `question_option` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_alternative_has_attempt_attempt1`
@@ -660,22 +660,12 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `post_has_category`
+-- Data for table `question_option`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `post_has_category` (`post_id`, `category_id`) VALUES (1, 1);
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `option`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `insidescoop`;
-INSERT INTO `option` (`id`, `option_text`, `question_id`, `correct`) VALUES (1, 'The answer', 1, 1);
-INSERT INTO `option` (`id`, `option_text`, `question_id`, `correct`) VALUES (2, 'Not the answer', 1, 0);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (1, 'The answer', 1, 1);
+INSERT INTO `question_option` (`id`, `option_text`, `question_id`, `correct`) VALUES (2, 'Not the answer', 1, 0);
 
 COMMIT;
 
