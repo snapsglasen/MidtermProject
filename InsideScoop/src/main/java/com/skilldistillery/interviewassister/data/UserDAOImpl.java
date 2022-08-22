@@ -395,6 +395,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Question findQuestionById(int questionId) {
+		System.out.println("in the beginning");
 		return em.find(Question.class, questionId); }
 
 	private List<Category> getCategoryList(Integer[] category) {
@@ -405,5 +406,12 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return categories;
 
+	}
+	
+	@Override
+	public List<Question> findAllQuestions() {
+		String jpql = "Select q from Question q";
+		List<Question> questions = em.createQuery(jpql, Question.class).getResultList();
+		return questions;
 	}
 }

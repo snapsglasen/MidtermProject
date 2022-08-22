@@ -41,6 +41,7 @@ public interface UserDAO {
 	Question updateQuestion(int id, String questionText);
 	Question findQuestionById(int questionId);
 	List<Category> findCategories();
+	List<Question> findAllQuestions();
 
 
 }

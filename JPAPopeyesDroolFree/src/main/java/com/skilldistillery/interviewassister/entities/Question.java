@@ -23,17 +23,17 @@ public class Question {
 	@OneToMany(mappedBy="question")
 	private List<QuestionVote> questionVotes;
 	
-	private boolean active;
+	private Boolean active;
 	
 
-//	@OneToMany(mappedBy="question")
-//	private List<Option> Options;
+	@OneToMany(mappedBy="question")
+	private List<Option> options;
 	
-	public boolean isActive() {
+	public Boolean isActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
@@ -79,13 +79,17 @@ public class Question {
 		this.questionVotes = questionVotes;
 	}
 
-//	public List<Option> getOptions() {
-//		return Options;
-//	}
-//
-//	public void setOptions(List<Option> options) {
-//		Options = options;
-//	}
+	public List<Option> getOptions() {
+		return options;
+	}
+
+	public void setOptions(List<Option> options) {
+		this.options = options;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
 
 	@Override
 	public int hashCode() {
