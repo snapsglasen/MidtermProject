@@ -71,9 +71,16 @@ public class Post {
 	public Post() {
 		super();
 	}
-	
-	
 
+	public Post(String content, User user, String title, Set<Company> companies, Set<WorkRole> workRoles) {
+		super();
+		this.content = content;
+		this.user = user;
+		this.title = title;
+		this.companies = companies;
+		this.workRoles = workRoles;
+	}
+	
 	public Post(String content, User user, String title, Set<Company> companies) {
 		super();
 		this.content = content;
@@ -81,8 +88,6 @@ public class Post {
 		this.title = title;
 		this.companies = companies;
 	}
-
-
 
 	public int getId() {
 		return id;
