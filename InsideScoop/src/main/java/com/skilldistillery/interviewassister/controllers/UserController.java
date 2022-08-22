@@ -69,8 +69,9 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "account.do")
-	public String accountInfo(Model model, HttpSession session) {
+	public String accountInfo(Model model, Model login, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		model.addAttribute("account", user);
 		return "accountInfo";
 	}
@@ -100,7 +101,9 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "createPostPage.do")
-	public String createPostPage() {
+	public String createPostPage(HttpSession session, Model login) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		return "createPost";
 	}
 
@@ -148,8 +151,9 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updateComment.do")
-	public String updateComment(Model model, Model comment, int id, int commentId) {
-
+	public String updateComment(HttpSession session, Model model, Model comment, Model login, int id, int commentId) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		model.addAttribute("displayPost", userDAO.findByPostId(id));
 		comment.addAttribute("comment", userDAO.findByCommentId(commentId));
 		return "commentUpdate";
@@ -196,23 +200,28 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updateProfile.do")
-	public String updateProfile(HttpSession session, Model model, int id) {
+	public String updateProfile(HttpSession session, Model model, Model login, int id) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		model.addAttribute("profile", userDAO.findById(id));
 		return "updateProfile";
 
 	}
 
 	@RequestMapping(path = "updateProfileAttempt.do")
-	public String updatedProfile(HttpSession session, Model model, int id, String firstName, String lastName,
+	public String updatedProfile(HttpSession session, Model model, Model login, int id, String firstName, String lastName,
 			String email, String username, String password, int category, String workRole, String company, String profilePicture) {
 		User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category, workRole, company, profilePicture);
 		model.addAttribute("profile", user);
 		session.setAttribute("loggedInUser", user);
+		login.addAttribute("loginCheck", user);
 		return "profile";
 	}
 
 	@RequestMapping(path = "updatePost.do")
-	public String updatePost(HttpSession session, Model model, int id) {
+	public String updatePost(HttpSession session, Model model, Model login, int id) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		model.addAttribute("post", userDAO.findByPostId(id));
 		return "updatePost";
 	}
