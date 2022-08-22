@@ -114,9 +114,12 @@ public class UserDAOImpl implements UserDAO {
 		Set<Post> posts = new HashSet<Post>();
 		String[] searches = search.split(" ");
 		for (String splitSearch : searches) {
+			Company comp= findCompanyByString(splitSearch);
+			WorkRole wr= findWorkRoleByString(splitSearch);
+			Category cat= findCategoryByString(splitSearch);
 			splitSearch = "%" + splitSearch + "%";
-			String jpql = "Select p from Post p WHERE p.title Like :search OR p.content LIKE :search OR p.user.firstName LIKE :search OR p.user.lastName LIKE :search OR p.user.username LIKE :search";
-			posts.addAll(em.createQuery(jpql, Post.class).setParameter("search", splitSearch).getResultList());
+			String jpql = "Select p from Post p WHERE p.title Like :search OR p.content LIKE :search OR p.user.firstName LIKE :search OR p.user.lastName LIKE :search OR p.user.username LIKE :search OR :searchComp MEMBER OF p.companies OR :searchWr MEMBER OF p.workRoles OR :searchCat MEMBER OF p.categories";
+			posts.addAll(em.createQuery(jpql, Post.class).setParameter("search", splitSearch).setParameter("searchComp", comp).setParameter("searchWr", wr).setParameter("searchCat", cat).getResultList());
 		}
 		return posts;
 	}
@@ -186,10 +189,6 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Post updatePost(int id, String title, String content, String company, String workRole, Integer[] category) {
-		System.out.println("********************* In DAOIMPL Top");
-		System.out.println(company);
-		System.out.println(workRole);
-		System.out.println(category);
 		Post post = findByPostId(id);
 		if (!title.equals("") && title != null) {
 			post.setTitle(title);
@@ -264,6 +263,35 @@ public class UserDAOImpl implements UserDAO {
 		}
 	}
 
+	private Company findCompanyByString(String company) {
+		try {
+			String jpql = "SELECT c from Company c WHERE c.name = :company";
+			Company comp = em.createQuery(jpql, Company.class).setParameter("company", company).getSingleResult();
+			return comp;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	private WorkRole findWorkRoleByString(String workRole) {
+		try {
+			String jpql = "SELECT w from WorkRole w WHERE w.role = :workRole";
+			WorkRole wr = em.createQuery(jpql, WorkRole.class).setParameter("workRole", workRole).getSingleResult();
+			return wr;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	private Category findCategoryByString(String category) {
+		try {
+		String jpql = "Select c from Category c WHERE c.name= :category";
+		Category cat = em.createQuery(jpql, Category.class).setParameter("category", category).getSingleResult();
+		return cat;
+	} catch (Exception e) {
+		return null;
+	}
+	}
+	
 	@Override
 	public Company companyByString(String company) {
 		try {
