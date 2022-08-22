@@ -29,7 +29,7 @@ public class UserController {
 		model.addAttribute("posts", userDAO.findNewestPost());
 		return "index";
 	}
-	@RequestMapping(path = { "PostByTitle.do" })
+	@RequestMapping(path = { "postByTitle.do" })
 	public String postByTitle(Model model, Model login, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);

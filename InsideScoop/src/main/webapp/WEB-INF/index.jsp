@@ -23,11 +23,11 @@
 Looking for a post?<input type="text" class= "form-control" name="search"/>
 <input class="btn btn-primary" type="submit" value="Search post">
 </form>
-<form action="PostByTitle.do">
+<form action="postByTitle.do">
 <input class="btn btn-primary" type="submit" value="Filter by Title">
 </form>
 </form>
-<form action="PostByOldest.do">
+<form action="postByOldest.do">
 <input class="btn btn-primary" type="submit" value="Filter by Oldest">
 </form>
 </form>

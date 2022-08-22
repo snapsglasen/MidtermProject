@@ -58,7 +58,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<Post> findOldestPost() {
 		
-		String jpql = "Select p from Post p ORDER BY lastUpdate ASC";
+		String jpql = "Select p from Post p ORDER BY lastUpdate";
 		System.out.println(em.createQuery(jpql, Post.class).getResultList());
 		
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
