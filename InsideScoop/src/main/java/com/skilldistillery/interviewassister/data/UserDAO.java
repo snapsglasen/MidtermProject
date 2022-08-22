@@ -6,6 +6,7 @@ import java.util.Set;
 import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.Company;
 import com.skilldistillery.interviewassister.entities.Post;
+import com.skilldistillery.interviewassister.entities.Question;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.WorkRole;
 
@@ -26,6 +27,7 @@ public interface UserDAO {
 	void deleteComment(int commentId);
 	void deletePost(int id);
 	void deleteUser(int id);
+	void deleteQuestion(int id);
 	User updateProfile(int id, String firstName, String lastName, String email, String username, String password, int category, String workRole, String company, String profilePicture);
 	Post updatePost(int id, String title, String content);
 	Set<User> searchUsers(String search);
@@ -34,5 +36,8 @@ public interface UserDAO {
 	Company companyByString(String company);
 	void addUpvotePost(int userId, int postId);
 	void addUpvoteComment(int userId, int commentId);
+	Question createQuestion(String questionText);
+	Question updateQuestion(int id, String questionText);
+	Question findQuestionById(int questionId);
 
 }

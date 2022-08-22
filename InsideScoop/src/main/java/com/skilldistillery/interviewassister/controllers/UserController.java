@@ -291,5 +291,14 @@ public class UserController {
 		model.addAttribute("displayPost", userDAO.findByPostId(postId));
 		return "showPost";
 	}
+	
+	@RequestMapping(path = "createQuestion.do", method = RequestMethod.POST)
+	public String createQuestion(Model model, HttpSession session, Model login, String questionText) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("displayQuestion", userDAO.createQuestion(questionText));
+		return "showQuestion";
+
+	}
 
 }

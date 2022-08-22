@@ -18,6 +18,7 @@ import com.skilldistillery.interviewassister.entities.Company;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.PostVote;
 import com.skilldistillery.interviewassister.entities.PostVoteId;
+import com.skilldistillery.interviewassister.entities.Question;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.UserCategory;
 import com.skilldistillery.interviewassister.entities.WorkRole;
@@ -314,5 +315,30 @@ public class UserDAOImpl implements UserDAO {
 			workRoleSet.add(workRoleByString(wr));
 		}
 		return workRoleSet;
+	}
+
+	@Override
+	public Question createQuestion(String questionText) {
+		Question question = new Question(questionText);
+		em.persist(question);
+		return question;
+
+	}
+
+	@Override
+	public void deleteQuestion(int id) {
+Question question = findQuestionById(id);
+question.setActive(false);
+	}
+
+	@Override
+	public Question updateQuestion(int id, String questionText) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Question findQuestionById(int questionId) {
+		return em.find(Question.class, questionId);
 	}
 }

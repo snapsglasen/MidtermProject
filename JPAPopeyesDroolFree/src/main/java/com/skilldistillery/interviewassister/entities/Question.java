@@ -42,6 +42,9 @@ public class Question {
 		super();
 	}
 
+	public Question(String questionText2) {
+	}
+
 	public int getId() {
 		return id;
 	}
