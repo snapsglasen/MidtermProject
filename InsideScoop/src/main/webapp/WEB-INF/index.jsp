@@ -10,6 +10,7 @@
 </head>
 <body>
 
+<div class="navbar">
 	<c:choose>
 		<c:when test="${not empty loginCheck }">
 			<jsp:include page="navbar.jsp"/>
@@ -18,23 +19,24 @@
 			<jsp:include page="loggedOutNavbar.jsp"/>
 		</c:otherwise>
 	</c:choose>
+</div>
 	
 	<main class="container-fluid">
 		<h1>Welcome to Inside Scoop</h1>
 <form action="searchPosts.do">
 Looking for a post?<input type="text" class= "form-control" name="search"/>
-<input class="btn btn-primary" type="submit" value="Search post">
+<input class="btn btn-secondary btn-sm" type="submit" value="Search post">
 </form>
 <form action="postByTitle.do">
-<input class="btn btn-primary" type="submit" value="Filter by Title">
+<input class="btn btn-secondary btn-sm" type="submit" value="Filter by Title">
 </form>
 </form>
 <form action="postByOldest.do">
-<input class="btn btn-primary" type="submit" value="Filter by Oldest">
+<input class="btn btn-secondary btn-sm" type="submit" value="Filter by Oldest">
 </form>
 </form>
 <form action="home.do">
-<input class="btn btn-primary" type="submit" value="Filter by Newest">
+<input class="btn btn-secondary btn-sm" type="submit" value="Filter by Newest">
 </form>
 
 <c:forEach var="p" items="${posts }" >
@@ -50,7 +52,7 @@ ${p.lastUpdate}
 </c:forEach>
 <c:if test="${not empty loginCheck }">
 <form action="createPostPage.do">
-<input class="btn btn-primary" type="submit" value="Create a Post">
+<input class="btn btn-secondary btn-sm" type="submit" value="Create a Post">
 </form>
 </c:if>
 
