@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.skilldistillery.interviewassister.data.OptionDAO;
 import com.skilldistillery.interviewassister.data.UserDAO;
+import com.skilldistillery.interviewassister.entities.Attempt;
 import com.skilldistillery.interviewassister.entities.Question;
 import com.skilldistillery.interviewassister.entities.User;
 
@@ -20,8 +22,8 @@ public class QuestionController {
 	@Autowired
 	private UserDAO userDAO;
 	
-//	@Autowired
-//	private QuestionDAO questionDAO;
+	@Autowired
+	private OptionDAO optionDAO;
 	
 	@RequestMapping(path = "createQuestionPage.do")
 	public String createQuestionPage(HttpSession session, Model login, Model model) {
@@ -77,29 +79,51 @@ public class QuestionController {
 	}
 	
 	@RequestMapping(path= "question.do")
-	public String question(Model model, Model login, HttpSession session, int id) {
+	public String question(Model model, Model login, Model total, Model correct, Model incorrect, HttpSession session, int id) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		model.addAttribute("displayQuestion", userDAO.findQuestionById(id));
+		Question question=userDAO.findQuestionById(id);
+		model.addAttribute("displayQuestion", question);
+		List<Attempt> totalAt= optionDAO.usersTotalAttemptsOnQuestion(question, user);
+		total.addAttribute("total", totalAt.size());
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttemptsOnQuestion(question, user);
+		correct.addAttribute("correct", totalCor.size());
+		List<Attempt> totalInc= optionDAO.userTotalIncorrectQuestion(question, user);
+		incorrect.addAttribute("incorrect", totalInc.size());
 		return "question";
 	}
+	
 	@RequestMapping(path= "randomQuestion.do")
-	public String question(Model model, Model login, HttpSession session) {
+	public String question(Model model, Model login, Model total, Model correct, Model incorrect, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		List<Question> questions=userDAO.findAllQuestions();
 		int randomId= (int) (Math.random()*questions.size());
-		model.addAttribute("displayQuestion", questions.get(randomId));
+		Question question=questions.get(randomId);
+		model.addAttribute("displayQuestion", question);
+		List<Attempt> totalAt= optionDAO.usersTotalAttemptsOnQuestion(question, user);
+		total.addAttribute("total", totalAt.size());
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttemptsOnQuestion(question, user);
+		correct.addAttribute("correct", totalCor.size());
+		List<Attempt> totalInc= optionDAO.userTotalIncorrectQuestion(question, user);
+		incorrect.addAttribute("incorrect", totalInc.size());
 		return "question";
 	}
 	
 	@RequestMapping(path="questionAndAnswer.do")
-	public String questionAndAnswer(Model model, Model login, Model bool, HttpSession session, Integer[] option, int questionId) {
+	public String questionAndAnswer(Model model, Model login, Model bool, Model totalAttempt, Model correctAttempt, HttpSession session, Integer[] option, int questionId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		Question question = userDAO.findQuestionById(questionId);
 		model.addAttribute("displayQuestion", question);
 		bool.addAttribute("bool", userDAO.correct(option, question, user));
+		List<Attempt> total=optionDAO.totalAttemptsOnQuestion(question);
+		List<Attempt> correct=optionDAO.totalCorrectAttemptsOnQuestion(question);
+		System.out.println(total);
+		System.out.println(correct);
+		totalAttempt.addAttribute("totalAttempt", total.size());
+		correctAttempt.addAttribute("correctAttempt", correct.size());
+		
 		return "questionAnswer";
 	}
 	

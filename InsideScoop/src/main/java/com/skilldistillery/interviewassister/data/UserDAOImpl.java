@@ -461,17 +461,20 @@ public class UserDAOImpl implements UserDAO {
 			if (userSelectedOption.contains(option.getId())) {
 				if (option.isCorrect()) {
 				} else {
-					new Attempt(user, question, false);
+					Attempt at=new Attempt(user, question, false);
+					em.persist(at);
 					return false;
 				}
 			} else {
 				if (option.isCorrect()) {
-					new Attempt(user, question, false);
+					Attempt at=new Attempt(user, question, false);
+					em.persist(at);
 					return false;
 				}
 			}
 		}
-		new Attempt(user, question, true);
+		Attempt at=new Attempt(user, question, true);
+		em.persist(at);
 		return true;
 	}
 

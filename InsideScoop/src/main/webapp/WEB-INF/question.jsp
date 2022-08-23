@@ -52,6 +52,9 @@ ${displayQuestion.description}
  <form action="randomQuestion.do">
  <button type="submit" class="btn btn-primary">to random question</button>
  </form>
+ Your total attempts on this question: ${total} <br/>
+ Your correct attempts on this question: ${correct}<br/>
+ Your incorrect attempts on this question: ${incorrect}
 </main>
 	<jsp:include page="bootstrapFoot.jsp" />
 </body>

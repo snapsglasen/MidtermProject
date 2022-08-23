@@ -10,10 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.skilldistillery.interviewassister.data.OptionDAO;
 import com.skilldistillery.interviewassister.data.UserDAO;
-import com.skilldistillery.interviewassister.entities.Option;
+import com.skilldistillery.interviewassister.entities.Attempt;
 import com.skilldistillery.interviewassister.entities.Post;
-import com.skilldistillery.interviewassister.entities.Question;
 import com.skilldistillery.interviewassister.entities.User;
 
 @Controller
@@ -22,8 +22,8 @@ public class UserController {
 	@Autowired
 	private UserDAO userDAO;
 
-//	@Autowired
-//	private CategoryDAO categoryDAO;
+	@Autowired
+	private OptionDAO optionDAO;
 
 	@RequestMapping(path = { "/", "home.do", "index.do" })
 	public String home(Model model, Model login, HttpSession session) {
@@ -55,13 +55,15 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "registerAttempt.do")
-	public String registerAttempt(Model model, Model login, String firstName, String lastName, String username,
+	public String registerAttempt(Model model, Model login, Model correct, String firstName, String lastName, String username,
 			String password, int category, HttpSession session) {
 		try {
 			User user = userDAO.registerUser(firstName, lastName, lastName, username, password, category);
 			model.addAttribute("profile", user);
 			session.setAttribute("loggedInUser", user);
 			login.addAttribute("loginCheck", user);
+			List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
+			correct.addAttribute("correct", totalCor.size());
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "register";
@@ -75,10 +77,16 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "account.do")
-	public String accountInfo(Model model, Model login, HttpSession session) {
+	public String accountInfo(Model model, Model login, Model total, Model correct, Model incorrect, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("account", user);
+		List<Attempt> totalAt= optionDAO.usersTotalAttempts(user);
+		total.addAttribute("total", totalAt.size());
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
+		correct.addAttribute("correct", totalCor.size());
+		List<Attempt> totalInc= optionDAO.userTotalIncorrectAttempts(user);
+		incorrect.addAttribute("incorrect", totalInc.size());
 		return "accountInfo";
 	}
 
@@ -91,19 +99,31 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "profile.do")
-	public String profile(Model model, Model login, HttpSession session, int id) {
+	public String profile(Model model, Model login, Model total, Model correct, Model incorrect, HttpSession session, int id) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		User profile = userDAO.findById(id);
 		model.addAttribute("profile", profile);
+		List<Attempt> totalAt= optionDAO.usersTotalAttempts(user);
+		total.addAttribute("total", totalAt.size());
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
+		correct.addAttribute("correct", totalCor.size());
+		List<Attempt> totalInc= optionDAO.userTotalIncorrectAttempts(user);
+		incorrect.addAttribute("incorrect", totalInc.size());
 		return "profile";
 	}
 
 	@RequestMapping(path = "loggedInProfile.do")
-	public String profile(Model model, Model login, HttpSession session) {
+	public String profile(Model model, Model login, Model total, Model correct, Model incorrect, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("profile", user);
+		List<Attempt> totalAt= optionDAO.usersTotalAttempts(user);
+		total.addAttribute("total", totalAt.size());
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
+		correct.addAttribute("correct", totalCor.size());
+		List<Attempt> totalInc= optionDAO.userTotalIncorrectAttempts(user);
+		incorrect.addAttribute("incorrect", totalInc.size());
 		return "profile";
 	}
 

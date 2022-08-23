@@ -28,7 +28,8 @@ ${displayQuestion.questionText }<br/>
 <c:forEach var="option" items="${displayQuestion.options}">
 <c:if test="${option.correct }">${option.optionText }<br/></c:if>
  </c:forEach>
- 
+ Total attempts: ${totalAttempt}
+ Total correct attempts: ${correctAttempt}
  <form action="randomQuestion.do">
  <button type="submit" class="btn btn-primary">to random question</button>
  </form>
