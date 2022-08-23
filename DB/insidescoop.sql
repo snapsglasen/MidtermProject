@@ -106,7 +106,7 @@ DROP TABLE IF EXISTS `question` ;
 CREATE TABLE IF NOT EXISTS `question` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `question_text` TEXT NULL,
-  `active` TINYINT NULL,
+  `active` TINYINT NULL DEFAULT 1,
   `description` TEXT NULL,
   `user_id` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),

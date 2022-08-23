@@ -20,29 +20,42 @@
 		<jsp:include page="loggedOutNavbar.jsp"/>
 	</c:otherwise>
 </c:choose>
-<div class="container-fluid">
+<div class="container">
 
 	<!-- Search -->
-	<div class="row">
+	<div class="row m-3">
 		<form class="form-inline" action="searchPosts.do">
-			<div class="form-group form-row">
-					<div class="form-group">
-						<input type="text" class="form-control" name="search" id="postSearch"/>
-						<input class="btn btn-secondary btn-sm btn-search" type="submit" value="Search">
-					</div>
+			<div class="form-group row">
+				<div class="col"></div>
+				<div class="col-7">
+					<input type="text" class="form-control" name="search" id="postSearch" placeholder="Search posts"/>
+				</div>
+				<div class="col-1">
+				<div class="row">
+						<input class="btn btn-secondary btn-search" type="submit" value="Search">
+						</div>
+				</div>
+				<div class="col"></div>
 			</div>
 		</form>
 	</div>
 
 	<!-- Sort -->
-	<div class="row">
-			<a class="btn btn-secondary btn-sm" href="postByTitle.do">Sort by Title</a>
-			<a class="btn btn-secondary btn-sm" href="postByOldest.do">Sort by Oldest</a>
-			<a class="btn btn-secondary btn-sm" href="home.do">Sort by Most Recent</a>
+	<div class="row m-3">
+		<div class="col"></div>
+			<div class="col-4"></div>
+			<div class="col-4">
+				<div class="row">
+					<a class="col btn btn-secondary btn-sm me-auto" href="postByTitle.do">Sort by Title</a>
+					<a class="col btn btn-secondary btn-sm me-auto" href="postByOldest.do">Sort by Oldest</a>
+					<a class="col btn btn-secondary btn-sm me-auto" href="home.do">Sort by Most Recent</a>
+				</div>
+			</div>
+		<div class="col"></div>
 	</div>
 
 	<!-- Posts -->
-	<div class="row">
+	<div class="row m-3">
 		<div class="col">
 			<c:forEach var="post" items="${posts }">
 				<c:if test="${post.active }">
