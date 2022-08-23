@@ -22,6 +22,25 @@
 </c:choose>
 <div class="container-fluid">
 
+	<!-- Search -->
+	<div class="row">
+		<form class="form-inline" action="searchPosts.do">
+			<div class="form-group form-row">
+					<div class="form-group">
+						<input type="text" class="form-control" name="search" id="postSearch"/>
+						<input class="btn btn-secondary btn-sm btn-search" type="submit" value="Search">
+					</div>
+			</div>
+		</form>
+	</div>
+
+	<!-- Sort -->
+	<div class="row">
+			<a class="btn btn-secondary btn-sm" href="postByTitle.do">Sort by Title</a>
+			<a class="btn btn-secondary btn-sm" href="postByOldest.do">Sort by Oldest</a>
+			<a class="btn btn-secondary btn-sm" href="home.do">Sort by Most Recent</a>
+	</div>
+
 	<!-- Posts -->
 	<div class="row">
 		<div class="col">
@@ -42,6 +61,7 @@
 			</c:forEach>
 		</div>
 	</div>
+
 </div>
 
 

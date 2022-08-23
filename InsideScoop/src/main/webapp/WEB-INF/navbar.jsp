@@ -16,7 +16,7 @@
 				<a class="nav-link" href="allUsers.do">User Profiles</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="showQuestions.do">Questions</a>
+				<a class="nav-link" href="showQuestion.do">Questions</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="logout.do">Logout</a>
