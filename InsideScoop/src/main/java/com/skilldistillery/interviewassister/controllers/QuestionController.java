@@ -99,7 +99,7 @@ public class QuestionController {
 		login.addAttribute("loginCheck", user);
 		Question question = userDAO.findQuestionById(questionId);
 		model.addAttribute("displayQuestion", question);
-		bool.addAttribute("bool", userDAO.correct(option, question));
+		bool.addAttribute("bool", userDAO.correct(option, question, user));
 		return "questionAnswer";
 	}
 	

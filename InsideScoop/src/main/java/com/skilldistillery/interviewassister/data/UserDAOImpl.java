@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.interviewassister.entities.Attempt;
 import com.skilldistillery.interviewassister.entities.Category;
 import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.CommentVote;
@@ -454,21 +455,23 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Boolean correct(Integer[] selectedOptions, Question question) {
+	public Boolean correct(Integer[] selectedOptions, Question question, User user) {
 		List<Integer> userSelectedOption = new ArrayList<>(Arrays.asList(selectedOptions));
 		for (Option option : question.getOptions()) {
 			if (userSelectedOption.contains(option.getId())) {
 				if (option.isCorrect()) {
 				} else {
-					
+					new Attempt(user, question, false);
 					return false;
 				}
 			} else {
 				if (option.isCorrect()) {
+					new Attempt(user, question, false);
 					return false;
 				}
 			}
 		}
+		new Attempt(user, question, true);
 		return true;
 	}
 
