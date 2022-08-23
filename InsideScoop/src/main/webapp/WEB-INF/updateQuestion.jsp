@@ -39,7 +39,7 @@
 	</c:forEach>
 
 	<form action="addOption.do" method="POST">
-	<input type="text" name="optionText">
+	<input type="text" name="optionText" required>
 	<input type="checkbox" name="correct">
 	<input type="hidden" name="questionId" value="${question.id}">
 	
