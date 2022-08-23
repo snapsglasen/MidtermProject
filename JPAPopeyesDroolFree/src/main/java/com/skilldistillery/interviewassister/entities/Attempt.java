@@ -32,6 +32,13 @@ public class Attempt {
 	@CreationTimestamp
 	private LocalDateTime date;
 
+	public Attempt(User user, Question question, Boolean correct) {
+		super();
+		this.user = user;
+		this.question = question;
+		this.correct = correct;
+	}
+
 	public int getId() {
 		return id;
 	}
