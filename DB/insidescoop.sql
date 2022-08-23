@@ -16,20 +16,6 @@ CREATE SCHEMA IF NOT EXISTS `insidescoop` DEFAULT CHARACTER SET utf8 ;
 USE `insidescoop` ;
 
 -- -----------------------------------------------------
--- Table `question`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `question` ;
-
-CREATE TABLE IF NOT EXISTS `question` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `question_text` TEXT NULL,
-  `active` TINYINT NULL,
-  `description` TEXT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `work_role`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `work_role` ;
@@ -107,6 +93,27 @@ CREATE TABLE IF NOT EXISTS `user` (
   CONSTRAINT `fk_user_user_category1`
     FOREIGN KEY (`user_category_id`)
     REFERENCES `user_category` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `question`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `question` ;
+
+CREATE TABLE IF NOT EXISTS `question` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `question_text` TEXT NULL,
+  `active` TINYINT NULL,
+  `description` TEXT NULL,
+  `user_id` INT NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  INDEX `fk_question_user1_idx` (`user_id` ASC),
+  CONSTRAINT `fk_question_user1`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -549,19 +556,6 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `question`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `insidescoop`;
-INSERT INTO `question` (`id`, `question_text`, `active`, `description`) VALUES (1, 'Why is a mouse when it spins?', NULL, 'A senseless question to make your head explode');
-INSERT INTO `question` (`id`, `question_text`, `active`, `description`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?', NULL, 'Most important for DBAs');
-INSERT INTO `question` (`id`, `question_text`, `active`, `description`) VALUES (3, 'Which of the following options makes Java portable and secure?', NULL, 'One of Java\'s greatest strengths');
-INSERT INTO `question` (`id`, `question_text`, `active`, `description`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?', NULL, 'This is sort of a \"gotcha\" question');
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `work_role`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -602,6 +596,19 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `user` (`id`, `first_name`, `last_name`, `admin`, `active`, `email`, `create_date`, `last_update`, `username`, `password`, `work_role_id`, `company_id`, `profile_image_url`, `user_category_id`) VALUES (1, 'Testy', 'Testaburn', 1, 1, 'testy@testaburn.com', NULL, NULL, 'ttesta', 'testing', 1, 1, 'https://testy.jovial.com/testy.jpg', 1);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `question`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `insidescoop`;
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (1, 'Why is a mouse when it spins?', NULL, 'A senseless question to make your head explode', DEFAULT);
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?', NULL, 'Most important for DBAs', DEFAULT);
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (3, 'Which of the following options makes Java portable and secure?', NULL, 'One of Java\'s greatest strengths', DEFAULT);
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?', NULL, 'This is sort of a \"gotcha\" question', DEFAULT);
 
 COMMIT;
 
@@ -666,7 +673,7 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', NULL);
-INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `interview_date`) VALUES (2, 'This is a second post', NULL, NULL, 1, 1, NULL, NULL);
+INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `interview_date`) VALUES (2, 'This is a second post', NULL, NULL, 1, 1, 'The title of the second post', NULL);
 
 COMMIT;
 
