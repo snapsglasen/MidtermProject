@@ -325,5 +325,12 @@ public class UserController {
 		return "showPost";
 	}
 
-	
+	@RequestMapping(path = "searchQuestions.do")
+	public String searchQuestions(HttpSession session, Model model, Model login, String search) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("questions", userDAO.searchQuestions(search));
+		return "showQuestion";
+
+	}
 }

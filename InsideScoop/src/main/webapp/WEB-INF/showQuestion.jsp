@@ -9,6 +9,12 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
+	<form action="searchQuestions.do">
+		<input type="text" name="search" id="postSearch"
+			placeholder="Search Questions..." /> <input type="submit"
+			value="Search" />
+
+	</form>
 	<c:choose>
 		<c:when test="${not empty loginCheck }">
 			<jsp:include page="navbar.jsp"></jsp:include>
@@ -20,21 +26,24 @@
 	<main class="container-fluid">
 
 		<h1>${displayQuestion.questionText }</h1>
-		
- <form action="randomQuestion.do">
- <button type="submit" class="btn btn-primary">to random question</button>
- </form>
- <c:forEach var="question" items="${questions}">
 
- <a href="question.do?id=${question.id }"> ${question.questionText}</a>
+		<form action="randomQuestion.do">
+			<button type="submit" class="btn btn-primary">to random
+				question</button>
+		</form>
+		<c:forEach var="question" items="${questions}">
 
- <br/>
- </c:forEach>
+			<a href="question.do?id=${question.id }">
+				${question.questionText}</a>
+
+			<br />
+		</c:forEach>
 
 		<%-- <c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }"> --%>
-		<br/>
+		<br />
 		<form action="createQuestionPage.do" method="POST">
-			<button type="submit" class="btn btn-primary">Create Question</button>
+			<button type="submit" class="btn btn-primary">Create
+				Question</button>
 		</form>
 		<%-- </c:if> --%>
 
