@@ -134,7 +134,12 @@ public class UserDAOImpl implements UserDAO {
 			Integer[] category) {
 		Set<Company> companySet = getCompanySet(company);
 		Set<WorkRole> workRoleSet = getWorkRoleSet(workRole);
-		List<Category> categories = getCategoryList(category);
+		boolean check = (category == null);
+		List<Category> categories = new ArrayList<>();
+		if (check) { 
+		} else {
+		categories = getCategoryList(category);
+		}
 		Post post = new Post(content, user, title, companySet, workRoleSet, categories);
 		post.setActive(true);
 		em.persist(post);
@@ -192,7 +197,8 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Post updatePost(int id, String title, String content, String company, String workRole, Integer[] category) {
+	public Post updatePost(int id, String title, String content, String company, String workRole,
+			Integer[] categories) {
 		Post post = findByPostId(id);
 		if (!title.equals("") && title != null) {
 			post.setTitle(title);
@@ -206,10 +212,15 @@ public class UserDAOImpl implements UserDAO {
 		if (!workRole.equals("") && workRole != null) {
 			post.setWorkRoles(getWorkRoleSet(workRole));
 		}
-		if (category.length > 0) {
-			post.setCategories(getCategoryList(category));
+		boolean check = (categories == null);
+		if (check) {
+			List<Category> cates = new ArrayList<>();
+			post.setCategories(cates);
+		} else if (categories.length > 0) {
+
+			post.setCategories(getCategoryList(categories));
 		}
-		System.out.println(post);
+
 		return post;
 	}
 
@@ -375,7 +386,12 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public Question createQuestion(String questionText, Integer[] categories, String description, User user) {
-		List<Category> category = getCategoryList(categories);
+		boolean check = (categories == null);
+		List<Category> category = new ArrayList<>();
+		if (check) { 
+		} else {
+		category = getCategoryList(categories);
+		}
 		Question question = new Question(questionText, description, category, user);
 		question.setActive(true);
 		em.persist(question);
@@ -397,7 +413,12 @@ public class UserDAOImpl implements UserDAO {
 		if (!description.equals("") && description != null) {
 			question.setDescription(description);
 		}
-		if (categories.length > 0) {
+		boolean check = (categories == null);
+		if (check) {
+			List<Category> cates = new ArrayList<>();
+			question.setCategories(cates);
+		} else if (categories.length > 0) {
+
 			question.setCategories(getCategoryList(categories));
 		}
 
@@ -422,7 +443,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<Question> findAllQuestions() {
-		Question q=em.find(Question.class, 1);
+		Question q = em.find(Question.class, 1);
 		System.out.println(q.getActive());
 		String jpql = "Select q from Question q WHERE q.active=true";
 		List<Question> questions = em.createQuery(jpql, Question.class).getResultList();
