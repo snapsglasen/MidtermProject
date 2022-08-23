@@ -1,12 +1,16 @@
 package com.skilldistillery.interviewassister.entities;
 
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 public class Attempt {
@@ -22,6 +26,11 @@ public class Attempt {
 	@ManyToOne
 	@JoinColumn(name="question_id")
 	private Question question;
+	
+	private Boolean correct;
+	
+	@CreationTimestamp
+	private LocalDateTime date;
 
 	public int getId() {
 		return id;
@@ -45,6 +54,22 @@ public class Attempt {
 
 	public void setQuestion(Question question) {
 		this.question = question;
+	}
+	
+	public Boolean getCorrect() {
+		return correct;
+	}
+
+	public void setCorrect(Boolean correct) {
+		this.correct = correct;
+	}
+
+	public LocalDateTime getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDateTime date) {
+		this.date = date;
 	}
 
 	public Attempt() {
