@@ -105,9 +105,13 @@ input {
 	flex-direction: column;
 }
 
-.post {
+.post-bg-white {
+	background-color: #FFF9FB;
+	opacity: 0.5;
+}
 
-
+.post-bg-color {
+	background-color: #F3E0B0;
 }
 
 .footer {

@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Inside Scoop</title>
 <jsp:include page="bootstrapHead.jsp" />
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body class="container">
 
@@ -57,12 +58,16 @@
 	<div class="posts">
 		<c:forEach var="p" items="${posts }" >
 			<c:if test="${p.active }">
+			<div class="post-bg-color">
+			<div class="post-bg-white">
 			<div class="post">
 				<img src="<c:out value="${p.user.profilePicture }"/>" width="40px" height="40px">
-				<a href="profile.do?id=${p.user.id }">${p.user.firstName} ${p.user.lastName }</a>
-				<a href="showPost.do?postId=${p.id }">${p.title }</a>
+				<h3><a href="showPost.do?postId=${p.id }">${p.title }</a></h3>
+				<h5><a href="profile.do?id=${p.user.id }">by ${p.user.firstName} ${p.user.lastName }</a></h5>
 				${p.createDate}
 				${p.lastUpdate}
+			</div>
+			</div>
 			</div>
 			</c:if>
 		</c:forEach>
