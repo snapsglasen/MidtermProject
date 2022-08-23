@@ -484,7 +484,8 @@ public class UserDAOImpl implements UserDAO {
 		for (String splitSearch : searches) {
 			Category cat = findCategoryByString(splitSearch);
 			splitSearch = "%" + splitSearch + "%";
-			String jpql = "Select pqfrom Question q WHERE q.questionText Like :search OR q.description LIKE :search OR q.user.firstName LIKE :search OR q.user.lastName LIKE :search OR q.user.username LIKE :search OR :searchCat MEMBER OF p.categories WHERE active = TRUE";
+			String jpql = "Select q from Question q WHERE (q.questionText Like :search "
+					+ "OR q.description LIKE :search OR q.user.firstName LIKE :search OR q.user.lastName LIKE :search OR q.user.username LIKE :search OR :searchCat MEMBER OF q.categories) AND q.active=true";
 			questions.addAll(em.createQuery(jpql, Question.class).setParameter("search", splitSearch)
 					.setParameter("searchCat", cat)
 					.getResultList());
