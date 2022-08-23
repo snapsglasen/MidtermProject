@@ -374,15 +374,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Question createQuestion(String questionText, Integer[] categories) {
-		System.out.println(categories + "in imple");
+	public Question createQuestion(String questionText, Integer[] categories, String description, User user) {
 		List<Category> category = getCategoryList(categories);
-		System.out.println(category);
-		Question question = new Question(questionText, category);
-		System.out.println(question);
+		Question question = new Question(questionText, description, category, user);
+		question.setActive(true);
 		em.persist(question);
 		return question;
-
 	}
 
 	@Override
@@ -441,4 +438,5 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return true;
 	}
+
 }

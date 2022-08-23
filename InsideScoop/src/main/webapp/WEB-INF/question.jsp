@@ -19,7 +19,14 @@
 	</c:choose>	
 	
 	<main class="container-fluid">
-${displayQuestion.questionText }
+<a href="profile.do?id=${displayQuestion.user.id }">${displayQuestion.user.firstName}${displayQuestion.user.lastName}</a>
+<br/>
+${displayQuestion.questionText }<br/>
+<c:forEach var="category" items="${displayQuestion.categories}">
+${category.name}
+</c:forEach>
+<!-- TAKE THIS OUT LATER -->
+${displayQuestion.description}
 <form action="questionAndAnswer.do">
 <c:forEach var="option" items="${displayQuestion.options}">
 

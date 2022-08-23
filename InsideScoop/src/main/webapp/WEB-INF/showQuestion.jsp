@@ -20,7 +20,7 @@
 	<main class="container-fluid">
 
 		<h1>${displayQuestion.questionText }</h1>
-
+		
  <form action="randomQuestion.do">
  <button type="submit" class="btn btn-primary">to random question</button>
  </form>

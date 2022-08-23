@@ -2,7 +2,6 @@ package com.skilldistillery.interviewassister.entities;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -29,9 +29,15 @@ public class Question {
 	
 	private Boolean active;
 	
+	private String description;
+	
 	@ManyToMany
 	@JoinTable(name = "question_has_category", joinColumns = @JoinColumn(name = "question_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
+	
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	private User user;
 	
 	public Question(String questionText, List<Category> categories) {
 		super();
@@ -67,6 +73,33 @@ public class Question {
 
 	public void setAttempts(List<Attempt> attempts) {
 		this.attempts = attempts;
+	}
+	
+	
+
+	public String getDescription() {
+		return description;
+	}
+	
+	public Question(String questionText, String description, List<Category> categories) {
+		super();
+		this.questionText = questionText;
+		this.description = description;
+		this.categories = categories;
+	}
+	
+	
+
+	public Question(String questionText, String description, List<Category> categories, User user) {
+		super();
+		this.questionText = questionText;
+		this.description = description;
+		this.categories = categories;
+		this.user = user;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Question() {
@@ -113,6 +146,14 @@ public class Question {
 
 	public Boolean getActive() {
 		return active;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

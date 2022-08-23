@@ -6,6 +6,7 @@ import java.util.Set;
 import com.skilldistillery.interviewassister.entities.Category;
 import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.Company;
+import com.skilldistillery.interviewassister.entities.Option;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.Question;
 import com.skilldistillery.interviewassister.entities.User;
@@ -37,7 +38,7 @@ public interface UserDAO {
 	Company companyByString(String company);
 	void addUpvotePost(int userId, int postId);
 	void addUpvoteComment(int userId, int commentId);
-	Question createQuestion(String questionText, Integer[] categories);
+	Question createQuestion(String questionText, Integer[] categories, String description, User user);
 	Question updateQuestion(int id, String questionText);
 	Question findQuestionById(int questionId);
 	List<Category> findCategories();

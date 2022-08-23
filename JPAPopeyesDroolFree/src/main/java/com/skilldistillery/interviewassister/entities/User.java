@@ -48,6 +48,9 @@ public class User {
 	@JoinColumn(name="work_role_id")
 	private WorkRole workRole;
 	
+	@OneToMany(mappedBy="user")
+	private List<Question> questions;
+	
 	public User() {
 		super();
 	}
@@ -233,6 +236,14 @@ public class User {
 
 	public void setProfilePicture(String profilePicture) {
 		this.profilePicture = profilePicture;
+	}
+	
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 
 	public void addPost(Post post) {

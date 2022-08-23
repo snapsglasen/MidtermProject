@@ -29,7 +29,8 @@
 						name="categories">
 					<label for="categories">${q.name }</label>
 				</c:forEach>
-
+Explanation of answer: <input type="text" class="form-control"
+					name="description" /> 
 
 			</div>
 

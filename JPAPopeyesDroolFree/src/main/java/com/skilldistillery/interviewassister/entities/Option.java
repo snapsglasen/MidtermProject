@@ -29,6 +29,15 @@ public class Option {
 	public Option() {
 		super();
 	}
+	
+
+	public Option(String optionText, Question question, boolean correct) {
+		super();
+		this.optionText = optionText;
+		this.question = question;
+		this.correct = correct;
+	}
+
 
 	public int getId() {
 		return Id;

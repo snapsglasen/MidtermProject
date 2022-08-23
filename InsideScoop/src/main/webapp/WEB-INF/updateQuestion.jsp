@@ -20,14 +20,26 @@
 	<main class="container-fluid">
 <h1>Update Question</h1>
 
-	<form action="updateQuestionAttempt.do" method="POST">
+	<form action="updateQuestion.do" method="POST">
 		<div>
 		<input type="hidden" name="id" value=${question.id } />
-			Question Text <input type="text"class= "form-control" name="questionText" placeholder="${question.questionText }"/>
-			
+			Question Text <input type="text"class= "form-control" name="questionText" value="${question.questionText }"/>
+			Explanation Text:
+			<textarea rows="3" cols="40" name="description">${question.description}</textarea>
 		</div>
 
 		<button type="submit" class="btn btn-primary">Update Question</button>
+	</form>
+	<c:forEach var="o" items="${question.options }">
+	<li>${o.optionText} correct:${o.correct} </li>
+	</c:forEach>
+
+	<form action="addOption.do" method="POST">
+	<input type="text" name="optionText">
+	<input type="checkbox" name="correct">
+	<input type="hidden" name="questionId" value="${question.id}">
+	
+		<button type="submit" class="btn btn-primary">Add Option</button>
 	</form>
 	 </main>
 	<jsp:include page="bootstrapFoot.jsp" />
