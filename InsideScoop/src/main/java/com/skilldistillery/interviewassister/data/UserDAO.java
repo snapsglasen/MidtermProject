@@ -44,5 +44,6 @@ public interface UserDAO {
 	List<Category> findCategories();
 	List<Question> findAllQuestions();
 	Boolean correct(Integer[] selectedOptions, Question question);
+	Set <Question> searchQuestions(String search);
 
 }

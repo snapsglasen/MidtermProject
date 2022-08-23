@@ -323,6 +323,8 @@ public class UserDAOImpl implements UserDAO {
 			return comp;
 		}
 	}
+	
+	
 
 	@Override
 	public void addUpvotePost(int userId, int postId) {
@@ -467,6 +469,23 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 		return true;
+	}
+
+	
+	
+	@Override
+	public Set<Question> searchQuestions(String search) {
+		Set<Question> questions = new HashSet<Question>();
+		String[] searches = search.split(" ");
+		for (String splitSearch : searches) {
+			Category cat = findCategoryByString(splitSearch);
+			splitSearch = "%" + splitSearch + "%";
+			String jpql = "Select pqfrom Question q WHERE q.questionText Like :search OR q.description LIKE :search OR q.user.firstName LIKE :search OR q.user.lastName LIKE :search OR q.user.username LIKE :search OR :searchCat MEMBER OF p.categories";
+			questions.addAll(em.createQuery(jpql, Question.class).setParameter("search", splitSearch)
+					.setParameter("searchCat", cat)
+					.getResultList());
+		}
+		return questions;
 	}
 
 }
