@@ -32,11 +32,12 @@ public class QuestionController {
 	}
 
 	@RequestMapping(path = "createQuestion.do", method = RequestMethod.POST)
-	public String createQuestion(Model model, HttpSession session, Model login, String questionText, Integer[] categories, String description) {
+	public String createQuestion(Model model, HttpSession session, Model login, Model cate, String questionText, Integer[] categories, String description) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		Question question= userDAO.createQuestion(questionText, categories, description, user);
 		model.addAttribute("question", question);
+		cate.addAttribute("categories", userDAO.findCategories());
 		return "updateQuestion";
 		
 	}

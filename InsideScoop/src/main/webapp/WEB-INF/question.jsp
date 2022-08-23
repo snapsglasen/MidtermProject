@@ -38,7 +38,7 @@ ${displayQuestion.description}
  <input type="hidden" value="${displayQuestion.id }" name="questionId" /> 
  <button type="submit" class="btn btn-primary">Submit answer</button>
  </form>
- 
+ <c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }">
  <form action="updateQuestion.do" method="GET">
 			<input type="hidden" name="questionId" value="${displayQuestion.id }" /> <br />
 			<button type="submit" class="btn btn-primary">Update</button>
@@ -48,7 +48,7 @@ ${displayQuestion.description}
 			<input type="hidden" name="id" value=${displayQuestion.id } /> <br />
 			<button type="submit" class="btn btn-primary">Delete</button>
 		</form>
- 
+ </c:if>
  <form action="randomQuestion.do">
  <button type="submit" class="btn btn-primary">to random question</button>
  </form>
