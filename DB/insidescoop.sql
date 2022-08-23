@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `question` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `question_text` TEXT NULL,
   `active` TINYINT NULL,
+  `description` TEXT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -552,10 +553,10 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `question` (`id`, `question_text`, `active`) VALUES (1, 'Why is a mouse when it spins?', NULL);
-INSERT INTO `question` (`id`, `question_text`, `active`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?', NULL);
-INSERT INTO `question` (`id`, `question_text`, `active`) VALUES (3, 'Which of the following options makes Java portable and secure?', NULL);
-INSERT INTO `question` (`id`, `question_text`, `active`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?', NULL);
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`) VALUES (1, 'Why is a mouse when it spins?', NULL, 'A senseless question to make your head explode');
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?', NULL, 'Most important for DBAs');
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`) VALUES (3, 'Which of the following options makes Java portable and secure?', NULL, 'One of Java\'s greatest strengths');
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?', NULL, 'This is sort of a \"gotcha\" question');
 
 COMMIT;
 
@@ -600,7 +601,7 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `user` (`id`, `first_name`, `last_name`, `admin`, `active`, `email`, `create_date`, `last_update`, `username`, `password`, `work_role_id`, `company_id`, `profile_image_url`, `user_category_id`) VALUES (1, 'Testy', 'Testaburn', 1, 1, 'testy@testaburn.com', NULL, NULL, 'ttesta', 'testing', 1, 1, NULL, 1);
+INSERT INTO `user` (`id`, `first_name`, `last_name`, `admin`, `active`, `email`, `create_date`, `last_update`, `username`, `password`, `work_role_id`, `company_id`, `profile_image_url`, `user_category_id`) VALUES (1, 'Testy', 'Testaburn', 1, 1, 'testy@testaburn.com', NULL, NULL, 'ttesta', 'testing', 1, 1, 'https://testy.jovial.com/testy.jpg', 1);
 
 COMMIT;
 
@@ -665,6 +666,7 @@ COMMIT;
 START TRANSACTION;
 USE `insidescoop`;
 INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `interview_date`) VALUES (1, 'This is a post', NULL, NULL, 1, 1, 'The title of a post', NULL);
+INSERT INTO `post` (`id`, `content`, `create_date`, `last_update`, `user_id`, `active`, `title`, `interview_date`) VALUES (2, 'This is a second post', NULL, NULL, 1, 1, NULL, NULL);
 
 COMMIT;
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,14 +27,14 @@
 </div>
 
 <div class="content">
-<section class="search">
-<form action="searchPosts.do">
-Looking for a post?<input type="text" class= "form-control" name="search"/>
-<input class="btn btn-secondary btn-sm" type="submit" value="Search post">
+<div class="search">
+<form action="searchPosts.do"><label for="postSearch">Looking for a post?</label>
+<input type="text" class="form-control" name="search" id="postSearch"/>
+<input class="btn btn-secondary btn-sm btn-search" type="submit" value="Search">
 </form>
-</section>
+</div>
 
-<section class="sort">
+<div class="sort">
 <article>
 <a class="btn btn-secondary btn-sm" href="postByTitle.do">Sort by Title</a>
 <a class="btn btn-secondary btn-sm" href="postByOldest.do">Sort by Oldest</a>
@@ -52,27 +53,27 @@ Looking for a post?<input type="text" class= "form-control" name="search"/>
 <input class="btn btn-secondary btn-sm" type="submit" value="Filter by Newest">
 </form>
 -->
-</section>
-<section class="posts">
-<c:forEach var="p" items="${posts }" >
-<c:if test="${p.active }">
-<img src="${p.user.profilePicture }"
-width="40" height="40">
-<a href="profile.do?id=${p.user.id }">${p.user.firstName} ${p.user.lastName }</a>
-<a href="showPost.do?postId=${p.id }">${p.title }</a>
-${p.createDate}
-${p.lastUpdate}
-<br/>
-</c:if>
-</c:forEach>
-</section>
-<section>
+</div>
+	<div class="posts">
+		<c:forEach var="p" items="${posts }" >
+			<c:if test="${p.active }">
+			<div class="post">
+				<img src="<c:out value="${p.user.profilePicture }"/>" width="40px" height="40px">
+				<a href="profile.do?id=${p.user.id }">${p.user.firstName} ${p.user.lastName }</a>
+				<a href="showPost.do?postId=${p.id }">${p.title }</a>
+				${p.createDate}
+				${p.lastUpdate}
+			</div>
+			</c:if>
+		</c:forEach>
+	</div>
+<div>
 <c:if test="${not empty loginCheck }">
 <form action="createPostPage.do">
 <input class="btn btn-secondary btn-sm" type="submit" value="Create a Post">
 </form>
 </c:if>
-</section>
+</div>
 </div>
 <div class="footer">
 
