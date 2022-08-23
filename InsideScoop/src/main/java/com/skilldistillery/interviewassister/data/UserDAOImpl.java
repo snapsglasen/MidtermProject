@@ -389,10 +389,16 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public Question updateQuestion(int id, String questionText) {
+	public Question updateQuestion(int id, String questionText, String description, Integer[] categories) {
 		Question question = findQuestionById(id);
 		if (!questionText.equals("") && questionText != null) {
 			question.setQuestionText(questionText);
+		}
+		if (!description.equals("") && description != null) {
+			question.setDescription(description);
+		}
+		if (categories.length > 0) {
+			question.setCategories(getCategoryList(categories));
 		}
 
 		return question;
@@ -416,8 +422,11 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<Question> findAllQuestions() {
-		String jpql = "Select q from Question q";
+		Question q=em.find(Question.class, 1);
+		System.out.println(q.getActive());
+		String jpql = "Select q from Question q WHERE q.active=true";
 		List<Question> questions = em.createQuery(jpql, Question.class).getResultList();
+		System.out.println(questions);
 		return questions;
 	}
 

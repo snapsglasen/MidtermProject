@@ -39,7 +39,7 @@ public interface UserDAO {
 	void addUpvotePost(int userId, int postId);
 	void addUpvoteComment(int userId, int commentId);
 	Question createQuestion(String questionText, Integer[] categories, String description, User user);
-	Question updateQuestion(int id, String questionText);
+	Question updateQuestion(int id, String questionText, String description, Integer[] categories);
 	Question findQuestionById(int questionId);
 	List<Category> findCategories();
 	List<Question> findAllQuestions();

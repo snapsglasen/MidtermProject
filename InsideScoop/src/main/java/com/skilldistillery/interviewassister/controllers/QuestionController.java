@@ -41,37 +41,29 @@ public class QuestionController {
 		
 	}
 
-	@RequestMapping(path = "deleteQuestion.do")
-	public String deleteQuestion(Model model, Model login, HttpSession session, int id) {
-		User user = (User) session.getAttribute("loggedInUser");
-		login.addAttribute("loginCheck", user);
+	@RequestMapping(path = "deleteQuestion.do", method=RequestMethod.POST)
+	public String deleteQuestion(int id) {
 		userDAO.deleteQuestion(id);
-		return "index";
-	}
-
-	
-	@RequestMapping(path = "updateQuestion.do")
-	public String updateQuestion(HttpSession session, Model model, Model login, int id) {
-		User user = (User) session.getAttribute("loggedInUser");
-		login.addAttribute("loginCheck", user);
-		model.addAttribute("post", userDAO.findByPostId(id));
-		return "updatePost";
+		return "redirect:showQuestion.do";
 	}
 	
 	@RequestMapping(path= "updateQuestion.do", method=RequestMethod.GET)
-	public String goToQuestionUpdate(int questionId, Model model) {
+	public String goToQuestionUpdate(int questionId, Model model, Model login, Model cat, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
 		Question q=userDAO.findQuestionById(questionId);
 		model.addAttribute("question", q);
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "updateQuestion";
 	}
 
 	@RequestMapping(path = "updateQuestion.do", method=RequestMethod.POST)
-	public String updatedQuestion(HttpSession session, Model model, int id, String questionText, Model login) {
-		Question question = userDAO.updateQuestion(id, questionText);
+	public String updatedQuestion(HttpSession session, Model model, int id, String questionText, String description, Integer[] categories, Model login) {
+		Question question = userDAO.updateQuestion(id, questionText, description, categories);
 		model.addAttribute("displayQuestion", question);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		return "showQuestion";
+		return "question";
 	}
 
 	@RequestMapping(path = "showQuestion.do")

@@ -27,7 +27,11 @@
 			Explanation Text:
 			<textarea rows="3" cols="40" name="description">${question.description}</textarea>
 		</div>
-
+<c:forEach var="q" items="${categories }">
+					<input type="checkbox" id="categories" value="${q.id}"
+						name="categories">
+					<label for="categories">${q.name }</label>
+				</c:forEach>
 		<button type="submit" class="btn btn-primary">Update Question</button>
 	</form>
 	<c:forEach var="o" items="${question.options }">

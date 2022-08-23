@@ -24,7 +24,6 @@
  <form action="randomQuestion.do">
  <button type="submit" class="btn btn-primary">to random question</button>
  </form>
- 
  <c:forEach var="question" items="${questions}">
 
  <a href="question.do?id=${question.id }"> ${question.questionText}</a>
@@ -32,17 +31,7 @@
  <br/>
  </c:forEach>
 
-
 		<%-- <c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }"> --%>
-		<form action="updateQuestion.do" method="POST">
-			<input type="hidden" name="id" value=${displayQuestion.id } /> <br />
-			<button type="submit" class="btn btn-primary">Update</button>
-		</form>
-
-		<form action="deleteQuestion.do" method="POST">
-			<input type="hidden" name="id" value=${displayQuestion.id } /> <br />
-			<button type="submit" class="btn btn-primary">Delete</button>
-		</form>
 		<br/>
 		<form action="createQuestionPage.do" method="POST">
 			<button type="submit" class="btn btn-primary">Create Question</button>

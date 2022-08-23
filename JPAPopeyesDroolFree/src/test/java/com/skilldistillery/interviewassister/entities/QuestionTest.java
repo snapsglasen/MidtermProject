@@ -55,5 +55,10 @@ class QuestionTest {
 	void test_one_to_many_attempt_mapping() {
 		assertTrue(question.getAttempts().size() > 0);
 	}
+	
+	@Test
+	void test_question_to_active() {
+		assertTrue(question.getActive());
+	}
 
 }

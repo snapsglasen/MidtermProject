@@ -39,6 +39,16 @@ ${displayQuestion.description}
  <button type="submit" class="btn btn-primary">Submit answer</button>
  </form>
  
+ <form action="updateQuestion.do" method="GET">
+			<input type="hidden" name="questionId" value="${displayQuestion.id }" /> <br />
+			<button type="submit" class="btn btn-primary">Update</button>
+		</form>
+
+		<form action="deleteQuestion.do" method="POST">
+			<input type="hidden" name="id" value=${displayQuestion.id } /> <br />
+			<button type="submit" class="btn btn-primary">Delete</button>
+		</form>
+ 
  <form action="randomQuestion.do">
  <button type="submit" class="btn btn-primary">to random question</button>
  </form>
