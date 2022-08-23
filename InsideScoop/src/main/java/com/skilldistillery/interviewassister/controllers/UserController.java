@@ -312,13 +312,15 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "createQuestion.do", method = RequestMethod.POST)
-	public String createQuestion(Model model, HttpSession session, Model login, String questionText) {
+	public String createQuestion(Model model, HttpSession session, Model login, String questionText, Integer[] categories) {
+		System.out.println(categories);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		model.addAttribute("displayQuestion", userDAO.createQuestion(questionText));
+		model.addAttribute("displayQuestion", userDAO.createQuestion(questionText, categories));
 		return "showQuestion";
-
+		
 	}
+
 
 	
 

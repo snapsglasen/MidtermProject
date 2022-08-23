@@ -23,7 +23,12 @@
 		<form action="createQuestion.do" method="POST">
 			<div>
 				Text of Question <input type="text" class="form-control"
-					name="questionText" />
+					name="questionText" /> Choose Question's Category(ies):
+				<c:forEach var="q" items="${categories }">
+					<input type="checkbox" id="categories" value="${q.id}"
+						name="categories">
+					<label for="categories">${q.name }</label>
+				</c:forEach>
 
 
 			</div>

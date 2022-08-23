@@ -43,6 +43,10 @@
 			<input type="hidden" name="id" value=${displayQuestion.id } /> <br />
 			<button type="submit" class="btn btn-primary">Delete</button>
 		</form>
+		<br/>
+		<form action="createQuestionPage.do" method="POST">
+			<button type="submit" class="btn btn-primary">Create Question</button>
+		</form>
 		<%-- </c:if> --%>
 
 

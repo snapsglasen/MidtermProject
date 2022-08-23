@@ -37,7 +37,7 @@ public interface UserDAO {
 	Company companyByString(String company);
 	void addUpvotePost(int userId, int postId);
 	void addUpvoteComment(int userId, int commentId);
-	Question createQuestion(String questionText);
+	Question createQuestion(String questionText, Integer[] categories);
 	Question updateQuestion(int id, String questionText);
 	Question findQuestionById(int questionId);
 	List<Category> findCategories();
