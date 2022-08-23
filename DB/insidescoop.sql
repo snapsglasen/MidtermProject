@@ -106,7 +106,7 @@ DROP TABLE IF EXISTS `question` ;
 CREATE TABLE IF NOT EXISTS `question` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `question_text` TEXT NULL,
-  `active` TINYINT NULL DEFAULT 1,
+  `active` TINYINT NOT NULL DEFAULT 1,
   `description` TEXT NULL,
   `user_id` INT NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
@@ -605,10 +605,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `insidescoop`;
-INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (1, 'Why is a mouse when it spins?', NULL, 'A senseless question to make your head explode', DEFAULT);
-INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?', NULL, 'Most important for DBAs', DEFAULT);
-INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (3, 'Which of the following options makes Java portable and secure?', NULL, 'One of Java\'s greatest strengths', DEFAULT);
-INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?', NULL, 'This is sort of a \"gotcha\" question', DEFAULT);
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (1, 'Why is a mouse when it spins?', 1, 'A senseless question to make your head explode', DEFAULT);
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (2, 'Which of the following is NOT a Data Definition Language(DDL) command?', 1, 'Most important for DBAs', DEFAULT);
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (3, 'Which of the following options makes Java portable and secure?', 1, 'One of Java\'s greatest strengths', DEFAULT);
+INSERT INTO `question` (`id`, `question_text`, `active`, `description`, `user_id`) VALUES (4, 'Which of the following is NOT a JPA entity manager method?', 1, 'This is sort of a \"gotcha\" question', DEFAULT);
 
 COMMIT;
 

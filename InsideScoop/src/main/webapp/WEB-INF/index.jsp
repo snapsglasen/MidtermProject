@@ -43,8 +43,8 @@
 	<!-- Sort -->
 	<div class="row m-3">
 		<div class="col"></div>
-			<div class="col-4"></div>
-			<div class="col-4">
+			<div class="col-2"></div>
+			<div class="col-6">
 				<div class="row">
 					<a class="col btn btn-secondary btn-sm me-auto" href="postByTitle.do">Sort by Title</a>
 					<a class="col btn btn-secondary btn-sm me-auto" href="postByOldest.do">Sort by Oldest</a>
