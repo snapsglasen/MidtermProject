@@ -19,7 +19,10 @@
 	</c:choose>		
 	<main class="container-fluid">
 		<h1>Account Info</h1>
-		${account.firstName }<br /> ${account.lastName }
+		${account.firstName }${account.lastName }<br/>
+		Total questions attempted: ${total}<br/>
+		Total correct: ${correct }<br/>
+		Total incorrect: ${incorrect }<br>
 
 		<form action="updateProfile.do" method="POST">
 			<input type="hidden" name="id" value=${account.id } />

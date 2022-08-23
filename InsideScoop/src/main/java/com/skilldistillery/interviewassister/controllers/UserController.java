@@ -91,39 +91,38 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "adminAccount.do")
-	public String accountInfo(Model model, Model login, HttpSession session, int id) {
+	public String accountInfo(Model model, Model login, Model total, Model correct, Model incorrect, HttpSession session, int id) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		model.addAttribute("account", userDAO.findById(id));
+		User profile=userDAO.findById(id);
+		model.addAttribute("account", profile);
+		List<Attempt> totalAt= optionDAO.usersTotalAttempts(profile);
+		total.addAttribute("total", totalAt.size());
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(profile);
+		correct.addAttribute("correct", totalCor.size());
+		List<Attempt> totalInc= optionDAO.userTotalIncorrectAttempts(profile);
+		incorrect.addAttribute("incorrect", totalInc.size());
 		return "accountInfo";
 	}
 
 	@RequestMapping(path = "profile.do")
-	public String profile(Model model, Model login, Model total, Model correct, Model incorrect, HttpSession session, int id) {
+	public String profile(Model model, Model login, Model correct, HttpSession session, int id) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		User profile = userDAO.findById(id);
 		model.addAttribute("profile", profile);
-		List<Attempt> totalAt= optionDAO.usersTotalAttempts(user);
-		total.addAttribute("total", totalAt.size());
-		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(profile);
 		correct.addAttribute("correct", totalCor.size());
-		List<Attempt> totalInc= optionDAO.userTotalIncorrectAttempts(user);
-		incorrect.addAttribute("incorrect", totalInc.size());
 		return "profile";
 	}
 
 	@RequestMapping(path = "loggedInProfile.do")
-	public String profile(Model model, Model login, Model total, Model correct, Model incorrect, HttpSession session) {
+	public String profile(Model model, Model login, Model correct, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("profile", user);
-		List<Attempt> totalAt= optionDAO.usersTotalAttempts(user);
-		total.addAttribute("total", totalAt.size());
 		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
 		correct.addAttribute("correct", totalCor.size());
-		List<Attempt> totalInc= optionDAO.userTotalIncorrectAttempts(user);
-		incorrect.addAttribute("incorrect", totalInc.size());
 		return "profile";
 	}
 
@@ -251,7 +250,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updateProfileAttempt.do")
-	public String updatedProfile(HttpSession session, Model model, Model login, int id, String firstName,
+	public String updatedProfile(HttpSession session, Model model, Model login, Model correct,int id, String firstName,
 			String lastName, String email, String username, String password, int category, String workRole,
 			String company, String profilePicture) {
 		User user = userDAO.updateProfile(id, firstName, lastName, email, username, password, category, workRole,
@@ -259,6 +258,8 @@ public class UserController {
 		model.addAttribute("profile", user);
 		session.setAttribute("loggedInUser", user);
 		login.addAttribute("loginCheck", user);
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
+		correct.addAttribute("correct", totalCor.size());
 		return "profile";
 	}
 

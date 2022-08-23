@@ -22,11 +22,12 @@
 <h1>Profile</h1>
 <img src="${profile.profilePicture }" alt="Profile picture"
 width="50" height= "50">
-${profile.firstName }<br/>
+<br/>
+${profile.firstName }
 ${profile.lastName }
-${profile.workRole.role }
-${profile.company.name }
-
+${profile.workRole.role }<br/>
+${profile.company.name }<br/>
+Total correct quiz questions: ${correct}
 <c:if test="${loginCheck==profile }">
 <a href="account.do">account</a>
 </c:if>
