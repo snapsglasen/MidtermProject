@@ -367,7 +367,19 @@ public class UserController {
 		Post post=userDAO.findByPostId(postId);
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
-		like.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		return "showPost";
+	}
+	
+	@RequestMapping(path = "downvoteComment.do")
+	public String downvoteComment(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int commentId, int postId) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.addDownvoteComment(userId, commentId);
+		Post post=userDAO.findByPostId(postId);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
 		return "showPost";
 	}
 	
