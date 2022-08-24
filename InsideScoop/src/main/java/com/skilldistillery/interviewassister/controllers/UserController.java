@@ -140,8 +140,8 @@ public class UserController {
 		login.addAttribute("loginCheck", user);
 		Post post=userDAO.findByPostId(postId);
 		model.addAttribute("displayPost", post);
-		like.addAttribute("postLikes", countPostLike(post));
-		dislike.addAttribute("postDislikes", countPostDislike(post));
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
 		return "showPost";
 	}
 
@@ -160,8 +160,8 @@ public class UserController {
 		login.addAttribute("loginCheck", user);
 		Post post=userDAO.createPost(content, user, title, company, workRole, category);
 		model.addAttribute("displayPost", post);
-		like.addAttribute("postLikes", countPostLike(post));
-		dislike.addAttribute("postDislikes", countPostDislike(post));
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
 		return "showPost";
 
 	}
@@ -173,8 +173,8 @@ public class UserController {
 		userDAO.createComment(content, user, id);
 		Post post=userDAO.findByPostId(id);
 		model.addAttribute("displayPost", post);
-		like.addAttribute("postLikes", countPostLike(post));
-		dislike.addAttribute("postDislikes", countPostDislike(post));
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
 		return "showPost";
 	}
 
@@ -218,8 +218,8 @@ public class UserController {
 		userDAO.updateComment(commentId, content);
 		Post post=userDAO.findByPostId(id);
 		model.addAttribute("displayPost", post);
-		like.addAttribute("postLikes", countPostLike(post));
-		dislike.addAttribute("postDisikes", countPostDislike(post));
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		dislike.addAttribute("postDisikes", userDAO.countPostDislike(post));
 		return "showPost";
 	}
 
@@ -230,8 +230,8 @@ public class UserController {
 		userDAO.deleteComment(commentId);
 		Post post=userDAO.findByPostId(id);
 		model.addAttribute("displayPost", post);
-		like.addAttribute("postLikes", countPostLike(post));
-		dislike.addAttribute("postDislikes", countPostDislike(post));
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
 		return "showPost";
 	}
 
@@ -302,8 +302,8 @@ public class UserController {
 		model.addAttribute("displayPost", post);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		like.addAttribute("postLikes", countPostLike(post));
-		dislike.addAttribute("postDislikes", countPostDislike(post));
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
 		return "showPost";
 	}
 
@@ -338,8 +338,8 @@ public class UserController {
 		userDAO.addUpvotePost(userId, postId);
 		Post post=userDAO.findByPostId(postId);
 		model.addAttribute("displayPost", post);
-		like.addAttribute("postLikes", countPostLike(post));
-		like.addAttribute("postDislikes", countPostDislike(post));		
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		like.addAttribute("postDislikes", userDAO.countPostDislike(post));		
 		return "showPost";
 	}
 
@@ -352,8 +352,8 @@ public class UserController {
 		userDAO.addUpvoteComment(userId, commentId);
 		Post post=userDAO.findByPostId(postId);
 		model.addAttribute("displayPost", post);
-		like.addAttribute("postLikes", countPostLike(post));
-		like.addAttribute("postDislikes", countPostDislike(post));
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		like.addAttribute("postDislikes", userDAO.countPostDislike(post));
 		return "showPost";
 	}
 
