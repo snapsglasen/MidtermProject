@@ -47,7 +47,22 @@ Categories:
 ${p.name }
 </c:forEach>
 <br/>
-
+Likes:${postLikes }
+<br/>
+Dislikes:${postDislikes }
+<c:if test="${not empty loginCheck}">
+			<form action="upvotePost.do">
+				<input type="hidden" name="userId" value=${loginCheck.id } /> <input
+					type="hidden" name="postId" value=${displayPost.id } />
+				<button type="submit" class="btn btn-primary">Like</button>
+			</form>
+			<br />
+			<form action="deleteUpvotePost.do">
+				<input type="hidden" name="userId" value=${loginCheck.id } /> <input
+					type="hidden" name="postId" value=${displayPost.id } />
+				<button type="submit" class="btn btn-primary">Dislike</button>
+			</form>
+		</c:if>
 <c:if test="${loginCheck==displayPost.user || loginCheck.admin }">
 <form action="updatePost.do" method="POST">
 			<input type="hidden" name="id" value=${displayPost.id } /> <br />

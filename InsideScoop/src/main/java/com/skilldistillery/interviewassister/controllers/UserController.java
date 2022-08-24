@@ -345,6 +345,17 @@ public class UserController {
 		like.addAttribute("postDislikes", userDAO.countPostDislike(post));		
 		return "showPost";
 	}
+	@RequestMapping(path = "deleteUpvotePost.do")
+	public String deleteUpvotePost(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int postId) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.deleteUpvotePost(userId, postId);
+		Post post=userDAO.findByPostId(postId);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", userDAO.countPostLike(post));
+		like.addAttribute("postDislikes", userDAO.countPostDislike(post));		
+		return "showPost";
+	}
 
 	@RequestMapping(path = "upvoteComment.do")
 	public String upvoteComment(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int commentId, int postId) {
@@ -359,7 +370,7 @@ public class UserController {
 		like.addAttribute("postDislikes", userDAO.countPostDislike(post));
 		return "showPost";
 	}
-
+	
 	@RequestMapping(path = "searchQuestions.do")
 	public String searchQuestions(HttpSession session, Model model, Model login, String search) {
 		User user = (User) session.getAttribute("loggedInUser");
