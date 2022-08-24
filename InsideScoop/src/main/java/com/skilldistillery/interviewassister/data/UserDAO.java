@@ -19,6 +19,9 @@ public interface UserDAO {
 	List<Post> findNewestPost ();
 	List<Post> findOldestPost();
 	List<User> findAllUsers();
+	List<User> adminFindAllUsers();
+	List<Post> findAllNewestPost();
+	List<Post> findMostPopularPost();
 	Post findByPostId(int postId);
 	Comment findByCommentId(int commentId);
 	Post createPost(String content, User user, String title, String company, String workRole, Integer[] category);
