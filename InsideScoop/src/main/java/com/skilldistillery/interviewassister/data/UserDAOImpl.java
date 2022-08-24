@@ -59,22 +59,23 @@ public class UserDAOImpl implements UserDAO {
 	// ASK ABOUT THIS! How to make a jpql statement that orders by most of an entity
 	@Override
 	public List<Post> findMostPopularPost() {
-		String jpql = "Select p from Post p WHERE p.active=true ORDER BY p.getLikes";
-		List<Post> posts = em.createQuery(jpql, Post.class).setMaxResults(1).getResultList();
-		return posts;
+		String jpql = "Select p.id, avg(pv.liked), p from Post p LEFT OUTER JOIN p.postVotes pv GROUP BY p.id HAVING p.active=true ORDER BY avg(pv.liked) DESC";
+		List<Object[]> obj = em.createQuery(jpql, Object[].class).getResultList();
+		List<Post> post= new ArrayList<>();
+		
+		for(int i=0; i<5; i++) {
+			post.add((Post) obj.get(i)[2]);
+		}
+		
+		return post;
 	}
-
-	
 
 	@Override
 	public List<Post> findNewestPost() {
 		String jpql = "Select p from Post p ORDER BY lastUpdate DESC";
-		System.out.println(em.createQuery(jpql, Post.class).getResultList());
-
-		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
-		return posts;
+		List<Post> post= em.createQuery(jpql, Post.class).getResultList();
+		return post;
 	}
-
 
 	@Override
 	public List<Category> findCategories() {
@@ -391,7 +392,7 @@ public class UserDAOImpl implements UserDAO {
 				.setParameter("post", post).getResultList();
 		if (testingKeys.isEmpty()) {
 			PostVoteId pvi = new PostVoteId(userId, postId);
-			PostVote pv = new PostVote(pvi, true, user, post);
+			PostVote pv = new PostVote(pvi, false, user, post);
 			em.persist(pv);
 			post.addPostVote(pv);
 		} else {
