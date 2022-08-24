@@ -15,7 +15,7 @@
 			-->
 			<li class="nav-item me-3">
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
-  					Login
+  					Sign in
 				</button>
 			</li>
 		</ul>
