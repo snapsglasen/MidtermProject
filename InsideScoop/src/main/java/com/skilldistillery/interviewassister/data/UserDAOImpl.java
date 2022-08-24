@@ -662,6 +662,13 @@ public class UserDAOImpl implements UserDAO {
 		return pv.size();
 	}
 	
+	@Override
+	public List<Post> postsFromUser(User user){
+		String jpql= "SELECT p FROM Post p WHERE p.user=:user AND p.active=true";
+		List<Post> posts= em.createQuery(jpql, Post.class).setParameter("user", user).setMaxResults(5).getResultList();
+		return posts;
+	}
+	
 	
 
 }

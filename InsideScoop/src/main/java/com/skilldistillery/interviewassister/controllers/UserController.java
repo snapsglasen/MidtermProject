@@ -63,7 +63,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "registerAttempt.do")
-	public String registerAttempt(Model model, Model login, Model correct, String firstName, String lastName, String username,
+	public String registerAttempt(Model model, Model login, Model correct, Model userPosts, String firstName, String lastName, String username,
 			String password, int category, HttpSession session) {
 		try {
 			User user = userDAO.registerUser(firstName, lastName, lastName, username, password, category);
@@ -72,6 +72,7 @@ public class UserController {
 			login.addAttribute("loginCheck", user);
 			List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
 			correct.addAttribute("correct", totalCor.size());
+			userPosts.addAttribute("displayPost", userDAO.postsFromUser(user));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "register";
@@ -114,23 +115,25 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "profile.do")
-	public String profile(Model model, Model login, Model correct, HttpSession session, int id) {
+	public String profile(Model model, Model login, Model correct, Model userPosts, HttpSession session, int id) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		User profile = userDAO.findById(id);
 		model.addAttribute("profile", profile);
 		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(profile);
 		correct.addAttribute("correct", totalCor.size());
+		userPosts.addAttribute("displayPost", userDAO.postsFromUser(profile));
 		return "profile";
 	}
 
 	@RequestMapping(path = "loggedInProfile.do")
-	public String profile(Model model, Model login, Model correct, HttpSession session) {
+	public String profile(Model model, Model login, Model correct, Model userPosts, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("profile", user);
 		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
 		correct.addAttribute("correct", totalCor.size());
+		userPosts.addAttribute("displayPost", userDAO.postsFromUser(user));
 		return "profile";
 	}
 

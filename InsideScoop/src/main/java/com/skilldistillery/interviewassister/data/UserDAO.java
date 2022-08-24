@@ -54,5 +54,6 @@ public interface UserDAO {
 	int countPostDislike(Post post);
 	List<Post> findMostPopularPost();
 	List<User> adminFindAllUsers();
+	List<Post> postsFromUser(User user);
 
 }
