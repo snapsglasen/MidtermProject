@@ -159,9 +159,9 @@ public class UserDAOImpl implements UserDAO {
 		Set<WorkRole> workRoleSet = getWorkRoleSet(workRole);
 		boolean check = (category == null);
 		List<Category> categories = new ArrayList<>();
-		if (check) { 
+		if (check) {
 		} else {
-		categories = getCategoryList(category);
+			categories = getCategoryList(category);
 		}
 		Post post = new Post(content, user, title, companySet, workRoleSet, categories);
 		post.setActive(true);
@@ -346,8 +346,6 @@ public class UserDAOImpl implements UserDAO {
 			return comp;
 		}
 	}
-	
-	
 
 	@Override
 	public void addUpvotePost(int userId, int postId) {
@@ -413,9 +411,9 @@ public class UserDAOImpl implements UserDAO {
 	public Question createQuestion(String questionText, Integer[] categories, String description, User user) {
 		boolean check = (categories == null);
 		List<Category> category = new ArrayList<>();
-		if (check) { 
+		if (check) {
 		} else {
-		category = getCategoryList(categories);
+			category = getCategoryList(categories);
 		}
 		Question question = new Question(questionText, description, category, user);
 		question.setActive(true);
@@ -483,25 +481,23 @@ public class UserDAOImpl implements UserDAO {
 			if (userSelectedOption.contains(option.getId())) {
 				if (option.isCorrect()) {
 				} else {
-					Attempt at=new Attempt(user, question, false);
+					Attempt at = new Attempt(user, question, false);
 					em.persist(at);
 					return false;
 				}
 			} else {
 				if (option.isCorrect()) {
-					Attempt at=new Attempt(user, question, false);
+					Attempt at = new Attempt(user, question, false);
 					em.persist(at);
 					return false;
 				}
 			}
 		}
-		Attempt at=new Attempt(user, question, true);
+		Attempt at = new Attempt(user, question, true);
 		em.persist(at);
 		return true;
 	}
 
-	
-	
 	@Override
 	public Set<Question> searchQuestions(String search) {
 		Set<Question> questions = new HashSet<Question>();
@@ -512,17 +508,13 @@ public class UserDAOImpl implements UserDAO {
 			String jpql = "Select q from Question q WHERE (q.questionText Like :search "
 					+ "OR q.description LIKE :search OR q.user.firstName LIKE :search OR q.user.lastName LIKE :search OR q.user.username LIKE :search OR :searchCat MEMBER OF q.categories) AND q.active=true";
 			questions.addAll(em.createQuery(jpql, Question.class).setParameter("search", splitSearch)
-					.setParameter("searchCat", cat)
-					.getResultList());
+					.setParameter("searchCat", cat).getResultList());
 		}
 		return questions;
 	}
 
-
-	
 	@Override
 	public void addUpvoteQuestion(int userId, int questionId) {
-		System.out.println("********************* METHOD");
 		Question question = findQuestionById(questionId);
 		User user = findById(userId);
 
@@ -530,12 +522,76 @@ public class UserDAOImpl implements UserDAO {
 		List<QuestionVote> testingKeys = em.createQuery(jpql, QuestionVote.class).setParameter("user", user)
 				.setParameter("question", question).getResultList();
 		if (testingKeys.isEmpty()) {
-			System.out.println("********************* IN IF");
+
 			QuestionVoteId qvi = new QuestionVoteId(userId, questionId);
 			QuestionVote qv = new QuestionVote(qvi, true, user, question);
 			em.persist(qv);
 			question.addQuestionVote(qv);
+			
+		} else {
+			for (QuestionVote questionVote : testingKeys) {
+				try {
+					if (questionVote.getLiked() == true) {
+						questionVote.setLiked(null);
+					} else {
+						questionVote.setLiked(true);
+					}
+				} catch (Exception e) {
+					questionVote.setLiked(true);
+					e.printStackTrace();
+				}
+
+			}
 		}
 	}
 
+	@Override
+	public void deleteQuestionLike(int userId, int questionId) {
+		Question question = findQuestionById(questionId);
+		User user = findById(userId);
+
+		String jpql = "SELECT qv FROM QuestionVote qv WHERE qv.user=:user AND qv.question=:question";
+		List<QuestionVote> testingKeys = em.createQuery(jpql, QuestionVote.class).setParameter("user", user)
+				.setParameter("question", question).getResultList();
+		if (testingKeys.isEmpty()) {
+
+			QuestionVoteId qvi = new QuestionVoteId(userId, questionId);
+			QuestionVote qv = new QuestionVote(qvi, false, user, question);
+			em.persist(qv);
+			question.addQuestionVote(qv);
+			
+		} else {
+			for (QuestionVote questionVote : testingKeys) {
+				try {
+					if (questionVote.getLiked() == false) {
+						questionVote.setLiked(null);
+					} else {
+						questionVote.setLiked(false);
+					}
+				} catch (Exception e) {
+					questionVote.setLiked(false);
+					e.printStackTrace();
+				}
+
+			}
+		}
+	}
+
+	@Override
+	public int countLikes(Question question) {
+		String jpql = "Select qv from QuestionVote qv WHERE qv.question = :question AND qv.liked = true";
+		List<QuestionVote> qv = em.createQuery(jpql, QuestionVote.class)
+				.setParameter("question", question).getResultList();
+
+		return qv.size();
+	}
+
+	@Override
+	public int countDislikes(Question question) {
+		String jpql = "Select qv from QuestionVote qv WHERE qv.question = :question AND qv.liked = false";
+		List<QuestionVote> qv = em.createQuery(jpql, QuestionVote.class)
+				.setParameter("question", question).getResultList();
+
+		return qv.size();
+	}
 }
