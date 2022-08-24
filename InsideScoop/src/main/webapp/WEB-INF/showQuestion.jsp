@@ -7,65 +7,62 @@
 <meta charset="UTF-8">
 <title>Inside Scoop</title>
 <jsp:include page="bootstrapHead.jsp" />
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<form action="searchQuestions.do">
-		<input type="text" name="search" id="postSearch"
-			placeholder="Search Questions..." /> <input type="submit"
-			value="Search" />
+<jsp:include page="universalNavbar.jsp"/>
+<div class="container align-items-center">
+	<div class="row"></div>
+	
+	<!-- Header -->
+	<div class="row m-3">
+		<div class="col"></div>
+		<div class="col-8">
+			<jsp:include page="header.jsp"/>
+			<div class="row text-center">
+			<h1 class="display-3">Questions</h1>
+			</div>
+		</div>
+		<div class="col"></div>
+	</div>
+	<div class="row"></div>
+<c:if test="${not empty loginCheck }">
 
+<!-- Search -->
+<div class="row m-3">
+	<form class="form-inlin" action="searchQuestions.do">
+	<div class="form-group row">
+				<div class="col"></div>
+				<div class="col-7">
+				
+		<input type="text" class="form-control" name="search" id="postSearch"
+			placeholder="Search Questions..." /> 
+			</div>
+				<div class="col-1">
+				<div class="row">
+				<input class="btn btn-secondary btn-search" type="submit" value="Search">
+						</div>
+				</div>
+				<div class="col"></div>
+			</div>
 	</form>
-	<c:choose>
-		<c:when test="${not empty loginCheck }">
-			<jsp:include page="navbar.jsp"></jsp:include>
-		</c:when>
-		<c:otherwise>
-			<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
-	<main class="container-fluid">
-
-		<h1>${displayQuestion.questionText }</h1>
-
-		<form action="randomQuestion.do">
-			<button type="submit" class="btn btn-primary">to random
-				question</button>
-		</form>
-		<c:forEach var="question" items="${questions}">
-
-			<a href="question.do?id=${question.id }">
-				${question.questionText}</a>
-
-			<br />
-		</c:forEach>
-		<br/>
+	</div>
+	<div class="row-1"></div>
+	<!--Questions-->
+	<div class="row m-3">
+		<div class="col"></div>
+		<div class="col-6">
+			<jsp:include page="carouselQuestion.jsp"/>
+		</div>
+		<div class="col"></div>
+	</div>
+</c:if>
 		
-		<%--  Likes: ${displayQuestion.likes } 
-<c:if test="${not empty loginCheck}">
-<form action="upvoteQuestion.do">
-			<input type="hidden" name="userId" value=${loginCheck.id } /> 
-			<input type="hidden" name="questionId" value=${displayQuestion.id } /> 
-		<button type="submit" class="btn btn-primary">Like</button>
-	</form>
-</c:if> --%>
+<article>
+<a class="btn btn-secondary btn-sm" href="randomQuestion.do">Random Question</a>
+<a class="btn btn-secondary btn-sm" href="createQuestionPage.do">Create question</a>
+</article>
 
-		<%-- <c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }"> --%>
-		<br />
-		<form action="createQuestionPage.do" method="POST">
-			<button type="submit" class="btn btn-primary">Create
-				Question</button>
-		</form>
-		<%-- </c:if> --%>
-
-
-
-
-
-
-
-
-
-	</main>
 	<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>

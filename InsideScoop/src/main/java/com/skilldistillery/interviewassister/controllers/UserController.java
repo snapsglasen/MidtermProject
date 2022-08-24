@@ -397,7 +397,7 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("questions", userDAO.searchQuestions(search));
-		return "showQuestion";
+		return "viewQuestions";
 
 	}
 }
