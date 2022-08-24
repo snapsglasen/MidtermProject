@@ -52,5 +52,8 @@ public interface UserDAO {
 	void deleteQuestionLike(int userId, int questionId);
 	int countLikes(Question question);
 	int countDislikes(Question question);
+	void deleteUpvotePost(int userId, int postId);
+	int countPostLikes(Post post);
+	int countPostDislikes(Post post);
 
 }
