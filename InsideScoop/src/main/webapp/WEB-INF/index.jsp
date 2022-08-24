@@ -16,8 +16,8 @@
 
 <!-- Navbar -->
 <jsp:include page="universalNavbar.jsp"/>
-<div class="container">
-	<div class="row-1"></div>
+<div class="container align-items-center">
+	<div class="row"></div>
 	
 	<!-- Header -->
 	<div class="row m-3">
@@ -27,7 +27,7 @@
 		</div>
 		<div class="col"></div>
 	</div>
-	<div class="row-1"></div>
+	<div class="row"></div>
 <c:if test="${not empty loginCheck }">
 	<!-- Search -->
 	<div class="row m-3">

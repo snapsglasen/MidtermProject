@@ -89,6 +89,8 @@ public class QuestionController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		Question question = userDAO.findQuestionById(id);
+		System.out.println(question.getCountLikes());
+		System.out.println(question.getDislikes());
 		model.addAttribute("displayQuestion", question);
 		List<Attempt> totalAt = optionDAO.usersTotalAttemptsOnQuestion(question, user);
 		total.addAttribute("total", totalAt.size());
