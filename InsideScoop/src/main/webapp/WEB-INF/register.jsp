@@ -20,7 +20,7 @@
 	</c:choose>		
 	
 		<main class="container-fluid">
-		<h1>LOGIN</h1>
+		<h1>Sign Up</h1>
 		<form action="registerAttempt.do" method="GET">
 			First Name: <input class="form-control" type="text" name="firstName"
 				required /> Last Name: <input class="form-control" type="text"

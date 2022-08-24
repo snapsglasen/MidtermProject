@@ -14,7 +14,9 @@
 			</li>
 			-->
 			<li class="nav-item me-3">
-				<a class="nav-link" href="login.do">Login</a>
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+  					Login
+				</button>
 			</li>
 		</ul>
 	</div>
