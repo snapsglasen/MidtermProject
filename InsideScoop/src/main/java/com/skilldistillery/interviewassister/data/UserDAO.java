@@ -6,9 +6,9 @@ import java.util.Set;
 import com.skilldistillery.interviewassister.entities.Category;
 import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.Company;
-import com.skilldistillery.interviewassister.entities.Option;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.Question;
+import com.skilldistillery.interviewassister.entities.QuestionVote;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.WorkRole;
 
@@ -46,5 +46,8 @@ public interface UserDAO {
 	List<Question> findAllQuestions();
 	Boolean correct(Integer[] selectedOptions, Question question, User user);
 	Set <Question> searchQuestions(String search);
+	void deleteQuestionLike(int userId, int questionId);
+	int countLikes(Question question);
+	int countDislikes(Question question);
 
 }
