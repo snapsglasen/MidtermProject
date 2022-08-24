@@ -19,9 +19,6 @@ public interface UserDAO {
 	List<Post> findNewestPost ();
 	List<Post> findOldestPost();
 	List<User> findAllUsers();
-	List<User> adminFindAllUsers();
-	List<Post> findAllNewestPost();
-	List<Post> findMostPopularPost();
 	Post findByPostId(int postId);
 	Comment findByCommentId(int commentId);
 	Post createPost(String content, User user, String title, String company, String workRole, Integer[] category);
@@ -53,7 +50,9 @@ public interface UserDAO {
 	int countLikes(Question question);
 	int countDislikes(Question question);
 	void deleteUpvotePost(int userId, int postId);
-	int countPostLikes(Post post);
-	int countPostDislikes(Post post);
+	int countPostLike(Post post);
+	int countPostDislike(Post post);
+	List<Post> findMostPopularPost();
+	List<User> adminFindAllUsers();
 
 }
