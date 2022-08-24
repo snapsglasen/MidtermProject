@@ -38,6 +38,15 @@ ${displayQuestion.description}
  <input type="hidden" value="${displayQuestion.id }" name="questionId" /> 
  <button type="submit" class="btn btn-primary">Submit answer</button>
  </form>
+ Likes: ${displayPost.likes }
+<c:if test="${not empty loginCheck}">
+<form action="upvotePost.do">
+			<input type="hidden" name="userId" value=${loginCheck.id } /> 
+			<input type="hidden" name="postId" value=${displayPost.id } /> 
+		<button type="submit" class="btn btn-primary">Like</button>
+	</form>
+</c:if>
+ 
  <c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }">
  <form action="updateQuestion.do" method="GET">
 			<input type="hidden" name="questionId" value="${displayQuestion.id }" /> <br />

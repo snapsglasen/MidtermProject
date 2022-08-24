@@ -47,14 +47,7 @@ Categories:
 ${p.name }
 </c:forEach>
 <br/>
-Likes: ${displayPost.likes }
-<c:if test="${not empty loginCheck}">
-<form action="upvotePost.do">
-			<input type="hidden" name="userId" value=${loginCheck.id } /> 
-			<input type="hidden" name="postId" value=${displayPost.id } /> 
-		<button type="submit" class="btn btn-primary">Like</button>
-	</form>
-</c:if>
+
 <c:if test="${loginCheck==displayPost.user || loginCheck.admin }">
 <form action="updatePost.do" method="POST">
 			<input type="hidden" name="id" value=${displayPost.id } /> <br />

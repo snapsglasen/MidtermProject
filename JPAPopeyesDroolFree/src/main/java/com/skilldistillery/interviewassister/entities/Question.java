@@ -1,5 +1,6 @@
 package com.skilldistillery.interviewassister.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,6 +53,7 @@ public class Question {
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
+	
 
 	@OneToMany(mappedBy="question")
 	private List<Option> options;
@@ -155,6 +157,31 @@ public class Question {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public void addQuestionVote(QuestionVote questionVote) {
+		if (questionVotes == null) {
+			questionVotes = new ArrayList<>();
+		}
+		
+		if (!questionVotes.contains(questionVote)) {
+			questionVotes.add(questionVote);
+		}
+	}
+	public int getLikes() {
+		try {
+			return questionVotes.size();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	public void removeQuestionVote(QuestionVote questionVote) {
+		if (questionVotes != null && questionVotes.contains(questionVote)) {
+			questionVotes.remove(questionVote);
+		}
+	}
+
 
 	@Override
 	public int hashCode() {

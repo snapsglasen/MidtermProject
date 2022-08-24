@@ -28,6 +28,7 @@ public class QuestionVote {
 	@MapsId(value="userId")
 	private User user;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="question_id")
 	@MapsId(value="questionId")
@@ -39,6 +40,18 @@ public class QuestionVote {
 
 	public QuestionVote() {
 		super();
+	}
+
+	
+
+	
+
+	public QuestionVote(QuestionVoteId id, Boolean liked, User user, Question question) {
+		super();
+		this.id = id;
+		this.liked = liked;
+		this.user = user;
+		this.question = question;
 	}
 
 	public Boolean getLiked() {

@@ -31,6 +31,13 @@ public class QuestionVoteId implements Serializable {
 	public int getQuestionId() {
 		return questionId;
 	}
+	
+
+	public QuestionVoteId(int userId, int questionId) {
+		super();
+		this.userId = userId;
+		this.questionId = questionId;
+	}
 
 	public void setQuestionId(int questionId) {
 		this.questionId = questionId;

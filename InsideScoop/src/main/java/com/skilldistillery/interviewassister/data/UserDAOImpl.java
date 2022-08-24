@@ -24,6 +24,8 @@ import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.PostVote;
 import com.skilldistillery.interviewassister.entities.PostVoteId;
 import com.skilldistillery.interviewassister.entities.Question;
+import com.skilldistillery.interviewassister.entities.QuestionVote;
+import com.skilldistillery.interviewassister.entities.QuestionVoteId;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.UserCategory;
 import com.skilldistillery.interviewassister.entities.WorkRole;
@@ -494,6 +496,26 @@ public class UserDAOImpl implements UserDAO {
 					.getResultList());
 		}
 		return questions;
+	}
+
+
+	
+	@Override
+	public void addUpvoteQuestion(int userId, int questionId) {
+		System.out.println("********************* METHOD");
+		Question question = findQuestionById(questionId);
+		User user = findById(userId);
+
+		String jpql = "SELECT qv FROM QuestionVote qv WHERE qv.user=:user AND qv.question=:question";
+		List<QuestionVote> testingKeys = em.createQuery(jpql, QuestionVote.class).setParameter("user", user)
+				.setParameter("question", question).getResultList();
+		if (testingKeys.isEmpty()) {
+			System.out.println("********************* IN IF");
+			QuestionVoteId qvi = new QuestionVoteId(userId, questionId);
+			QuestionVote qv = new QuestionVote(qvi, true, user, question);
+			em.persist(qv);
+			question.addQuestionVote(qv);
+		}
 	}
 
 }
