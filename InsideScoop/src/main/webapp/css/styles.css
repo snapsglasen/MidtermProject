@@ -1,3 +1,14 @@
 div.card {
 	width: 50vw;
 }
+
+.carousel-caption {
+	background: white;
+	opacity: 0.8;
+}
+
+.center-cropped {
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 25vh;
+}

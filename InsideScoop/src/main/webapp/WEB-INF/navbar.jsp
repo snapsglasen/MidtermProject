@@ -18,11 +18,16 @@
 			<li class="nav-item">
 				<a class="nav-link" href="showQuestion.do">Questions</a>
 			</li>
+		</ul>
+		<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
 			<li class="nav-item">
 				<a class="nav-link" href="logout.do">Logout</a>
 			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="loggedInProfile.do">My Profile</a>
+			<li>
+			<a class="navbar-brand" href="loggedInProfile.do">
+				<img src="${loginCheck.profilePicture }" width="40" height="40" alt="profile picture"/>
+				Profile
+			</a>
 			</li>
 		</ul>
 	</div>
@@ -39,8 +44,7 @@
 	<ul>
     	<li class="item-right"> <a href="logout.do">Logout</a></li>
     	<li class="item-right"> <a href="loggedInProfile.do">Profile</a></li>
-    	<!-- <li> <a href="loggedInProfile.do"><img class="topright" src="${loginCheck.profilePicture }" width="50" height="50"/></a></li>
+    	<li> <a href="loggedInProfile.do"><img class="topright" src="${loginCheck.profilePicture }" width="50" height="50"/></a></li>
 	</ul>
 </section>
 -->
-	
