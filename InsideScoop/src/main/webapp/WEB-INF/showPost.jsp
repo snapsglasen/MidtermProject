@@ -107,7 +107,7 @@ Dislikes: ${p.dislikes}
 			<input type="hidden" name="userId" value=${loginCheck.id } /> 
 			<input type="hidden" name="commentId" value=${p.id } /> 
 			<input type="hidden" name="postId" value=${displayPost.id } /> 
-		<button type="submit" class="btn btn-primary">disLike</button>
+		<button type="submit" class="btn btn-primary">Dislike</button>
 	</form>
 </c:if>
 	<c:if test="${loginCheck==p.user ||loginCheck.admin }">
