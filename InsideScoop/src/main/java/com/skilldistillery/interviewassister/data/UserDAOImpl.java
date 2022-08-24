@@ -63,8 +63,13 @@ public class UserDAOImpl implements UserDAO {
 		List<Object[]> obj = em.createQuery(jpql, Object[].class).getResultList();
 		List<Post> post= new ArrayList<>();
 		
-		for(int i=0; i<5; i++) {
-			post.add((Post) obj.get(i)[2]);
+		try {
+			for(int i=0; i<5; i++) {
+				post.add((Post) obj.get(i)[2]);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 		return post;
