@@ -25,7 +25,7 @@
 <article>
 <a class="btn btn-secondary btn-sm" href="postByTitle.do">Sort by Title</a>
 <a class="btn btn-secondary btn-sm" href="postByOldest.do">Sort by Oldest</a>
-<a class="btn btn-secondary btn-sm" href="home.do">Sort by Most Recent</a>
+<a class="btn btn-secondary btn-sm" href="postByRecent.do">Sort by Most Recent</a>
 </article>
 
 </div>

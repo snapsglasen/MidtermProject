@@ -32,13 +32,21 @@ public class UserController {
 		model.addAttribute("posts", userDAO.findNewestPost());
 		return "index";
 	}
+	
+	@RequestMapping(path = "postByRecent.do")
+	public String postByRecent(Model model, Model login, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("posts", userDAO.findNewestPost());
+		return "viewPosts";
+	}
 
 	@RequestMapping(path = { "postByTitle.do" })
 	public String postByTitle(Model model, Model login, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findAlphabeticalPost());
-		return "index";
+		return "viewPosts";
 	}
 
 	@RequestMapping(path = { "postByOldest.do" })
@@ -46,7 +54,7 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findOldestPost());
-		return "index";
+		return "viewPosts";
 	}
 
 	@RequestMapping(path = "login.do")
@@ -303,7 +311,7 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.searchPosts(search));
-		return "index";
+		return "viewPosts";
 	}
 
 	@RequestMapping(path = "upvotePost.do")

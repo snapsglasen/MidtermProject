@@ -2,9 +2,16 @@ div.card {
 	width: 50vw;
 }
 
+.carousel {
+    border-radius: 1rem 1rem 1rem 1rem;
+    overflow: hidden;
+}
+
 .carousel-caption {
 	background: white;
 	opacity: 0.8;
+	border-radius: 1rem 1rem 1rem 1rem;
+    overflow: hidden;
 }
 
 .center-cropped {
