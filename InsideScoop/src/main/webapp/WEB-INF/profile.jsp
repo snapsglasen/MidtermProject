@@ -24,12 +24,13 @@
 width="50" height= "50">
 <br/>
 ${profile.firstName }
-${profile.lastName }
-${profile.workRole.role }<br/>
-${profile.company.name }<br/>
-Total correct quiz questions: ${correct}
+${profile.lastName }<br/>
+Works at: ${profile.company.name }<br/>
+Role: ${profile.workRole.role }<br/>
+${profile.userCategory.name}<br/>
+Total correct quiz questions: ${correct}<br/>
 <c:if test="${loginCheck==profile }">
-<a href="account.do">account</a>
+<a href="account.do">account</a><br/>
 </c:if>
 <c:if test="${loginCheck.admin}">
 <form action="adminAccount.do">
@@ -37,6 +38,13 @@ Total correct quiz questions: ${correct}
 <input class="btn btn-primary" type="submit" value="To user's account page">
 </form>
 </c:if>
+<br/>
+<c:forEach var="p" items="${displayPost }">
+<a href="showPost.do?postId=${p.id }">${p.title }</a><br/>
+${p.content}
+<br/><br/>
+</c:forEach>
+
 </main>
 <jsp:include page="bootstrapFoot.jsp" />
 </body>

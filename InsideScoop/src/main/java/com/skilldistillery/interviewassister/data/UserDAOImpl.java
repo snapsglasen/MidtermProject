@@ -54,14 +54,37 @@ public class UserDAOImpl implements UserDAO {
 		return em.find(Comment.class, commentId);
 	}
 
+<<<<<<< HEAD
+=======
+
+	
+	// ASK ABOUT THIS! How to make a jpql statement that orders by most of an entity
+	@Override
+	public List<Post> findMostPopularPost() {
+		String jpql = "Select p from Post p WHERE p.active=true ORDER BY p.getLikes";
+		List<Post> posts = em.createQuery(jpql, Post.class).setMaxResults(1).getResultList();
+		return posts;
+	}
+
+	
+
+>>>>>>> 4b2c33ccc1b551fecbd30709eb34a47048a838ff
 	@Override
 	public List<Post> findNewestPost() {
 		String jpql = "Select p from Post p ORDER BY lastUpdate DESC";
 		System.out.println(em.createQuery(jpql, Post.class).getResultList());
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b2c33ccc1b551fecbd30709eb34a47048a838ff
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b2c33ccc1b551fecbd30709eb34a47048a838ff
 	@Override
 	public List<Category> findCategories() {
 		String jpql = "Select c from Category c";
@@ -69,6 +92,10 @@ public class UserDAOImpl implements UserDAO {
 		return categories;
 	}
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4b2c33ccc1b551fecbd30709eb34a47048a838ff
 	@Override
 	public List<Post> findOldestPost() {
 
@@ -88,6 +115,18 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public List<User> findAllUsers() {
+<<<<<<< HEAD
+=======
+
+		String jpql = "Select u from User u WHERE u.active=true ORDER BY firstName";
+		List<User> users = em.createQuery(jpql, User.class).getResultList();
+		return users;
+	}
+
+	@Override
+	public List<User> adminFindAllUsers() {
+
+>>>>>>> 4b2c33ccc1b551fecbd30709eb34a47048a838ff
 		String jpql = "Select u from User u ORDER BY firstName";
 		List<User> users = em.createQuery(jpql, User.class).getResultList();
 		return users;
@@ -329,7 +368,6 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public void addUpvotePost(int userId, int postId) {
-		System.out.println("********************* METHOD");
 		Post post = findByPostId(postId);
 		User user = findById(userId);
 
@@ -337,14 +375,57 @@ public class UserDAOImpl implements UserDAO {
 		List<PostVote> testingKeys = em.createQuery(jpql, PostVote.class).setParameter("user", user)
 				.setParameter("post", post).getResultList();
 		if (testingKeys.isEmpty()) {
-			System.out.println("********************* IN IF");
 			PostVoteId pvi = new PostVoteId(userId, postId);
 			PostVote pv = new PostVote(pvi, true, user, post);
 			em.persist(pv);
 			post.addPostVote(pv);
+		} else {
+			for (PostVote postVote : testingKeys) {
+				try {
+					if (postVote.getLiked() == true) {
+						postVote.setLiked(null);
+					} else {
+						postVote.setLiked(true);
+					}
+				} catch (Exception e) {
+					postVote.setLiked(true);
+					e.printStackTrace();
+				}
+
+			}
 		}
 	}
+	
+	@Override
+	public void deleteUpvotePost(int userId, int postId) {
+		Post post = findByPostId(postId);
+		User user = findById(userId);
 
+		String jpql = "SELECT pv FROM PostVote pv WHERE pv.user=:user AND pv.post=:post";
+		List<PostVote> testingKeys = em.createQuery(jpql, PostVote.class).setParameter("user", user)
+				.setParameter("post", post).getResultList();
+		if (testingKeys.isEmpty()) {
+			PostVoteId pvi = new PostVoteId(userId, postId);
+			PostVote pv = new PostVote(pvi, true, user, post);
+			em.persist(pv);
+			post.addPostVote(pv);
+		} else {
+			for (PostVote postVote : testingKeys) {
+				try {
+					if (postVote.getLiked() == false) {
+						postVote.setLiked(null);
+					} else {
+						postVote.setLiked(false);
+					}
+				} catch (Exception e) {
+					postVote.setLiked(false);
+					e.printStackTrace();
+				}
+
+			}
+		}
+	}
+	
 	@Override
 	public void addUpvoteComment(int userId, int commentId) {
 		System.out.println("********************* METHOD");
@@ -507,7 +588,7 @@ public class UserDAOImpl implements UserDAO {
 			QuestionVote qv = new QuestionVote(qvi, true, user, question);
 			em.persist(qv);
 			question.addQuestionVote(qv);
-			
+
 		} else {
 			for (QuestionVote questionVote : testingKeys) {
 				try {
@@ -524,6 +605,8 @@ public class UserDAOImpl implements UserDAO {
 			}
 		}
 	}
+	
+	
 
 	@Override
 	public void deleteQuestionLike(int userId, int questionId) {
@@ -539,7 +622,7 @@ public class UserDAOImpl implements UserDAO {
 			QuestionVote qv = new QuestionVote(qvi, false, user, question);
 			em.persist(qv);
 			question.addQuestionVote(qv);
-			
+
 		} else {
 			for (QuestionVote questionVote : testingKeys) {
 				try {
@@ -560,8 +643,8 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int countLikes(Question question) {
 		String jpql = "Select qv from QuestionVote qv WHERE qv.question = :question AND qv.liked = true";
-		List<QuestionVote> qv = em.createQuery(jpql, QuestionVote.class)
-				.setParameter("question", question).getResultList();
+		List<QuestionVote> qv = em.createQuery(jpql, QuestionVote.class).setParameter("question", question)
+				.getResultList();
 
 		return qv.size();
 	}
@@ -569,9 +652,38 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public int countDislikes(Question question) {
 		String jpql = "Select qv from QuestionVote qv WHERE qv.question = :question AND qv.liked = false";
-		List<QuestionVote> qv = em.createQuery(jpql, QuestionVote.class)
-				.setParameter("question", question).getResultList();
+		List<QuestionVote> qv = em.createQuery(jpql, QuestionVote.class).setParameter("question", question)
+				.getResultList();
 
 		return qv.size();
 	}
+	
+	
+	@Override
+	public int countPostLike(Post post) {
+		String jpql = "Select pv from PostVote pv WHERE pv.post = :post AND pv.liked = true";
+		List<PostVote> pv = em.createQuery(jpql, PostVote.class).setParameter("post", post)
+				.getResultList();
+		
+		return pv.size();
+	}
+	
+	@Override
+	public int countPostDislike(Post post) {
+		String jpql = "Select pv from PostVote pv WHERE pv.post = :post AND pv.liked = false";
+		List<PostVote> pv = em.createQuery(jpql, PostVote.class).setParameter("post", post)
+				.getResultList();
+		
+		return pv.size();
+	}
+	
+	@Override
+	public List<Post> postsFromUser(User user){
+		String jpql= "SELECT p FROM Post p WHERE p.user=:user AND p.active=true";
+		List<Post> posts= em.createQuery(jpql, Post.class).setParameter("user", user).setMaxResults(5).getResultList();
+		return posts;
+	}
+	
+	
+
 }
