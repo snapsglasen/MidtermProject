@@ -142,8 +142,13 @@ public class Comment {
 		try {
 			List<CommentVote> cv= new ArrayList<>();
 			for (CommentVote commentVote : commentVotes) {
-				if(commentVote.getLiked()) {
-					cv.add(commentVote);
+				try {
+					if(commentVote.getLiked()) {
+						cv.add(commentVote);
+					}
+				} catch (Exception e) {
+					System.out.println("In dislike catch trying to not get in the bad catch");
+					e.printStackTrace();
 				}
 			}
 			return cv.size();
@@ -156,13 +161,19 @@ public class Comment {
 		try {
 			List<CommentVote> cv= new ArrayList<>();
 			for (CommentVote commentVote : commentVotes) {
-				if(!commentVote.getLiked()) {
-					cv.add(commentVote);
+				try {
+					if(!commentVote.getLiked()) {
+						cv.add(commentVote);
+					}
+				} catch (Exception e) {
+					System.out.println("In dislike catch trying to not get in the bad catch");
+					e.printStackTrace();
 				}
 			}
 			return cv.size();
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("In the bad catch!");
 			return 0;
 		}
 	}
