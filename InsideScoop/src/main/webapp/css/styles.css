@@ -19,3 +19,7 @@ div.card {
   object-position: center; /* Center the image within the element */
   height: 25vh;
 }
+
+.container {
+	height: 100%;
+}
