@@ -25,8 +25,8 @@
 			</li>
 			<li>
 			<a class="navbar-brand" href="loggedInProfile.do">
-				<img src="${loginCheck.profilePicture }" width="40" height="40" alt="profile picture"/>
-				Profile
+				<img class="rounded-circle" src="${loginCheck.profilePicture }" width="40" height="40" alt="profile picture"/>
+				
 			</a>
 			</li>
 		</ul>
