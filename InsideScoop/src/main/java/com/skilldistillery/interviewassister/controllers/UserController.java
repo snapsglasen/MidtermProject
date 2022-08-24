@@ -135,10 +135,13 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "showPost.do")
-	public String post(Model model, Model login, HttpSession session, int postId) {
+	public String post(Model model, Model login, Model like, Model dislike, HttpSession session, int postId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		model.addAttribute("displayPost", userDAO.findByPostId(postId));
+		Post post=userDAO.findByPostId(postId);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", countPostLike(post));
+		dislike.addAttribute("postDislikes", countPostDislike(post));
 		return "showPost";
 	}
 
@@ -151,21 +154,27 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "createPost.do", method = RequestMethod.POST)
-	public String createPost(Model model, Model login, String title, String content, String company, String workRole,
+	public String createPost(Model model, Model login, Model like, Model dislike, String title, String content, String company, String workRole,
 			Integer[] category, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		model.addAttribute("displayPost", userDAO.createPost(content, user, title, company, workRole, category));
+		Post post=userDAO.createPost(content, user, title, company, workRole, category);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", countPostLike(post));
+		dislike.addAttribute("postDislikes", countPostDislike(post));
 		return "showPost";
 
 	}
 
 	@RequestMapping(path = "createComment.do", method = RequestMethod.POST)
-	public String createComment(Model model, Model login, String content, int id, HttpSession session) {
+	public String createComment(Model model, Model login, Model like, Model dislike, String content, int id, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.createComment(content, user, id);
-		model.addAttribute("displayPost", userDAO.findByPostId(id));
+		Post post=userDAO.findByPostId(id);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", countPostLike(post));
+		dislike.addAttribute("postDislikes", countPostDislike(post));
 		return "showPost";
 	}
 
@@ -203,20 +212,26 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updateCommentAttempt.do")
-	public String updatecomment(Model model, Model login, HttpSession session, int id, int commentId, String content) {
+	public String updatecomment(Model model, Model login, Model like, Model dislike, HttpSession session, int id, int commentId, String content) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.updateComment(commentId, content);
-		model.addAttribute("displayPost", userDAO.findByPostId(id));
+		Post post=userDAO.findByPostId(id);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", countPostLike(post));
+		dislike.addAttribute("postDisikes", countPostDislike(post));
 		return "showPost";
 	}
 
 	@RequestMapping(path = "deleteComment.do")
-	public String deleteComment(Model model, Model login, HttpSession session, int id, int commentId) {
+	public String deleteComment(Model model, Model login, Model like, Model dislike, HttpSession session, int id, int commentId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.deleteComment(commentId);
-		model.addAttribute("displayPost", userDAO.findByPostId(id));
+		Post post=userDAO.findByPostId(id);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", countPostLike(post));
+		dislike.addAttribute("postDislikes", countPostDislike(post));
 		return "showPost";
 	}
 
@@ -281,12 +296,14 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updatePostAttempt.do")
-	public String updatedPost(HttpSession session, Model model, int id, String title, String content, String company,
+	public String updatedPost(HttpSession session, Model model, Model like, Model dislike, int id, String title, String content, String company,
 			String workRole, Integer[] category, Model login) {
 		Post post = userDAO.updatePost(id, title, content, company, workRole, category);
 		model.addAttribute("displayPost", post);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
+		like.addAttribute("postLikes", countPostLike(post));
+		dislike.addAttribute("postDislikes", countPostDislike(post));
 		return "showPost";
 	}
 
@@ -315,22 +332,28 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "upvotePost.do")
-	public String upvotePost(HttpSession session, Model model, Model login, int userId, int postId) {
+	public String upvotePost(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int postId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.addUpvotePost(userId, postId);
-		model.addAttribute("displayPost", userDAO.findByPostId(postId));
+		Post post=userDAO.findByPostId(postId);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", countPostLike(post));
+		like.addAttribute("postDislikes", countPostDislike(post));		
 		return "showPost";
 	}
 
 	@RequestMapping(path = "upvoteComment.do")
-	public String upvoteComment(HttpSession session, Model model, Model login, int userId, int commentId, int postId) {
+	public String upvoteComment(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int commentId, int postId) {
 		System.out.println("***********************In controller");
 		System.out.println("***********************" + userId + "" + commentId);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.addUpvoteComment(userId, commentId);
-		model.addAttribute("displayPost", userDAO.findByPostId(postId));
+		Post post=userDAO.findByPostId(postId);
+		model.addAttribute("displayPost", post);
+		like.addAttribute("postLikes", countPostLike(post));
+		like.addAttribute("postDislikes", countPostDislike(post));
 		return "showPost";
 	}
 
