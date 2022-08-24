@@ -40,14 +40,14 @@
 		</c:forEach>
 		<br/>
 		
-		Likes: ${displayQuestion.likes }
+		<%--  Likes: ${displayQuestion.likes } 
 <c:if test="${not empty loginCheck}">
 <form action="upvoteQuestion.do">
 			<input type="hidden" name="userId" value=${loginCheck.id } /> 
 			<input type="hidden" name="questionId" value=${displayQuestion.id } /> 
 		<button type="submit" class="btn btn-primary">Like</button>
 	</form>
-</c:if>
+</c:if> --%>
 
 		<%-- <c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }"> --%>
 		<br />

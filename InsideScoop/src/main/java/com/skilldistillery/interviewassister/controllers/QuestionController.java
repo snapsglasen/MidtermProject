@@ -132,7 +132,7 @@ public class QuestionController {
 	public String upvotePost(HttpSession session, Model model, Model login, int userId, int questionId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		userDAO.addUpvotePost(userId, questionId);
+		userDAO.addUpvoteQuestion(userId, questionId);
 		model.addAttribute("displayQuestion", userDAO.findQuestionById(questionId));
 		return "question";
 	}

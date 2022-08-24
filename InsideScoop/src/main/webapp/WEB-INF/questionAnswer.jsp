@@ -24,7 +24,14 @@
 <c:otherwise><h2>You were wrong!</h2></c:otherwise>
 </c:choose>
 
-${displayQuestion.questionText }<br/>
+${displayQuestion.questionText } Likes: ${displayQuestion.likes }
+<c:if test="${not empty loginCheck}">
+<form action="upvoteQuestion.do">
+			<input type="hidden" name="userId" value=${loginCheck.id } /> 
+			<input type="hidden" name="questionId" value=${displayQuestion.id } /> 
+		<button type="submit" class="btn btn-primary">Like</button>
+	</form>
+</c:if><br/>
 <c:forEach var="option" items="${displayQuestion.options}">
 <c:if test="${option.correct }">${option.optionText }<br/></c:if>
  </c:forEach>
