@@ -53,7 +53,15 @@ public class UserDAOImpl implements UserDAO {
 	public Comment findByCommentId(int commentId) {
 		return em.find(Comment.class, commentId);
 	}
-	
+
+	@Override
+	public List<Post> findNewestPost() {
+		String jpql = "Select p from Post p ORDER BY lastUpdate DESC";
+		System.out.println(em.createQuery(jpql, Post.class).getResultList());
+		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
+		return posts;
+	}
+
 	@Override
 	public List<Category> findCategories() {
 		String jpql = "Select c from Category c";
@@ -62,52 +70,24 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<Post> findNewestPost() {
-		String jpql = "Select p from Post p WHERE p.active=true ORDER BY p.getLikes";
-		List<Post> posts = em.createQuery(jpql, Post.class).setMaxResults(1).getResultList();
-		return posts;
-	}
-	
-	//ASK ABOUT THIS! How to make a jpql statement that orders by most of an entity
-	@Override
-	public List<Post> findMostPopularPost() {
-		String jpql = "Select p from Post p WHERE p.active=true ORDER BY p.getLikes";
-		List<Post> posts = em.createQuery(jpql, Post.class).setMaxResults(1).getResultList();
-		return posts;
-	}
-	
-	
-	@Override
-	public List<Post> findAllNewestPost() {
-		String jpql = "Select p from Post p WHERE p.active=true ORDER BY lastUpdate DESC";
-		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
-		return posts;
-	}
-
-
-	@Override
 	public List<Post> findOldestPost() {
-		String jpql = "Select p from Post p WHERE p.active=true ORDER BY lastUpdate";
+
+		String jpql = "Select p from Post p ORDER BY lastUpdate";
+		System.out.println(em.createQuery(jpql, Post.class).getResultList());
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
 
 	@Override
 	public List<Post> findAlphabeticalPost() {
-		String jpql = "Select p from Post p WHERE p.active=true ORDER BY title";
+		String jpql = "Select p from Post p ORDER BY title";
+		System.out.println(em.createQuery(jpql, Post.class).getResultList());
 		List<Post> posts = em.createQuery(jpql, Post.class).getResultList();
 		return posts;
 	}
 
 	@Override
 	public List<User> findAllUsers() {
-		String jpql = "Select u from User u WHERE u.active=true ORDER BY firstName";
-		List<User> users = em.createQuery(jpql, User.class).getResultList();
-		return users;
-	}
-	
-	@Override
-	public List<User> adminFindAllUsers() {
 		String jpql = "Select u from User u ORDER BY firstName";
 		List<User> users = em.createQuery(jpql, User.class).getResultList();
 		return users;
