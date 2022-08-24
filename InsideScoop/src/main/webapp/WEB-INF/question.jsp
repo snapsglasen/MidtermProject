@@ -30,7 +30,7 @@ ${category.name}
 			<c:forEach var="option" items="${displayQuestion.options}">
 
 				<input type="checkbox" id="option" value="${option.id}"
-					name="option">
+					name="option" required>
 				<label for="option">${option.optionText }</label>
 
 				<br />
