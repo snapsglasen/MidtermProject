@@ -56,5 +56,6 @@ public interface UserDAO {
 	List<User> adminFindAllUsers();
 	List<Post> postsFromUser(User user);
 	void addDownvoteComment(int userId, int commentId);
+	List<Post> findAllMostPopularPost();
 
 }

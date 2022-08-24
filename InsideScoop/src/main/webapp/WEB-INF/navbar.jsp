@@ -18,6 +18,12 @@
 			<li class="nav-item">
 				<a class="nav-link" href="showQuestion.do">Questions</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="postByRecent.do">Recent Posts</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="postByPopularity.do">Popular Posts</a>
+			</li>
 		</ul>
 		<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
 			<li class="nav-item">

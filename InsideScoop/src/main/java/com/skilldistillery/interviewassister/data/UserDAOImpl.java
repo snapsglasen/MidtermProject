@@ -69,6 +69,13 @@ public class UserDAOImpl implements UserDAO {
 		
 		return post;
 	}
+	@Override
+	public List<Post> findAllMostPopularPost() {
+		String jpql = "Select p from Post p LEFT OUTER JOIN p.postVotes pv GROUP BY p.id HAVING p.active=true ORDER BY avg(pv.liked) DESC";
+		List<Post> post = em.createQuery(jpql, Post.class).getResultList();
+		
+		return post;
+	}
 
 	@Override
 	public List<Post> findNewestPost() {
@@ -711,7 +718,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public List<Post> postsFromUser(User user){
-		String jpql= "SELECT p FROM Post p WHERE p.user=:user AND p.active=true ORDER BY lastUpdate ASC";
+		String jpql= "SELECT p FROM Post p WHERE p.user=:user AND p.active=true ORDER BY lastUpdate DESC";
 		List<Post> posts= em.createQuery(jpql, Post.class).setParameter("user", user).setMaxResults(5).getResultList();
 		return posts;
 	}

@@ -40,6 +40,14 @@ public class UserController {
 		model.addAttribute("posts", userDAO.findNewestPost());
 		return "viewPosts";
 	}
+	
+	@RequestMapping(path = "postByPopularity.do")
+	public String postByPopularity(Model model, Model login, HttpSession session) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		model.addAttribute("posts", userDAO.findAllMostPopularPost());
+		return "viewPosts";
+	}
 
 	@RequestMapping(path = { "postByTitle.do" })
 	public String postByTitle(Model model, Model login, HttpSession session) {
