@@ -48,6 +48,15 @@
 	</form>
 	</div>
 	<div class="row-1"></div>
+	
+	<!-- random/create buttons -->
+	<div class="row m-3">
+	
+	<article>
+<a class="btn btn-secondary btn-sm" href="randomQuestion.do">Random Question</a>
+<a class="btn btn-secondary btn-sm" href="createQuestionPage.do">Create question</a>
+</article>
+	</div>
 	<!--Questions-->
 	<div class="row m-3">
 		<div class="col"></div>
@@ -58,11 +67,6 @@
 	</div>
 </c:if>
 		
-<article>
-<a class="btn btn-secondary btn-sm" href="randomQuestion.do">Random Question</a>
-<a class="btn btn-secondary btn-sm" href="createQuestionPage.do">Create question</a>
-</article>
-
 	<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>
