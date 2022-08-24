@@ -95,12 +95,19 @@ ${p.lastUpdated }
 <br/>
 ${p.content }
 Likes: ${p.likes }
+Dislikes: ${p.dislikes}
 <c:if test="${not empty loginCheck}">
 <form action="upvoteComment.do">
 			<input type="hidden" name="userId" value=${loginCheck.id } /> 
 			<input type="hidden" name="commentId" value=${p.id } /> 
 			<input type="hidden" name="postId" value=${displayPost.id } /> 
 		<button type="submit" class="btn btn-primary">Like</button>
+	</form>
+<form action="downvoteComment.do">
+			<input type="hidden" name="userId" value=${loginCheck.id } /> 
+			<input type="hidden" name="commentId" value=${p.id } /> 
+			<input type="hidden" name="postId" value=${displayPost.id } /> 
+		<button type="submit" class="btn btn-primary">disLike</button>
 	</form>
 </c:if>
 	<c:if test="${loginCheck==p.user ||loginCheck.admin }">

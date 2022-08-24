@@ -426,8 +426,54 @@ public class UserDAOImpl implements UserDAO {
 			CommentVote cv = new CommentVote(cvi, true, user, comment);
 			em.persist(cv);
 			comment.addCommentVote(cv);
+		}else {
+			for (CommentVote commentVote : testingKeys) {
+				try {
+					if (commentVote.getLiked() == true) {
+						commentVote.setLiked(null);
+					} else {
+						commentVote.setLiked(true);
+					}
+				} catch (Exception e) {
+					commentVote.setLiked(true);
+					e.printStackTrace();
+				}
+
+			}
 		}
 	}
+	
+	@Override
+	public void addDownvoteComment(int userId, int commentId) {
+		System.out.println("********************* METHOD");
+		Comment comment = findByCommentId(commentId);
+		User user = findById(userId);
+
+	String jpql = "SELECT cv FROM CommentVote cv WHERE cv.user=:user AND cv.comment=:comment";
+	List<CommentVote> testingKeys = em.createQuery(jpql, CommentVote.class).setParameter("user", user)
+			.setParameter("comment", comment).getResultList();
+	if (testingKeys.isEmpty()) {
+		System.out.println("********************* IN IF");
+		CommentVoteId cvi = new CommentVoteId(userId, commentId);
+		CommentVote cv = new CommentVote(cvi, false, user, comment);
+		em.persist(cv);
+		comment.addCommentVote(cv);
+	}else {
+		for (CommentVote commentVote : testingKeys) {
+			try {
+				if (commentVote.getLiked() == false) {
+					commentVote.setLiked(null);
+				} else {
+					commentVote.setLiked(false);
+				}
+			} catch (Exception e) {
+				commentVote.setLiked(false);
+				e.printStackTrace();
+			}
+
+		}
+	}
+}
 
 	private Set<Company> getCompanySet(String company) {
 		Set<Company> companySet = new HashSet<Company>();
@@ -664,7 +710,7 @@ public class UserDAOImpl implements UserDAO {
 	
 	@Override
 	public List<Post> postsFromUser(User user){
-		String jpql= "SELECT p FROM Post p WHERE p.user=:user AND p.active=true";
+		String jpql= "SELECT p FROM Post p WHERE p.user=:user AND p.active=true ORDER BY lastUpdate ASC";
 		List<Post> posts= em.createQuery(jpql, Post.class).setParameter("user", user).setMaxResults(5).getResultList();
 		return posts;
 	}

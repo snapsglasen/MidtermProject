@@ -139,9 +139,28 @@ public class Comment {
 	}
 	
 	public Integer getLikes() {
-		
 		try {
-			return commentVotes.size();
+			List<CommentVote> cv= new ArrayList<>();
+			for (CommentVote commentVote : commentVotes) {
+				if(commentVote.getLiked()) {
+					cv.add(commentVote);
+				}
+			}
+			return cv.size();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	public Integer getDislikes() {
+		try {
+			List<CommentVote> cv= new ArrayList<>();
+			for (CommentVote commentVote : commentVotes) {
+				if(!commentVote.getLiked()) {
+					cv.add(commentVote);
+				}
+			}
+			return cv.size();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return 0;
