@@ -16,18 +16,15 @@
 
 <!-- Navbar -->
 <jsp:include page="universalNavbar.jsp"/>
-<div class="container align-items-center">
-	<div class="row"></div>
-	
+
+<div class="container-fluid">
 	<!-- Header -->
-	<div class="row m-3">
-		<div class="col"></div>
-		<div class="col-8">
+	<div class="row row-header">
+		<div class="div-header">
 			<jsp:include page="header.jsp"/>
 		</div>
-		<div class="col"></div>
 	</div>
-	<div class="row"></div>
+	
 <c:if test="${not empty loginCheck }">
 	<!-- Search -->
 	<div class="row m-3">
