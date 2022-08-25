@@ -18,7 +18,7 @@ $(document).ready(function(){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      	<form action="attemptLogin.do" method="GET">
+      	<form action="attemptLogin.do" method="POST">
 			<div class="form-group">
     			<label for="username">User Name:</label>
     			<input type="text" class="form-control" id="username" name="username" required aria-describedby="emailHelp" placeholder="Enter username">

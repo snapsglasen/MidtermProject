@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
+<c:out value="${fn:length(questions) }"/>
 <div id="trendingQuestionCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
 	<div class="carousel-indicators my-4">
   		<c:set var="slideNum" value="0" scope="page"/>
