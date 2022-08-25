@@ -9,6 +9,7 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
+<jsp:include page="updateProfileModal.jsp"/>
 <c:choose>
 <c:when test="${not empty loginCheck }">
 	<jsp:include page="navbar.jsp"></jsp:include>
@@ -24,11 +25,9 @@
 		Total correct: ${correct }<br/>
 		Total incorrect: ${incorrect }<br>
 
-		<form action="updateProfile.do" method="POST">
-			<input type="hidden" name="id" value=${account.id } />
-
-			<button type="submit" class="btn btn-primary">Update</button>
-		</form>
+		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateProfileModal">
+  		Update
+	</button>
 
 		<form action="deleteUser.do" method="POST">
 			<input type="hidden" name="id" value=${account.id } />

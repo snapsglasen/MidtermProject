@@ -268,19 +268,19 @@ public class UserDAOImpl implements UserDAO {
 	public User updateProfile(int id, String firstName, String lastName, String email, String username, String password,
 			int category, String workRole, String company, String profilePicture) {
 		User user = findById(id);
-		if (!firstName.equals("") && firstName != null) {
+		if (!firstName.equals("") && firstName != null && !firstName.equals(user.getFirstName())) {
 			user.setFirstName(firstName);
 		}
-		if (!lastName.equals("") && lastName != null) {
+		if (!lastName.equals("") && lastName != null && !lastName.equals(user.getLastName())) {
 			user.setLastName(lastName);
 		}
-		if (!email.equals("") && email != null) {
+		if (!email.equals("") && email != null && !email.equals(user.getEmail())) {
 			user.setEmail(email);
 		}
-		if (!username.equals("") && username != null) {
+		if (!username.equals("") && username != null && !username.equals(user.getUsername())) {
 			user.setUsername(username);
 		}
-		if (!password.equals("") && password != null) {
+		if (!password.equals("") && password != null && !password.equals(user.getPassword())) {
 			user.setPassword(password);
 		}
 		if (category != 0) {
@@ -288,7 +288,7 @@ public class UserDAOImpl implements UserDAO {
 			user.setUserCategory(em.find(UserCategory.class, category));
 			System.out.println(user.getUserCategory());
 		}
-		if (!workRole.equals("") && workRole != null) {
+		if (!workRole.equals("") && workRole != null ) {
 			user.setWorkRole(workRoleByString(workRole));
 		}
 		if (!company.equals("") && company != null) {
