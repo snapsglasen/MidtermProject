@@ -23,7 +23,7 @@
 	<c:otherwise>
 		<div class="row row-main">
 			<div class="col-sm">
-				<div class="row p-4 justify-content-center">
+				<div class="row p-4 m-4 justify-content-center">
 					<div class="col-sm col-main d-flex justify-content-center">
 						<div class="div-content p-4 justify-self-center">
 							<div class="text-center">
@@ -32,9 +32,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="row p-4 mt-4 justify-content-evenly">
+				<div class="row p-4 justify-content-evenly">
 					<div class="col-sm col-main d-flex justify-content-center">
-						<div class="div-content p-4 justify-self-center align-items-center">
+						<div class="div-content p-4 m-4 justify-self-center align-items-center">
 							<div class="text-center pb-4">
 								Recent Posts
 							</div>
@@ -42,7 +42,7 @@
 						</div>
 					</div>
 					<div class="col-sm col-main d-flex justify-content-center">
-						<div class="div-content p-4 justify-self-center align-items-center">
+						<div class="div-content p-4 m-4 justify-self-center align-items-center">
 							<div class="text-center pb-4">
 								Trending Questions
 							</div>
@@ -50,7 +50,7 @@
 						</div>
 					</div>
 					<div class="col-sm col-main d-flex justify-content-center">
-						<div class="div-content p-4 justify-self-center align-items-center">
+						<div class="div-content p-4 m-4 justify-self-center align-items-center">
 							<div class="text-center pb-4">
 								New Users
 							</div>
