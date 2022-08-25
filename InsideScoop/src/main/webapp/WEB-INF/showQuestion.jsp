@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+<jsp:include page="createQuestionModal.jsp"/>
 <jsp:include page="universalNavbar.jsp"/>
 <div class="container-fluid">
 	<div class="row"></div>
@@ -53,7 +54,9 @@
 	
 	<article>
 <a class="btn btn-secondary btn-sm" href="randomQuestion.do">Random Question</a>
-<a class="btn btn-secondary btn-sm" href="createQuestionPage.do">Create question</a>
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createQuestionModal">
+  		Create
+	</button>
 </article>
 	</div>
 	<!--Questions-->

@@ -10,6 +10,7 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+<jsp:include page="createQuestionModal.jsp"/>
 <jsp:include page="universalNavbar.jsp"/>
 <div class="container align-items-center">
 	<div class="row"></div>
@@ -40,7 +41,9 @@
 	<div class="row m-3">
 	<article>
 <a class="btn btn-secondary btn-sm" href="randomQuestion.do">Random Question</a>
-<a class="btn btn-secondary btn-sm" href="createQuestionPage.do">Create question</a>
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createQuestionModal">
+  		Create
+	</button>
 </article>
 </div>
 	<br/>
@@ -54,7 +57,7 @@
 			<div class="post-bg-white">
 			<div class="post">
 			<img src="<c:out value="${question.user.profilePicture }"/>" width="40px" height="40px">
-			<h3><a href="question.do?id=${question.id }">${question.questionText}</a></h3>
+			<h3><a href="question.do?questionId=${question.id}">${question.questionText}</a></h3>
 			<h5><a href="profile.do?id=${question.user.id }">by ${question.user.firstName} ${question.user.lastName }</a></h5>
 			</div>
 			</div>
@@ -64,10 +67,9 @@
 		<br/>
 		
 		<c:if test="${not empty loginCheck }">
-		<form action="createQuestionPage.do" method="POST">
-			<button type="submit" class="btn btn-primary">Create
-				Question</button>
-		</form>
+		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createQuestionModal">
+  		Create
+	</button>
 		</c:if>
 </div>
 </div>
