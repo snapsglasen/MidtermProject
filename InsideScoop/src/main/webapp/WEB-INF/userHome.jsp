@@ -23,7 +23,7 @@
 	<div class="row m-3">
 		<div class="col"></div>
 		<div class="col-8">
-			<jsp:include page="header.jsp"/>
+			<h1 class="display-3">Inside Scoop</h1>
 		</div>
 		<div class="col"></div>
 	</div>

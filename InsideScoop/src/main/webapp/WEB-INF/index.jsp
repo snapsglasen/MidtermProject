@@ -11,91 +11,34 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-<!-- Modal -->
+
+<!-- Login Modal -->
 <jsp:include page="loginModal.jsp"/>
+
+<!-- Register Modal -->
+<jsp:include page="registerModal.jsp"/>
+
+<!--  Register Modal -->
 
 <!-- Navbar -->
 <jsp:include page="universalNavbar.jsp"/>
 
+<!-- Container for grid -->
 <div class="container-fluid">
-	<!-- Header -->
+
+	<!-- Content -->
 	<div class="row row-header">
-		<div class="div-header">
-			<jsp:include page="header.jsp"/>
+		<div class="col-sm"></div>
+		<div class="col-sm col-header">
+			<div class="div-header p-4">
+				<jsp:include page="header.jsp"/>
+			</div>
 		</div>
+		<div class="col-sm"></div>
 	</div>
 	
-<c:if test="${not empty loginCheck }">
-	<!-- Search -->
-	<div class="row m-3">
-		<form class="form-inline" action="searchPosts.do">
-			<div class="form-group row">
-				<div class="col"></div>
-				<div class="col-7">
-					<input type="text" class="form-control" name="search" id="postSearch" placeholder="Search posts"/>
-				</div>
-				<div class="col-1">
-				<div class="row">
-						<input class="btn btn-secondary btn-search" type="submit" value="Search">
-						</div>
-				</div>
-				<div class="col"></div>
-			</div>
-		</form>
-	</div>
-	<div class="row-1"></div>
-	<!-- Most Popular Posts -->
-	<div class="row m-3">
-		<div class="col"></div>
-		<div class="col-6">
-			<jsp:include page="carousel.jsp"/>
-		</div>
-		<div class="col"></div>
-	</div>
-</c:if>
-<!-- 
-	<!-- Sort --
-	<div class="row m-3">
-		<div class="col"></div>
-			<div class="col-2"></div>
-			<div class="col-6">
-				<div class="row">
-					<a class="col m-1 btn btn-secondary btn-sm me-auto" href="postByTitle.do">Sort by Title</a>
-					<a class="col m-1 btn btn-secondary btn-sm me-auto" href="postByOldest.do">Sort by Oldest</a>
-					<a class="col m-1 btn btn-secondary btn-sm me-auto" href="home.do">Sort by Most Recent</a>
-				</div>
-			</div>
-		<div class="col"></div>
-	</div>
-
-	<!-- Posts --
-	<div class="row m-3">
-		<div class="col">
-			<c:forEach var="post" items="${posts }">
-				<c:if test="${post.active }">
-					<div class="row d-flex justify-content-center">
-							<div class="card body mb-3">
-								<div class="d-flex align-items-center">
-									<h5 class="card-title me-auto">
-										<a href="profile.do?id=<c:out value="${p.user.id }"/>">
-											${post.title }
-										</a>
-									</h5>
-									<img class="ms-auto" src="<c:out value="${post.user.profilePicture }"/>" width="30em" height="30em"/>
-									<h6 class="card-subtitle ms-1 me-1 text-muted">${post.user.firstName } ${post.user.lastName }</h6>
-								</div>
-								<p class="card-text text-truncate">Some quick example text to build on the card title and make up the bulk of the card's content. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-							</div>
-					</div>
-				</c:if>
-			</c:forEach>
-		</div>
-	</div>
-
 </div>
--->
-</div>
-<!-- Button trigger modal -->
+
 <jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>
