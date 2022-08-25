@@ -1,14 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<!-- Container class for modal - Make sure to change the "id" and "aria-labelledby" properties -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
+    <!-- Modal header - Make sure to change the "id" property pf the "modal-title" div -->
       <div class="modal-header">
         <h5 class="modal-title" id="registerModalLabel">Sign Up</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <!-- Modal body - Replace internal components with regular HTML/CSS -->
       <div class="modal-body">
+      	<!-- BEGIN REPLACE COMPONENTS -->
       	<form action="registerAttempt.do" method="GET">
       		<div class="form-group">
 				<label for="firstName">First Name:</label>
@@ -42,7 +46,9 @@
   				<button type="submit" class="btn btn-secondary">Sign up</button>
   			</div>
 		</form>
+		<!-- END REPLACE COMPONENTS -->
       </div>
+      <!-- Modal footer - Can put buttons or little messages to the user here -->
       <div class="modal-footer">
         <div class="signup-section">Already a member?
         	<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">

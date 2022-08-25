@@ -19,7 +19,7 @@
    				 <input type="password" class="form-control" id="password" name="password" required placeholder="Enter password">
  			 </div>
   			<button type="submit" class="btn btn-primary">Sign in</button>
-			</form>
+		</form>
       </div>
       <div class="modal-footer">
         <div class="signup-section">

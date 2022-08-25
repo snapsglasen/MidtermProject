@@ -11,6 +11,7 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+<jsp:include page="createPostModal.jsp"/>
 <jsp:include page="universalNavbar.jsp"/>
 <div class="container">
 <div class="content">
@@ -49,9 +50,9 @@
 	</div>
 <div>
 <c:if test="${not empty loginCheck }">
-<form action="createPostPage.do">
-<input class="btn btn-secondary btn-sm" type="submit" value="Create a Post">
-</form>
+	<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createPostModal">
+  		Create Post
+	</button>
 </c:if>
 </div>
 </div>
