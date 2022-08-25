@@ -23,8 +23,8 @@
  		<c:set var="slideNum" value="0" scope="page"/>
   		<c:forEach var="post" items="${posts }">
   			<c:if test="${post.active }">
-    			<div class="carousel-item <c:if test="${slideNum==0 }">active</c:if>">
-      				<img class="d-block w-100 center-cropped" src="https://www.ffxnow.com/files/2022/04/Ice-cream-cones-1260x840.jpg">
+    			<div class="carousel-item bg-light d-block w-100 <c:if test="${slideNum==0 }">active</c:if>">
+    			<img src="img/cream.png" class="cropped d-block">
       					<div class="carousel-caption d-none d-md-block bg-light mb-4">
         					<h5><a href="showPost.do?postId=<c:out value="${post.id }"/>">${post.title }</a></h5>
         					<p class="text-truncate">${post.content }</p>
