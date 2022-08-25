@@ -7,28 +7,26 @@
 <meta charset="UTF-8">
 <title>Inside Scoop</title>
 <jsp:include page="bootstrapHead.jsp" />
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-<c:choose>
-<c:when test="${not empty loginCheck }">
-	<jsp:include page="navbar.jsp"></jsp:include>
-	</c:when>
-	<c:otherwise>
-	<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
-	</c:otherwise>
-	</c:choose>
-	
+<jsp:include page="universalNavbar.jsp"/>
 	<main class="container-fluid">
-<h1>Profile</h1>
-<img src="${profile.profilePicture }" alt="Profile picture"
-width="50" height= "50">
 <br/>
-${profile.firstName }
-${profile.lastName }<br/>
-Works at: ${profile.company.name }<br/>
+	<div class="row row-header">
+			<div class="row text-center">
+		
+<div class="container-fluid">
+<div class="row">
+<div class="col-sm"><img src="${profile.profilePicture }" alt="Profile picture"
+width="300" height= "300"></div>
+<div class="col-sm">
+<div class="div-header p-4">
+<h1 class="display-3">${profile.firstName } ${profile.lastName }</h1>
+<h4>Works at: ${profile.company.name }<br/>
 Role: ${profile.workRole.role }<br/>
-${profile.userCategory.name}<br/>
-Total correct quiz questions: ${correct}<br/>
+${profile.userCategory.name}<br/><br/>
+Total correct quiz questions:<br/> ${correct}<br/></h4>
 <c:if test="${loginCheck==profile }">
 <a href="account.do">account</a><br/>
 </c:if>
@@ -38,13 +36,25 @@ Total correct quiz questions: ${correct}<br/>
 <input class="btn btn-primary" type="submit" value="To user's account page">
 </form>
 </c:if>
+</div>
 <br/>
+<br/>
+</div>
+<div class="col-sm">
 <c:forEach var="p" items="${displayPost }">
-<a href="showPost.do?postId=${p.id }">${p.title }</a><br/>
-${p.content}
+<div class="div-header p-4">
+<div class="text-truncate">
+<a href="showPost.do?postId=${p.id }">${p.title }</a>
+</div>
+<div class="text-truncate">${p.content}</div>
+</div>
 <br/><br/>
 </c:forEach>
-
+</div>
+</div>
+</div>
+</div>
+</div>
 </main>
 <jsp:include page="bootstrapFoot.jsp" />
 </body>

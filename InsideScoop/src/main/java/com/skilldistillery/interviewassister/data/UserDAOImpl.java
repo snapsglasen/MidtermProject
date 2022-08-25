@@ -724,7 +724,7 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public List<Post> postsFromUser(User user){
 		String jpql= "SELECT p FROM Post p WHERE p.user=:user AND p.active=true ORDER BY lastUpdate DESC";
-		List<Post> posts= em.createQuery(jpql, Post.class).setParameter("user", user).setMaxResults(5).getResultList();
+		List<Post> posts= em.createQuery(jpql, Post.class).setParameter("user", user).setMaxResults(3).getResultList();
 		return posts;
 	}
 	
