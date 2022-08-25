@@ -25,15 +25,9 @@
 <div class="container-fluid">
 
 	<!-- Content -->
-	<div class="row row-main">
-		<div class="col-sm"></div>
-		<div class="col-sm col-main">
-			<div class="div-content p-4">
-				<jsp:include page="header.jsp"/>
-			</div>
-		</div>
-		<div class="col-sm"></div>
-	</div>
+	<jsp:include page="contentSelector.jsp"/>
+
+</div>
 	
 </div>
 

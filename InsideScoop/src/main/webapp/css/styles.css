@@ -46,6 +46,8 @@ body {
 }
 
 .col-main {
+	display: flex;
+	justify-items: center !important;
 	justify-content: center !important;
 }
 
@@ -55,4 +57,5 @@ body {
 	justify-content: center !important;
 	justify-items: center !important;
 	height: 100%;
+	flex-wrap: nowrap;
 }

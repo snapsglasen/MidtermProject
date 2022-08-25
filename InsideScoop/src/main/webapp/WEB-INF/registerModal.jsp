@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+  	  $("#registerModal").on('shown.bs.modal', function(){
+  	      $(this).find('#firstName').focus();
+  	  });
+	});
+</script>
 
 <!-- Container class for modal - Make sure to change the "id" and "aria-labelledby" properties -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
