@@ -120,7 +120,7 @@ public class WorkRole {
 
 	@Override
 	public String toString() {
-		return "WorkRole [id=" + id + "]";
+		return role+" ";
 	}
 
 }

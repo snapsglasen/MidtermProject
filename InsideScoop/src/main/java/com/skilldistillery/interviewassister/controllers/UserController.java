@@ -150,13 +150,14 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "showPost.do")
-	public String post(Model model, Model login, Model like, Model dislike, HttpSession session, int postId) {
+	public String post(Model model, Model login, Model like, Model dislike, Model cat, HttpSession session, int postId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		Post post=userDAO.findByPostId(postId);
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
 		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 
@@ -169,7 +170,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "createPost.do", method = RequestMethod.POST)
-	public String createPost(Model model, Model login, Model like, Model dislike, String title, String content, String company, String workRole,
+	public String createPost(Model model, Model login, Model like, Model dislike, Model cat, String title, String content, String company, String workRole,
 			Integer[] category, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
@@ -177,12 +178,13 @@ public class UserController {
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
 		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 
 	}
 
 	@RequestMapping(path = "createComment.do", method = RequestMethod.POST)
-	public String createComment(Model model, Model login, Model like, Model dislike, String content, int id, HttpSession session) {
+	public String createComment(Model model, Model login, Model like, Model cat, Model dislike, String content, int id, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.createComment(content, user, id);
@@ -190,6 +192,7 @@ public class UserController {
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
 		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 
@@ -227,7 +230,7 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updateCommentAttempt.do")
-	public String updatecomment(Model model, Model login, Model like, Model dislike, HttpSession session, int id, int commentId, String content) {
+	public String updatecomment(Model model, Model login, Model like, Model dislike, Model cat, HttpSession session, int id, int commentId, String content) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.updateComment(commentId, content);
@@ -235,11 +238,12 @@ public class UserController {
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
 		dislike.addAttribute("postDisikes", userDAO.countPostDislike(post));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 
 	@RequestMapping(path = "deleteComment.do")
-	public String deleteComment(Model model, Model login, Model like, Model dislike, HttpSession session, int id, int commentId) {
+	public String deleteComment(Model model, Model login, Model like, Model dislike, Model cat, HttpSession session, int id, int commentId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.deleteComment(commentId);
@@ -247,6 +251,7 @@ public class UserController {
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
 		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 
@@ -312,14 +317,24 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "updatePostAttempt.do")
-	public String updatedPost(HttpSession session, Model model, Model like, Model dislike, int id, String title, String content, String company,
+	public String updatedPost(HttpSession session, Model model, Model like, Model dislike, Model cat, int id, String title, String content, String company,
 			String workRole, Integer[] category, Model login) {
+		System.out.println("In controller");
+		System.out.println("In controller"+id);
+		System.out.println("In controller"+title);
+		System.out.println("In controller"+content);
+		System.out.println("In controller"+company);
+		System.out.println("In controller"+ workRole);
+		System.out.println("In controller"+ category);
+		
+		
 		Post post = userDAO.updatePost(id, title, content, company, workRole, category);
 		model.addAttribute("displayPost", post);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
 		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 
@@ -349,30 +364,32 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "upvotePost.do")
-	public String upvotePost(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int postId) {
+	public String upvotePost(HttpSession session, Model model, Model login, Model like, Model dislike, Model cat, int userId, int postId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.addUpvotePost(userId, postId);
 		Post post=userDAO.findByPostId(postId);
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
-		like.addAttribute("postDislikes", userDAO.countPostDislike(post));		
+		like.addAttribute("postDislikes", userDAO.countPostDislike(post));	
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 	@RequestMapping(path = "deleteUpvotePost.do")
-	public String deleteUpvotePost(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int postId) {
+	public String deleteUpvotePost(HttpSession session, Model model, Model login, Model like, Model dislike, Model cat, int userId, int postId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.deleteUpvotePost(userId, postId);
 		Post post=userDAO.findByPostId(postId);
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
-		like.addAttribute("postDislikes", userDAO.countPostDislike(post));		
+		like.addAttribute("postDislikes", userDAO.countPostDislike(post));	
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 
 	@RequestMapping(path = "upvoteComment.do")
-	public String upvoteComment(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int commentId, int postId) {
+	public String upvoteComment(HttpSession session, Model model, Model login, Model like, Model dislike, Model cat, int userId, int commentId, int postId) {
 		System.out.println("***********************In controller");
 		System.out.println("***********************" + userId + "" + commentId);
 		User user = (User) session.getAttribute("loggedInUser");
@@ -382,11 +399,12 @@ public class UserController {
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
 		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 	
 	@RequestMapping(path = "downvoteComment.do")
-	public String downvoteComment(HttpSession session, Model model, Model login, Model like, Model dislike, int userId, int commentId, int postId) {
+	public String downvoteComment(HttpSession session, Model model, Model login, Model like, Model dislike, Model cat, int userId, int commentId, int postId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.addDownvoteComment(userId, commentId);
@@ -394,6 +412,7 @@ public class UserController {
 		model.addAttribute("displayPost", post);
 		like.addAttribute("postLikes", userDAO.countPostLike(post));
 		dislike.addAttribute("postDislikes", userDAO.countPostDislike(post));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "showPost";
 	}
 	
