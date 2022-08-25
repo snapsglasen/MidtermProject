@@ -6,9 +6,9 @@
 	<c:choose>
 		<c:when test="${empty loginCheck }">
 			<h1 class="display-3">Get the Inside Scoop</h1><br/>
-				<a class="btn btn-secondary btn-lg" href="register.do" role="button">
-					Sign up
-				</a>
+				<button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#registerModal">
+  					Sign up
+				</button>
 		</c:when>
 		<c:otherwise>
 			<h1 class="display-3">Inside Scoop</h1>

@@ -18,8 +18,6 @@
 <!-- Register Modal -->
 <jsp:include page="registerModal.jsp"/>
 
-<!--  Register Modal -->
-
 <!-- Navbar -->
 <jsp:include page="universalNavbar.jsp"/>
 

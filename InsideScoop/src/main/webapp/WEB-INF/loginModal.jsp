@@ -22,7 +22,12 @@
 			</form>
       </div>
       <div class="modal-footer">
-        <div class="signup-section">Not a member yet? <a href="register.do" class="text-info"> Sign Up</a></div>
+        <div class="signup-section">
+        	Not a member yet?
+        	<button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#registerModal">
+  				Sign up
+			</button>
+		</div>
       </div>
     </div>
   </div>
