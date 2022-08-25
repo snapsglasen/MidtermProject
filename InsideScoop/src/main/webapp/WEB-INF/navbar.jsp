@@ -13,28 +13,26 @@
 	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 		<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 			<li class="nav-item">
-				<a class="nav-link" href="allUsers.do">User Profiles</a>
+				<a class="nav-link" href="allUsers.do">Users</a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="showQuestion.do">Questions</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="postByRecent.do">Recent Posts</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="postByPopularity.do">Popular Posts</a>
+				<a class="nav-link" href="postByRecent.do">Posts</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav ms-auto mt-2 mt-lg-0">
+			<li>
+				<span><c:out value="${loginCheck.firstName }"/></span>
+				<a class="navbar-brand" href="loggedInProfile.do">
+					<img class="rounded-circle" src="${loginCheck.profilePicture }" width="40" height="40" alt="profile picture"/>
+				</a>
+			</li>
 			<li class="nav-item">
 				<a class="nav-link" href="logout.do">Logout</a>
 			</li>
-			<li>
-			<a class="navbar-brand" href="loggedInProfile.do">
-				<img class="rounded-circle" src="${loginCheck.profilePicture }" width="40" height="40" alt="profile picture"/>
-				
-			</a>
-			</li>
+
 		</ul>
 	</div>
 </nav>
