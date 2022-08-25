@@ -343,6 +343,8 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("users", userDAO.findAllUsers());
+		boolean search1 = false;
+		model.addAttribute("search", search1);
 		return "showAllUsers";
 	}
 
@@ -351,6 +353,8 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("users", userDAO.searchUsers(search));
+		boolean search1 = true;
+		model.addAttribute("search", search1);
 		return "showAllUsers";
 	}
 
