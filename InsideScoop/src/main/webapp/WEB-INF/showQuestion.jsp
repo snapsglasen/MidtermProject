@@ -11,21 +11,20 @@
 </head>
 <body>
 <jsp:include page="universalNavbar.jsp"/>
-<div class="container align-items-center">
+<div class="container-fluid">
 	<div class="row"></div>
 	
 	<!-- Header -->
-	<div class="row m-3">
-		<div class="col"></div>
-		<div class="col-8">
-			<jsp:include page="header.jsp"/>
+	<div class="row row-header">
+		<div class="div-header">
 			<div class="row text-center">
 			<h1 class="display-3">Questions</h1>
+			</div>
 			</div>
 		</div>
 		<div class="col"></div>
 	</div>
-	<div class="row"></div>
+	</div>
 <c:if test="${not empty loginCheck }">
 
 <!-- Search -->
@@ -66,7 +65,9 @@
 		<div class="col"></div>
 	</div>
 </c:if>
-		
+		<br/>
+		<br/>
+		<br/>
 	<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>

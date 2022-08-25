@@ -26,7 +26,8 @@
   		<c:forEach var="question" items="${questions }">
   			<c:if test="${question.active }">
     			<div class="carousel-item <c:if test="${slideNum==0 }">active</c:if>">
-      				<img class="d-block w-100 center-cropped" src="https://www.ffxnow.com/files/2022/04/Ice-cream-cones-1260x840.jpg">
+      				<!-- <img class="d-block w-100 center-cropped" src="https://www.ffxnow.com/files/2022/04/Ice-cream-cones-1260x840.jpg"> -->
+      				<img class="d-block w-100 center-cropped" src="https://media.gettyimages.com/videos/pastel-subtle-looping-ice-cream-bokeh-background-video-id858591902?s=640x640">
       					<div class="carousel-caption d-none d-md-block bg-light mb-4">
         					<h5 class="text-truncate">><a href="question.do?questionId=<c:out value="${question.id }"/>">${question.questionText }</a></h5>
         					<p class="text-truncate">${question.description } <br>
