@@ -9,6 +9,7 @@
 <jsp:include page="bootstrapHead.jsp" />
 </head>
 <body>
+<jsp:include page="updatePostModal.jsp"/>
 <c:choose>
 <c:when test="${not empty loginCheck }">
 	<jsp:include page="navbar.jsp"></jsp:include>
@@ -64,10 +65,14 @@ Dislikes:${postDislikes }
 			</form>
 		</c:if>
 <c:if test="${loginCheck==displayPost.user || loginCheck.admin }">
-<form action="updatePost.do" method="POST">
+
+<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updatePostModal">
+  		Update
+	</button>
+<%-- <form action="updatePost.do" method="POST">
 			<input type="hidden" name="id" value=${displayPost.id } /> <br />
 		<button type="submit" class="btn btn-primary">Update</button>
-	</form>
+	</form> --%>
 	
 <form action="deletePost.do" method="POST">
 			<input type="hidden" name="id" value=${displayPost.id } /> <br />

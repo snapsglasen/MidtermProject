@@ -7,33 +7,34 @@
 <meta charset="UTF-8">
 <title>Inside Scoop</title>
 <jsp:include page="bootstrapHead.jsp" />
+<link rel="stylesheet" type="text/css" href="css/styles.css" />
+
 </head>
 <body>
-<c:choose>
-<c:when test="${not empty loginCheck }">
-	<jsp:include page="navbar.jsp"></jsp:include>
-	</c:when>
-	<c:otherwise>
-	<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
-	</c:otherwise>
-	</c:choose>
-	<main class="container-fluid">
-		<h1>Inside scoop customers</h1>
+<jsp:include page="showUsersModal.jsp"/>
+<jsp:include page="universalNavbar.jsp"/>
+	<div class="container">
+		
+		<main>
+		
+			<h1>Inside Scoop Members</h1>
 
-<form action="searchUsers.do">
-Need to find someone?<input type="text" class= "form-control" name="search"/>
-<input class="btn btn-primary" type="submit" value="Search profile">
-</form>
+			 <form action="searchUsers.do">
+				Need to find someone?<input type="text" class="form-control"
+					name="search" /> <input class="btn btn-primary" type="submit"
+					value="Search profile">
+			</form>
 
-<c:forEach var="p" items="${users }" >
-<c:if test="${p.active }">
-<a href="profile.do?id=${p.id }">${p.firstName} ${p.lastName }</a>
-<br/>
-</c:if>
-</c:forEach>
+			<%-- <c:forEach var="p" items="${users }">
+				<c:if test="${p.active }">
+					<a href="profile.do?id=${p.id }">${p.firstName} ${p.lastName }</a>
+					<br />
+				</c:if>
+			</c:forEach> --%>
+<!-- Modal -->
 
-
-</main>
-		<jsp:include page="bootstrapFoot.jsp" />
+		</main>
+	</div>
+	<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>

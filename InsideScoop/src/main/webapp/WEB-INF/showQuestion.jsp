@@ -24,7 +24,7 @@
 		</div>
 		<div class="col"></div>
 	</div>
-	</div>
+	
 <c:if test="${not empty loginCheck }">
 
 <!-- Search -->
