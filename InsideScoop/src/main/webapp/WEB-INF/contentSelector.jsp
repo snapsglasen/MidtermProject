@@ -8,7 +8,7 @@
 		<div class="col-sm col-main d-flex justify-content-center">
 			<div class="div-content p-4">
 				<div class="text-center">
-					<h1 class="display-3">
+					<h1 class="display-5">
 						Get the Inside Scoop
 					</h1>
 					<br/>
@@ -22,13 +22,43 @@
 		</c:when>
 	<c:otherwise>
 		<div class="row row-main">
-		<div class="col-sm col-main d-flex justify-content-center">
-			<div class="div-content p-4 justify-self-center">
-				<div class="text-center">
-					<h1 class="display-3">Welcome, <c:out value="${loginCheck.firstName } ${loginCheck.lastName }"/></h1>
+			<div class="col-sm">
+				<div class="row p-4 m-4 justify-content-center">
+					<div class="col-sm col-main d-flex justify-content-center">
+						<div class="div-content p-4 justify-self-center">
+							<div class="text-center">
+								<h1 class="display-5">Welcome, <c:out value="${loginCheck.firstName } ${loginCheck.lastName }"/></h1>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row p-4 justify-content-evenly">
+					<div class="col-sm col-main d-flex justify-content-center">
+						<div class="div-content p-4 m-4 justify-self-center align-items-center">
+							<div class="text-center pb-4">
+								Recent Posts
+							</div>
+							<jsp:include page="carouselRecentPosts.jsp"/>
+						</div>
+					</div>
+					<div class="col-sm col-main d-flex justify-content-center">
+						<div class="div-content p-4 m-4 justify-self-center align-items-center">
+							<div class="text-center pb-4">
+								Trending Questions
+							</div>
+							<jsp:include page="carouselTrendingQuestions.jsp"/>
+						</div>
+					</div>
+					<div class="col-sm col-main d-flex justify-content-center">
+						<div class="div-content p-4 m-4 justify-self-center align-items-center">
+							<div class="text-center pb-4">
+								New Users
+							</div>
+							<jsp:include page="carouselNewUsers.jsp"/>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	</c:otherwise>
 </c:choose>

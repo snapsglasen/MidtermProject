@@ -11,26 +11,20 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-
 <!-- Login Modal -->
 <jsp:include page="loginModal.jsp"/>
-
 <!-- Register Modal -->
 <jsp:include page="registerModal.jsp"/>
-
 <!-- Navbar -->
 <jsp:include page="universalNavbar.jsp"/>
 
 <!-- Container for grid -->
 <div class="container-fluid">
-
 	<!-- Content -->
 	<jsp:include page="contentSelector.jsp"/>
 
 </div>
 	
-</div>
-
 <jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>

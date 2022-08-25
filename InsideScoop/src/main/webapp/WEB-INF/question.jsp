@@ -7,16 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <jsp:include page="bootstrapHead.jsp" />
+<script>
+	$(document).ready(function(){
+		$("#updateQuestionModal").modal('show');
+	});
+</script>
 </head>
 <body>
-	<c:choose>
-		<c:when test="${not empty loginCheck }">
-			<jsp:include page="navbar.jsp"></jsp:include>
-		</c:when>
-		<c:otherwise>
-			<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
-		</c:otherwise>
-	</c:choose>
+<jsp:include page="updateQuestionModal.jsp"/>
+<jsp:include page="universalNavbar.jsp"/>
+
 
 	<main class="container-fluid">
 		<a href="profile.do?id=${displayQuestion.user.id }">${displayQuestion.user.firstName}${displayQuestion.user.lastName}</a>
@@ -32,7 +32,6 @@ ${category.name}
 				<input type="checkbox" id="option" value="${option.id}"
 					name="option">
 				<label for="option">${option.optionText }</label>
-
 				<br />
 			</c:forEach>
 			<input type="hidden" value="${displayQuestion.id }" name="questionId" />
@@ -56,11 +55,9 @@ ${category.name}
 		</c:if>
 
 		<c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }">
-			<form action="updateQuestion.do" method="GET">
-				<input type="hidden" name="questionId"
-					value="${displayQuestion.id }" /> <br />
-				<button type="submit" class="btn btn-primary">Update</button>
-			</form>
+			<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateQuestionModal">
+  		Update
+	</button>
 
 			<form action="deleteQuestion.do" method="POST">
 				<input type="hidden" name="id" value=${displayQuestion.id } /> <br />
