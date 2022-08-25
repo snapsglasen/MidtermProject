@@ -36,13 +36,14 @@ public class QuestionController {
 
 	@RequestMapping(path = "createQuestion.do", method = RequestMethod.POST)
 	public String createQuestion(Model model, HttpSession session, Model login, Model cate, String questionText,
-			Integer[] categories, String description) {
+			Integer[] categories, String description, Model popupModel) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		Question question = userDAO.createQuestion(questionText, categories, description, user);
-		model.addAttribute("question", question);
+		model.addAttribute("displayQuestion", question);
 		cate.addAttribute("categories", userDAO.findCategories());
-		return "updateQuestion";
+		popupModel.addAttribute("popup", true);
+		return "question";
 
 	}
 
@@ -64,13 +65,14 @@ public class QuestionController {
 
 	@RequestMapping(path = "updateQuestion.do", method = RequestMethod.POST)
 	public String updatedQuestion(HttpSession session, Model likes, Model dislikes, Model model, int id,
-			String questionText, String description, Integer[] categories, Model login) {
+			String questionText, String description, Integer[] categories, Model login, Boolean popup, Model popupModel) {
 		Question question = userDAO.updateQuestion(id, questionText, description, categories);
 		model.addAttribute("displayQuestion", question);
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		likes.addAttribute("likes", userDAO.countLikes(question));
 		dislikes.addAttribute("dislikes", userDAO.countDislikes(question));
+		popupModel.addAttribute("popup", popup);
 		return "question";
 	}
 
