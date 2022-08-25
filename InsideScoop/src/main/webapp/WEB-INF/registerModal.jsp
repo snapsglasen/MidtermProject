@@ -35,15 +35,17 @@
 				<select name="category">
 					<option value="1">Student</option>
 					<option value="2">Instructor</option>
-					<option value="3">Alumni</option>
+					<option value="3">Alumnus</option>
 				</select>
 			</div>
-  			<button type="submit" class="btn btn-primary">Sign up</button>
+			<div class="form-group">
+  				<button type="submit" class="btn btn-secondary">Sign up</button>
+  			</div>
 		</form>
       </div>
       <div class="modal-footer">
         <div class="signup-section">Already a member?
-        	<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#loginModal">
+        	<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#loginModal">
   				Sign in
 			</button>
 		</div>
