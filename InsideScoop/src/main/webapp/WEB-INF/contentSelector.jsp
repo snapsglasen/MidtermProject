@@ -34,21 +34,27 @@
 				</div>
 				<div class="row p-4 mt-4 justify-content-evenly">
 					<div class="col-sm col-main d-flex justify-content-center">
-						<div class="div-content p-4 justify-self-center">
-							<div class="text-center">
-								Trending Posts
+						<div class="div-content p-4 justify-self-center align-items-center">
+							<div class="text-center pb-4">
+								Recent Posts
 							</div>
-							<jsp:include page="carousel.jsp"/>
+							<jsp:include page="carouselRecentPosts.jsp"/>
 						</div>
 					</div>
 					<div class="col-sm col-main d-flex justify-content-center">
-						<div class="div-content p-4 justify-self-center">
-							<jsp:include page="carousel.jsp"/>
+						<div class="div-content p-4 justify-self-center align-items-center">
+							<div class="text-center pb-4">
+								Trending Questions
+							</div>
+							<jsp:include page="carouselTrendingQuestions.jsp"/>
 						</div>
 					</div>
 					<div class="col-sm col-main d-flex justify-content-center">
-						<div class="div-content p-4 justify-self-center">
-							<jsp:include page="carousel.jsp"/>
+						<div class="div-content p-4 justify-self-center align-items-center">
+							<div class="text-center pb-4">
+								New Users
+							</div>
+							<jsp:include page="carouselNewUsers.jsp"/>
 						</div>
 					</div>
 				</div>
