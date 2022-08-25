@@ -8,7 +8,6 @@ import com.skilldistillery.interviewassister.entities.Comment;
 import com.skilldistillery.interviewassister.entities.Company;
 import com.skilldistillery.interviewassister.entities.Post;
 import com.skilldistillery.interviewassister.entities.Question;
-import com.skilldistillery.interviewassister.entities.QuestionVote;
 import com.skilldistillery.interviewassister.entities.User;
 import com.skilldistillery.interviewassister.entities.WorkRole;
 
@@ -44,6 +43,7 @@ public interface UserDAO {
 	Question findQuestionById(int questionId);
 	List<Category> findCategories();
 	List<Question> findAllQuestions();
+	List<Question> getAllQuestionsByCreationDate();
 	Boolean correct(Integer[] selectedOptions, Question question, User user);
 	Set <Question> searchQuestions(String search);
 	void deleteQuestionLike(int userId, int questionId);

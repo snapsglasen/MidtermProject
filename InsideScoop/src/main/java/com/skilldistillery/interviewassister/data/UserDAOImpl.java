@@ -579,6 +579,12 @@ public class UserDAOImpl implements UserDAO {
 		return questions;
 	}
 	
+	public List<Question> getAllQuestionsByCreationDate() {
+		String jpql = "Select q from Question q WHERE q.active=true ORDER BY q.id DESC";
+		List<Question> questions = em.createQuery(jpql, Question.class).getResultList();
+		System.out.println("LOOK HERE!\n" + questions);
+		return questions;
+	}
 
 	@Override
 	public Boolean correct(Integer[] selectedOptions, Question question, User user) {
