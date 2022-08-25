@@ -18,6 +18,7 @@
   # Joe:
 
   # James:
+  One of our mistakes is what taught me the most. Due to the scope of this project we really needed to use a lot of controllers and DAOs but with this being the first project of this magnitude that we have worked on we didn't quite do that and it got a bitt difficult to navigate. There was a ton of fun logic which provided interesting challenges and really understanding how each part works with another. The importance of organization and cooperation is certainly not lost on me.
 
   # Ryan:
   Through this project, I finally have a full grasp on what wiring code through a controller via DAOs and JSPs; until now, this had been extraordinarily confusing. Also, seeing how multiple DAOs and Controllers can be used to segregate code and make it more readable/manageable.
