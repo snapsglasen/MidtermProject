@@ -18,6 +18,7 @@ public interface UserDAO {
 	List<Post> findNewestPost ();
 	List<Post> findOldestPost();
 	List<User> findAllUsers();
+	List<User> getNewestUsers(int numUsers);
 	Post findByPostId(int postId);
 	Comment findByCommentId(int commentId);
 	Post createPost(String content, User user, String title, String company, String workRole, Integer[] category);
@@ -43,7 +44,7 @@ public interface UserDAO {
 	Question findQuestionById(int questionId);
 	List<Category> findCategories();
 	List<Question> findAllQuestions();
-	List<Question> getAllQuestionsByCreationDate();
+	List<Question> getMostRecentQuestions(int numQuestions);
 	Boolean correct(Integer[] selectedOptions, Question question, User user);
 	Set <Question> searchQuestions(String search);
 	void deleteQuestionLike(int userId, int questionId);

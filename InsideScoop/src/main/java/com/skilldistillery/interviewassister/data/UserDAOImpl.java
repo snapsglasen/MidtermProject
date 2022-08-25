@@ -121,6 +121,12 @@ public class UserDAOImpl implements UserDAO {
 		List<User> users = em.createQuery(jpql, User.class).getResultList();
 		return users;
 	}
+	
+	public List<User> getNewestUsers(int numUsers) {
+		String jpql = "Select u from User u WHERE u.active=true ORDER BY u.id DESC";
+		List<User> users = em.createQuery(jpql, User.class).getResultList();
+		return users.subList(users.size()-numUsers+1, users.size());
+	}
 
 	@Override
 	public List<User> adminFindAllUsers() {
@@ -579,11 +585,10 @@ public class UserDAOImpl implements UserDAO {
 		return questions;
 	}
 	
-	public List<Question> getAllQuestionsByCreationDate() {
+	public List<Question> getMostRecentQuestions(int numQuestions) {
 		String jpql = "Select q from Question q WHERE q.active=true ORDER BY q.id DESC";
 		List<Question> questions = em.createQuery(jpql, Question.class).getResultList();
-		System.out.println("LOOK HERE!\n" + questions);
-		return questions;
+		return questions.subList(questions.size()-numQuestions+1, questions.size());
 	}
 
 	@Override

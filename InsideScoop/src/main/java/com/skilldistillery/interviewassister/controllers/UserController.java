@@ -30,6 +30,8 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findMostPopularPost());
+		model.addAttribute("questions", userDAO.getMostRecentQuestions());
+		model.addAttribute("users", userDAO.getNewestUsers());
 		return "index";
 	}
 	
