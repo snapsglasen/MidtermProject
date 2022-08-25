@@ -77,11 +77,12 @@ public class QuestionController {
 	}
 
 	@RequestMapping(path = "showQuestion.do")
-	public String displayQuestion(Model model, Model display, Model login, HttpSession session) {
+	public String displayQuestion(Model model, Model display, Model cate, Model login, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("displayQuestion", userDAO.findQuestionById(1));
 		display.addAttribute("questions", userDAO.findAllQuestions());
+		cate.addAttribute("categories", userDAO.findCategories());
 		return "showQuestion";
 	}
 

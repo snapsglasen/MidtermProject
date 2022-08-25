@@ -4,7 +4,7 @@
 
 <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
 	<a class="navbar-brand" href="index.do">
-		<img src="/img/ice-cream.png" class="d-inline-block align-center" width="40" height="40" alt="smiling ice cream cone"/>
+		<img src="img/ice-cream.png" class="d-inline-block align-center" width="40" height="40" alt="smiling ice cream cone"/>
 		Inside Scoop
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
