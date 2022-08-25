@@ -36,7 +36,7 @@
 					<div class="col-sm col-main d-flex justify-content-center">
 						<div class="div-content p-4 m-4 justify-self-center align-items-center">
 							<div class="text-center pb-4">
-								Recent Posts
+								Trending Posts
 							</div>
 							<jsp:include page="carouselRecentPosts.jsp"/>
 						</div>
@@ -44,7 +44,7 @@
 					<div class="col-sm col-main d-flex justify-content-center">
 						<div class="div-content p-4 m-4 justify-self-center align-items-center">
 							<div class="text-center pb-4">
-								Trending Questions
+								Recent Questions
 							</div>
 							<jsp:include page="carouselTrendingQuestions.jsp"/>
 						</div>

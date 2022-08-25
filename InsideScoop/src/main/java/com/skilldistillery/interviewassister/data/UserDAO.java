@@ -53,7 +53,7 @@ public interface UserDAO {
 	void deleteUpvotePost(int userId, int postId);
 	int countPostLike(Post post);
 	int countPostDislike(Post post);
-	List<Post> findMostPopularPost();
+	List<Post> findMostPopularPosts(int numPosts);
 	List<User> adminFindAllUsers();
 	List<Post> postsFromUser(User user);
 	void addDownvoteComment(int userId, int commentId);

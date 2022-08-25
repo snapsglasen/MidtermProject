@@ -58,21 +58,21 @@ public class UserDAOImpl implements UserDAO {
 	
 	// ASK ABOUT THIS! How to make a jpql statement that orders by most of an entity
 	@Override
-	public List<Post> findMostPopularPost() {
+	public List<Post> findMostPopularPosts(int numPosts) {
 		String jpql = "Select p.id, avg(pv.liked), p from Post p LEFT OUTER JOIN p.postVotes pv GROUP BY p.id HAVING p.active=true ORDER BY avg(pv.liked) DESC";
 		List<Object[]> obj = em.createQuery(jpql, Object[].class).getResultList();
-		List<Post> post= new ArrayList<>();
+		List<Post> posts = new ArrayList<>();
 		
 		try {
-			for(int i=0; i<5; i++) {
-				post.add((Post) obj.get(i)[2]);
+			for(int i=0; i<numPosts; i++) {
+				posts.add((Post) obj.get(i)[2]);
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			
 		}
 		
-		return post;
+		return posts;
 	}
 	@Override
 	public List<Post> findAllMostPopularPost() {
@@ -123,9 +123,10 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	public List<User> getNewestUsers(int numUsers) {
-		String jpql = "Select u from User u WHERE u.active=true ORDER BY u.id DESC";
+		String jpql = "Select u from User u WHERE u.active=true ORDER BY id DESC";
 		List<User> users = em.createQuery(jpql, User.class).getResultList();
-		return users.subList(users.size() >= numUsers ? users.size()-numUsers : 0, users.size());
+		System.out.println("LOOK HERE! " + users.size());
+		return users;
 	}
 
 	@Override

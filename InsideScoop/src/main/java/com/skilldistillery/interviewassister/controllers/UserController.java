@@ -29,7 +29,7 @@ public class UserController {
 	public String home(Model model, Model login, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		model.addAttribute("posts", userDAO.findMostPopularPost());
+		model.addAttribute("posts", userDAO.findMostPopularPosts(3));
 		model.addAttribute("questions", userDAO.getMostRecentQuestions(3));
 		model.addAttribute("users", userDAO.getNewestUsers(3));
 		return "index";
@@ -209,7 +209,9 @@ public class UserController {
 
 				User loggedInUser = (User) session.getAttribute("loggedInUser");
 				login.addAttribute("loginCheck", loggedInUser);
-				model.addAttribute("posts", userDAO.findMostPopularPost());
+				model.addAttribute("posts", userDAO.findMostPopularPosts(3));
+				model.addAttribute("questions", userDAO.getMostRecentQuestions(3));
+				model.addAttribute("users", userDAO.getNewestUsers(3));
 
 				return "index";
 			}
@@ -262,7 +264,7 @@ public class UserController {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		userDAO.deletePost(id);
-		model.addAttribute("posts", userDAO.findMostPopularPost());
+		model.addAttribute("posts", userDAO.findMostPopularPosts(3));
 		return "index";
 	}
 
@@ -275,14 +277,14 @@ public class UserController {
 			login.addAttribute("loginCheck", user);
 		}
 		userDAO.deleteUser(id);
-		model.addAttribute("posts", userDAO.findMostPopularPost());
+		model.addAttribute("posts", userDAO.findMostPopularPosts(3));
 		return "index";
 	}
 
 	@RequestMapping(path = "logout.do")
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
-		model.addAttribute("posts", userDAO.findMostPopularPost());
+		model.addAttribute("posts", userDAO.findMostPopularPosts(3));
 		return "index";
 	}
 
