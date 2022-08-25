@@ -24,7 +24,7 @@
   		<c:forEach var="post" items="${posts }">
   			<c:if test="${post.active }">
     			<div class="carousel-item bg-light d-block w-100 <c:if test="${slideNum==0 }">active</c:if>">
-    			<img src="img/bananaMania.png" class="cropped d-block">
+    			<img src="img/bananaMania.png" class="d-block">
       					<div class="carousel-caption d-none d-md-block bg-light mb-4">
         					<h5><a href="showPost.do?postId=<c:out value="${post.id }"/>">${post.title }</a></h5>
         					<p class="text-truncate">${post.content }</p>

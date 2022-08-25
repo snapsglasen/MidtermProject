@@ -579,7 +579,6 @@ public class UserDAOImpl implements UserDAO {
 		return questions;
 	}
 	
-	List<Question> getAllQuestionsByCreationDate();
 
 	@Override
 	public Boolean correct(Integer[] selectedOptions, Question question, User user) {
