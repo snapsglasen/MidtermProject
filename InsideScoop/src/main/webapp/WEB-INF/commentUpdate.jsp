@@ -7,18 +7,13 @@
 <meta charset="UTF-8">
 <title>Update comment</title>
 <jsp:include page="bootstrapHead.jsp" />
+<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
+<jsp:include page="universalNavbar.jsp"/>
 
-<c:choose>
-<c:when test="${not empty loginCheck }">
-	<jsp:include page="navbar.jsp"></jsp:include>
-	</c:when>
-	<c:otherwise>
-	<jsp:include page="loggedOutNavbar.jsp"></jsp:include>
-	</c:otherwise>
-	</c:choose>
 	<main class="container-fluid">
+	<div class="div-content"></div>
 
 	<form action="updateCommentAttempt.do" method="POST">
 		<div>
@@ -29,6 +24,7 @@
 
 		<button type="submit" class="btn btn-primary">Post comment</button>
 	</form>
+	</div>
 </main>
 <jsp:include page="bootstrapFoot.jsp" />
 </body>
