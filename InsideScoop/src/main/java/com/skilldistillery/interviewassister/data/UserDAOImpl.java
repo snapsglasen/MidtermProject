@@ -125,7 +125,7 @@ public class UserDAOImpl implements UserDAO {
 	public List<User> getNewestUsers(int numUsers) {
 		String jpql = "Select u from User u WHERE u.active=true ORDER BY u.id DESC";
 		List<User> users = em.createQuery(jpql, User.class).getResultList();
-		return users.subList(users.size()-numUsers+1, users.size());
+		return users.subList(users.size() >= numUsers ? users.size()-numUsers : 0, users.size());
 	}
 
 	@Override
@@ -588,7 +588,7 @@ public class UserDAOImpl implements UserDAO {
 	public List<Question> getMostRecentQuestions(int numQuestions) {
 		String jpql = "Select q from Question q WHERE q.active=true ORDER BY q.id DESC";
 		List<Question> questions = em.createQuery(jpql, Question.class).getResultList();
-		return questions.subList(questions.size()-numQuestions+1, questions.size());
+		return questions.subList(questions.size() >= numQuestions ? questions.size()-numQuestions : 0, questions.size());
 	}
 
 	@Override

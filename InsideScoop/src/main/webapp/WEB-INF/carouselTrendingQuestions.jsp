@@ -6,8 +6,8 @@
 <div id="trendingQuestionCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
 	<div class="carousel-indicators my-4">
   		<c:set var="slideNum" value="0" scope="page"/>
-  		<c:forEach var="post" items="${posts }">
-  			<c:if test="${post.active }">
+  		<c:forEach var="question" items="${questions }">
+  			<c:if test="${question.active }">
     			<button
     				type="button"
     				data-bs-target="#trendingQuestionCarousel"
@@ -21,13 +21,12 @@
  	</div>
  	<div class="carousel-inner">
  		<c:set var="slideNum" value="0" scope="page"/>
-  		<c:forEach var="post" items="${posts }">
-  			<c:if test="${post.active }">
+  		<c:forEach var="question" items="${questions }">
+  			<c:if test="${question.active }">
     			<div class="carousel-item bg-light d-block w-100 <c:if test="${slideNum==0 }">active</c:if>">
     			<img src="img/cream.png" class="d-block">
       					<div class="carousel-caption d-none d-md-block bg-light mb-4">
-        					<h5><a href="showPost.do?postId=<c:out value="${post.id }"/>">${post.title }</a></h5>
-        					<p class="text-truncate">${post.content }</p>
+        					<h5><a href="showQuestion.do?questionId=<c:out value="${question.id }"/>">${question.description }</a></h5>
       					</div>
 				</div>
     			<c:set var="slideNum" value="${slideNum+1 }" scope="page"/>

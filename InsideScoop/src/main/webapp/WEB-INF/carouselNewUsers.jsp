@@ -6,8 +6,8 @@
 <div id="newUserCarousel" class="carousel carousel-dark slide" data-bs-ride="carousel">
 	<div class="carousel-indicators my-4">
   		<c:set var="slideNum" value="0" scope="page"/>
-  		<c:forEach var="post" items="${posts }">
-  			<c:if test="${post.active }">
+  		<c:forEach var="user" items="${users }">
+  			<c:if test="${user.active }">
     			<button
     				type="button"
     				data-bs-target="#newUserCarousel"
@@ -21,13 +21,12 @@
  	</div>
  	<div class="carousel-inner">
  		<c:set var="slideNum" value="0" scope="page"/>
-  		<c:forEach var="post" items="${posts }">
-  			<c:if test="${post.active }">
+  		<c:forEach var="user" items="${users }">
+  			<c:if test="${user.active }">
     			<div class="carousel-item bg-light d-block w-100 <c:if test="${slideNum==0 }">active</c:if>">
     			<img src="img/cafeAuLait.png" class="d-block">
       					<div class="carousel-caption d-none d-md-block bg-light mb-4">
-        					<h5><a href="showPost.do?postId=<c:out value="${post.id }"/>">${post.title }</a></h5>
-        					<p class="text-truncate">${post.content }</p>
+        					<h5><a href="profile.do?id=<c:out value="${user.id }"/>">${user.firstName } ${user.lastName }</a></h5>
       					</div>
 				</div>
     			<c:set var="slideNum" value="${slideNum+1 }" scope="page"/>
