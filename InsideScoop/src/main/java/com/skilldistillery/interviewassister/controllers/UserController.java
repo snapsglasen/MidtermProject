@@ -34,34 +34,38 @@ public class UserController {
 	}
 	
 	@RequestMapping(path = "postByRecent.do")
-	public String postByRecent(Model model, Model login, HttpSession session) {
+	public String postByRecent(Model model, Model login, Model cat, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findNewestPost());
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "viewPosts";
 	}
 	
 	@RequestMapping(path = "postByPopularity.do")
-	public String postByPopularity(Model model, Model login, HttpSession session) {
+	public String postByPopularity(Model model, Model login, Model cat, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findAllMostPopularPost());
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "viewPosts";
 	}
 
 	@RequestMapping(path = { "postByTitle.do" })
-	public String postByTitle(Model model, Model login, HttpSession session) {
+	public String postByTitle(Model model, Model login, Model cat, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findAlphabeticalPost());
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "viewPosts";
 	}
 
 	@RequestMapping(path = { "postByOldest.do" })
-	public String postByOldest(Model model, Model login, HttpSession session) {
+	public String postByOldest(Model model, Model login, Model cat, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.findOldestPost());
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "viewPosts";
 	}
 
@@ -336,10 +340,11 @@ public class UserController {
 	}
 
 	@RequestMapping(path = "searchPosts.do")
-	public String searchPosts(HttpSession session, Model model, Model login, String search) {
+	public String searchPosts(HttpSession session, Model model, Model login, Model cat, String search) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("posts", userDAO.searchPosts(search));
+		cat.addAttribute("categories", userDAO.findCategories());
 		return "viewPosts";
 	}
 
