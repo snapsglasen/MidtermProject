@@ -85,10 +85,10 @@ public class QuestionController {
 
 	@RequestMapping(path = "question.do")
 	public String question(Model model, Model login, Model total, Model likes, Model dislikes, Model correct,
-			Model incorrect, HttpSession session, int id) {
+			Model incorrect, HttpSession session, int questionId) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
-		Question question = userDAO.findQuestionById(id);
+		Question question = userDAO.findQuestionById(questionId);
 		model.addAttribute("displayQuestion", question);
 		List<Attempt> totalAt = optionDAO.usersTotalAttemptsOnQuestion(question, user);
 		total.addAttribute("total", totalAt.size());
@@ -124,6 +124,12 @@ public class QuestionController {
 	@RequestMapping(path = "questionAndAnswer.do")
 	public String questionAndAnswer(Model model, Model likes, Model dislikes, Model login, Model bool,
 			Model totalAttempt, Model correctAttempt, HttpSession session, Integer[] option, int questionId) {
+		System.out.println("Top of Controller line 127");
+		try {
+			int isThisNull=option.length;
+		} catch (Exception e) {
+			option=new Integer[0];
+		}
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		Question question = userDAO.findQuestionById(questionId);
