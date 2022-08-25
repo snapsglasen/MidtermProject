@@ -4,7 +4,7 @@
 
 <c:choose>
 	<c:when test="${empty loginCheck }">
-		<div class="row row-main">
+		<div class="row h-100 align-items-center">
 		<div class="col-sm col-main d-flex justify-content-center">
 			<div class="div-content p-4">
 				<div class="text-center">
@@ -21,7 +21,7 @@
 		</div>
 		</c:when>
 	<c:otherwise>
-		<div class="row row-main">
+		<div class="row align-items-center">
 			<div class="col-sm">
 				<div class="row p-4 m-4 justify-content-center">
 					<div class="col-sm col-main d-flex justify-content-center">

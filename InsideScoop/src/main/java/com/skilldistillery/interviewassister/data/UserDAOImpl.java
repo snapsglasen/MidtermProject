@@ -578,6 +578,8 @@ public class UserDAOImpl implements UserDAO {
 		System.out.println(questions);
 		return questions;
 	}
+	
+	List<Question> getAllQuestionsByCreationDate();
 
 	@Override
 	public Boolean correct(Integer[] selectedOptions, Question question, User user) {
