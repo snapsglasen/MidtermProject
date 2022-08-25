@@ -11,29 +11,25 @@
 
 </head>
 <body>
-<jsp:include page="showUsersModal.jsp"/>
-<jsp:include page="universalNavbar.jsp"/>
+	<jsp:include page="showUsersModal.jsp" />
+	<jsp:include page="universalNavbar.jsp" />
 	<div class="container">
-		
-		<main>
-		
-			<h1>Inside Scoop Members</h1>
+		<div class="div-content">
 
-			 <form action="searchUsers.do">
-				Need to find someone?<input type="text" class="form-control"
-					name="search" /> <input class="btn btn-primary" type="submit"
-					value="Search profile">
-			</form>
 
-			<%-- <c:forEach var="p" items="${users }">
-				<c:if test="${p.active }">
-					<a href="profile.do?id=${p.id }">${p.firstName} ${p.lastName }</a>
-					<br />
-				</c:if>
-			</c:forEach> --%>
-<!-- Modal -->
+			<div class="col-main">
+				<h1>Inside Scoop Members</h1>
+			</div>
+		<div class="row-main">
+		<form action="searchUsers.do">
+			Need to find someone?<input type="text" class="form-control"
+				name="search" /> <input class="btn btn-primary" type="submit"
+				value="Search profile">
+		</form>
+	</div>
 
-		</main>
+
+	</div>
 	</div>
 	<jsp:include page="bootstrapFoot.jsp" />
 </body>
