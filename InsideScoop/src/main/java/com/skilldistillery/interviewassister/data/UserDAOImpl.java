@@ -123,7 +123,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	public List<User> getNewestUsers(int numUsers) {
-		String jpql = "Select u from User u WHERE u.active=true ORDER BY id DESC";
+		String jpql = "Select u from User u WHERE u.active=true ORDER BY id";
 		List<User> users = em.createQuery(jpql, User.class).getResultList();
 		return users.subList(users.size() >= numUsers ? users.size() - numUsers : 0, users.size());
 	}
