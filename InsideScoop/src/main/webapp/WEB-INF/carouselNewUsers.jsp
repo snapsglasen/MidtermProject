@@ -27,7 +27,7 @@
     			    <div class="d-flex h-100 align-items-center justify-content-center">
     					<img src="img/cafeAuLait.png" class="d-block w-100">
       					<div class="carousel-caption h-75 pb-4 mb-4">
-        					<h5>
+        					<h5 class="test-truncate">
         							<img class="w-50" src="<c:out value="${user.profilePicture }"/>"><br>
         							${user.firstName } ${user.lastName }
         					</h5>
