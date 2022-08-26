@@ -16,6 +16,7 @@
   ## Lessons Learned:
 
   # Joe:
+  Given the variation of the modern technological environment, it is more and more important to build responsive web applications. In terms of today's tool suite, this means mastering the use of grids and flexboxes in html, css, and a handful of other languages. Beyond that, to create more powerful and functional web applications, we will need to begin to incorporate javascript. I ran up against these themes time and time again while building our project. Moving forward, I intend to place an emphasis on mastering the fundamentals while also adding new, powerful, and interesting tools to my toolbelt. This project also reinforced a growing design sense with beauty, simplicity, and practicality at its core.
 
   # James:
   One of our mistakes is what taught me the most. Due to the scope of this project we really needed to use a lot of controllers and DAOs but with this being the first project of this magnitude that we have worked on we didn't quite do that and it got a bitt difficult to navigate. There was a ton of fun logic which provided interesting challenges and really understanding how each part works with another. The importance of organization and cooperation is certainly not lost on me.
