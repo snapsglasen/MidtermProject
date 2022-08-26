@@ -22,15 +22,17 @@
  		<c:set var="slideNum" value="0" scope="page"/>
   		<c:forEach var="question" items="${questions }">
   			<c:if test="${question.active }">
+  				<a href="question.do?questionId=<c:out value="${question.id }"/>">
     			<div class="carousel-item <c:if test="${slideNum==0 }">active</c:if>">
     				<div class="d-flex h-100 align-items-center justify-content-center">
     				<img src="img/cream.png" class="d-block w-100">
       					<div class="carousel-caption h-75 pb-4 mb-4">
-        					<h5><a href="question.do?questionId=<c:out value="${question.id }"/>">${question.description }</a></h5>
+        					<h5>${question.description }</h5>
       					</div>
       				</div>
 				</div>
     			<c:set var="slideNum" value="${slideNum+1 }" scope="page"/>
+    			</a>
     		</c:if>
     	</c:forEach>
  	</div>
