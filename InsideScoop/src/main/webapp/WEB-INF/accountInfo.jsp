@@ -11,6 +11,7 @@
 </head>
 <body>
 <jsp:include page="updateProfileModal.jsp"/>
+<jsp:include page="updateProfileAdminModal.jsp"/>
 <jsp:include page="deleteVerifyModal.jsp"/>
 <jsp:include page="universalNavbar.jsp"/>
 
@@ -45,9 +46,16 @@
 		<br/>
 		<div class="row-main">
 	<div class="col-main">
+		<c:if test="${account==loginCheck}">
 		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateProfileModal">
   		Update
 	</button>
+	</c:if>
+	<c:if test="${account!=loginCheck && loginCheck.admin }">
+		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateProfileAdminModal">
+  		Update
+	</button>
+	</c:if>
 		<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#deleteVerifyModal">
   		Delete
 	</button>

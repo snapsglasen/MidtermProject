@@ -89,7 +89,8 @@ public class UserController {
 			userPosts.addAttribute("displayPost", userDAO.postsFromUser(user));
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "register";
+			model.addAttribute("registerStatus", false);
+			return "index";
 		}
 		return "profile";
 	}
@@ -212,15 +213,13 @@ public class UserController {
 				model.addAttribute("posts", userDAO.findMostPopularPosts(3));
 				model.addAttribute("questions", userDAO.getMostRecentQuestions(3));
 				model.addAttribute("users", userDAO.getNewestUsers(3));
-
-				return "index";
 			}
 
 		} catch (Exception e) {
-
 			e.printStackTrace();
+			model.addAttribute("loginStatus", false);
 		}
-		return "loginFailed";
+		return "index";
 
 	}
 
@@ -265,6 +264,8 @@ public class UserController {
 		login.addAttribute("loginCheck", user);
 		userDAO.deletePost(id);
 		model.addAttribute("posts", userDAO.findMostPopularPosts(3));
+		model.addAttribute("questions", userDAO.getMostRecentQuestions(3));
+		model.addAttribute("users", userDAO.getNewestUsers(3));
 		return "index";
 	}
 
@@ -278,6 +279,8 @@ public class UserController {
 		}
 		userDAO.deleteUser(id);
 		model.addAttribute("posts", userDAO.findMostPopularPosts(3));
+		model.addAttribute("questions", userDAO.getMostRecentQuestions(3));
+		model.addAttribute("users", userDAO.getNewestUsers(3));
 		return "index";
 	}
 
@@ -285,6 +288,8 @@ public class UserController {
 	public String logout(HttpSession session, Model model) {
 		session.invalidate();
 		model.addAttribute("posts", userDAO.findMostPopularPosts(3));
+		model.addAttribute("questions", userDAO.getMostRecentQuestions(3));
+		model.addAttribute("users", userDAO.getNewestUsers(3));
 		return "index";
 	}
 
@@ -307,6 +312,19 @@ public class UserController {
 		session.setAttribute("loggedInUser", user);
 		login.addAttribute("loginCheck", user);
 		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(user);
+		correct.addAttribute("correct", totalCor.size());
+		return "profile";
+	}
+	@RequestMapping(path = "updateProfileAttemptAdmin.do")
+	public String updatedProfileAdmin(HttpSession session, Model model, Model login, Model correct,int id, String firstName,
+			String lastName, String email, String username, String password, int category, String workRole,
+			String company, String profilePicture) {
+		User profile = userDAO.updateProfile(id, firstName, lastName, email, username, password, category, workRole,
+				company, profilePicture);
+		model.addAttribute("profile", profile);
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);		
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(profile);
 		correct.addAttribute("correct", totalCor.size());
 		return "profile";
 	}

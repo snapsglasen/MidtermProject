@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -9,6 +10,13 @@
   	  });
 	});
 </script>
+<c:if test="${not empty registerStatus }">
+<script type="text/javascript">
+	$(window).on('load', function() {
+		$("#registerModal").modal('show');
+	});
+</script>
+</c:if>
 
 <!-- Container class for modal - Make sure to change the "id" and "aria-labelledby" properties -->
 <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">

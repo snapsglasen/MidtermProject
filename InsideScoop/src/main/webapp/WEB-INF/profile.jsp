@@ -38,7 +38,7 @@ Total correct quiz questions:<br/> ${correct}<br/></h4>
 <input class="btn btn-primary" type="submit" value="Account">
 </form>
 </c:if>
-<c:if test="${loginCheck.admin}">
+<c:if test="${profile!=loginCheck && loginCheck.admin }">
 <form action="adminAccount.do">
 <input type= "hidden" name="id" value="${profile.id }"/>
 <input class="btn btn-primary" type="submit" value="To user's account page">

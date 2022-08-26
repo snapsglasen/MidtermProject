@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -9,6 +10,13 @@ $(document).ready(function(){
     });
 });
 </script>
+<c:if test="${not empty loginStatus }">
+<script type="text/javascript">
+	$(window).on('load', function() {
+		$("#loginModal").modal('show');
+	});
+</script>
+</c:if>
 
 <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -18,6 +26,9 @@ $(document).ready(function(){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+      	<c:if test="${not empty loginStatus }">
+      		<p class="text-danger">Login attempt failed. Please try again.</p>
+      	</c:if>
       	<form action="attemptLogin.do" method="POST">
 			<div class="form-group">
     			<label for="username">User Name:</label>
