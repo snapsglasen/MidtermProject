@@ -43,5 +43,23 @@ public class OptionController {
 		popupModel.addAttribute("popup", popup);
 		return "question";
 	}
+	@RequestMapping(path="deleteOption.do", method=RequestMethod.POST)
+	public String deleteOption(Integer questionId, int optionId, Boolean popup, HttpSession session, Model login, Model model, Model total, Model correct, Model incorrect, Model likes, Model dislikes, Model popupModel) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		Question question = userDAO.findQuestionById(questionId);
+		optionDAO.deleteOption(optionId);
+		model.addAttribute("displayQuestion", question);
+		List<Attempt> totalAt = optionDAO.usersTotalAttemptsOnQuestion(question, user);
+		total.addAttribute("total", totalAt.size());
+		List<Attempt> totalCor = optionDAO.userTotalCorrectAttemptsOnQuestion(question, user);
+		correct.addAttribute("correct", totalCor.size());
+		List<Attempt> totalInc = optionDAO.userTotalIncorrectQuestion(question, user);
+		incorrect.addAttribute("incorrect", totalInc.size());
+		likes.addAttribute("likes", userDAO.countLikes(question));
+		dislikes.addAttribute("dislikes", userDAO.countDislikes(question));
+		popupModel.addAttribute("popup", popup);
+		return "question";
+	}
 
 }

@@ -39,8 +39,15 @@ public class OptionDAOImpl implements OptionDAO {
 
 	@Override
 	public boolean deleteOption(int optionId) {
-		// TODO Auto-generated method stub
-		return false;
+		Option option=em.find(Option.class, optionId);
+		
+		try {
+			em.remove(option);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
