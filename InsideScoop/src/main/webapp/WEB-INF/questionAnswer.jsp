@@ -21,19 +21,27 @@
 <div class="div-content">
 		<c:choose>
 			<c:when test="${bool }">
-				<h2>You were correct!</h2>
+				<h2 class="text-center">You were correct!</h2>
 			</c:when>
 			<c:otherwise>
-				<h2>You were wrong!</h2>
+				<h2 class="text-center">You were wrong!</h2>
 			</c:otherwise>
 		</c:choose>
 		
-		<div class="div-header p-4">${displayQuestion.questionText}</div>
+		<br/>
+		<h5>${displayQuestion.questionText}</h5>
+		<br/>
+		<strong><em>Correct answer:</em></strong>
+		<br/>
 		<c:forEach var="option" items="${displayQuestion.options}">
-			<c:if test="${option.correct }"><div class="div-header p-4">${option.optionText }</div><br />
+			<c:if test="${option.correct }">${option.optionText }<br />
 			</c:if>
 		</c:forEach>
-		<div class="div-header p-4">${displayQuestion.description}</div>
+		<br/>
+		<strong><em>Explanation:</em></strong>
+		<br/>
+		${displayQuestion.description}
+		<br/>
 		<br/>
 
 		<c:if test="${not empty loginCheck}">
