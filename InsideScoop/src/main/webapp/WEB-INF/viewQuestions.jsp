@@ -56,12 +56,16 @@
 			<div class="post-container">
 			<div class="post-bg-white">
 			<div class="post">
+			<div class="div-content">
 			<img src="<c:out value="${question.user.profilePicture }"/>" width="40px" height="40px">
 			<h3><a href="question.do?questionId=${question.id}">${question.questionText}</a></h3>
 			<h5><a href="profile.do?id=${question.user.id }">by ${question.user.firstName} ${question.user.lastName }</a></h5>
 			</div>
 			</div>
 			</div>
+			</div>
+			<br/>
+			<br/>
 			</c:if>
 		</c:forEach>
 		<br/>
