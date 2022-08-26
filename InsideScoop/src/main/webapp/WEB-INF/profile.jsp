@@ -18,17 +18,25 @@
 		
 <div class="container-fluid">
 <div class="row">
-<div class="col-sm"><img src="${profile.profilePicture }" alt="Profile picture"
-width="300" height= "300"></div>
 <div class="col-sm">
-<div class="div-header p-4">
+<div class="div-content">
+<img src="${profile.profilePicture }" alt="Profile picture"
+width="300" height= "300">
+</div>
+</div>
+
+
+<div class="col-sm">
+<div class="div-content">
 <h1 class="display-3">${profile.firstName } ${profile.lastName }</h1>
 <h4>Works at: ${profile.company.name }<br/>
 Role: ${profile.workRole.role }<br/>
 ${profile.userCategory.name}<br/><br/>
 Total correct quiz questions:<br/> ${correct}<br/></h4>
 <c:if test="${loginCheck==profile }">
-<a href="account.do">account</a><br/>
+<form action="account.do">
+<input class="btn btn-primary" type="submit" value="Account">
+</form>
 </c:if>
 <c:if test="${loginCheck.admin}">
 <form action="adminAccount.do">
@@ -42,11 +50,13 @@ Total correct quiz questions:<br/> ${correct}<br/></h4>
 </div>
 <div class="col-sm">
 <c:forEach var="p" items="${displayPost }">
+<div class="div-content">
 <div class="div-header p-4">
 <div class="text-truncate">
 <a href="showPost.do?postId=${p.id }">${p.title }</a>
 </div>
 <div class="text-truncate">${p.content}</div>
+</div>
 </div>
 <br/><br/>
 </c:forEach>

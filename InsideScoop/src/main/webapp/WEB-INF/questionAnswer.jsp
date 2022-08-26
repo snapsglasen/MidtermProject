@@ -12,11 +12,13 @@
 <body>
 <jsp:include page="universalNavbar.jsp"/>
 	<main class="container-fluid">
-	<div class="row text-center">
+	<div class="row-main">
+	<div class="col-main">
 	
 <br/>
 <br/>
 <br/>
+<div class="div-content">
 		<c:choose>
 			<c:when test="${bool }">
 				<h2>You were correct!</h2>
@@ -36,30 +38,33 @@
 
 		<c:if test="${not empty loginCheck}">
 		<div class="form-group row">
-			<form action="upvoteQuestion.do">
+			<form action="upvoteQuestionAnswer.do">
 				<input type="hidden" name="userId" value=${loginCheck.id } /> <input
 					type="hidden" name="questionId" value=${displayQuestion.id } />
+					<input type="hidden" name="bool" value=${bool } />
 				<button type="submit" class="btn btn-primary"><img alt="Likes" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5IvDeqblUvYW7p51bBuCQciah3vxviSD4BA&usqp=CAU" width="50" height= "50"></button>
 			Likes: ${likes }
 			</form>
 			<br/>
-			<form action="deleteUpvoteQuestion.do">
+			<form action="deleteUpvoteQuestionAnswer.do">
 				<input type="hidden" name="userId" value=${loginCheck.id } /> <input
 					type="hidden" name="questionId" value=${displayQuestion.id } />
+					<input type="hidden" name="bool" value=${bool } />
 				<button type="submit" class="btn btn-primary"><img alt="Dislikes" src="https://img.freepik.com/free-photo/melted-red-ice-cream_23-2147831853.jpg?w=2000" width="50" height= "50"></button>
 			Dislikes: ${dislikes }
 			</form>
 			
 		</div>
 		</c:if>
-		<div class="row text-center">
-		Total attempts: ${totalAttempt} Total correct attempts:
-		${correctAttempt}
-		</div>
+		
+		Total attempts: ${totalAttempt} <br/>
+		Total correct attempts: ${correctAttempt}
 		<form action="randomQuestion.do">
 			<button type="submit" class="btn btn-primary">to random
 				question</button>
 		</form>
+		</div>
+		</div>
 		</div>
 	</main>
 	<jsp:include page="bootstrapFoot.jsp" />

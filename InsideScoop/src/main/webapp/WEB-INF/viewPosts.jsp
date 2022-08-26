@@ -33,6 +33,7 @@
 </div>
 	<div class="posts">
 		<c:forEach var="p" items="${posts }" >
+	<div class="div-content">
 			<c:if test="${p.active }">
 			<div class="post-container">
 			<div class="post-bg-white">
@@ -46,6 +47,9 @@
 			</div>
 			</div>
 			</c:if>
+			</div>
+			<br/>
+			<br/>
 		</c:forEach>
 	</div>
 <div>

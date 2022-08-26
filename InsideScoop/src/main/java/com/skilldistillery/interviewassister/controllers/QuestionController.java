@@ -77,11 +77,12 @@ public class QuestionController {
 	}
 
 	@RequestMapping(path = "showQuestion.do")
-	public String displayQuestion(Model model, Model display, Model login, HttpSession session) {
+	public String displayQuestion(Model model, Model display, Model cate, Model login, HttpSession session) {
 		User user = (User) session.getAttribute("loggedInUser");
 		login.addAttribute("loginCheck", user);
 		model.addAttribute("displayQuestion", userDAO.findQuestionById(1));
 		display.addAttribute("questions", userDAO.findAllQuestions());
+		cate.addAttribute("categories", userDAO.findCategories());
 		return "showQuestion";
 	}
 
@@ -173,6 +174,46 @@ public class QuestionController {
 		likes.addAttribute("likes", userDAO.countLikes(question));
 		dislikes.addAttribute("dislikes", userDAO.countDislikes(question));
 		return "question";
+	}
+	
+	@RequestMapping(path = "upvoteQuestionAnswer.do")
+	public String upvoteQuestionAnswer(HttpSession session, Model likes, Model dislikes, Model boo, Model totalAttempt, Model correctAttempt, Model model, Model login, int userId,
+			int questionId, boolean bool) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.addUpvoteQuestion(userId, questionId);
+		Question question = userDAO.findQuestionById(questionId);
+		model.addAttribute("displayQuestion", question);
+		likes.addAttribute("likes", userDAO.countLikes(question));
+		dislikes.addAttribute("dislikes", userDAO.countDislikes(question));
+		boo.addAttribute("bool", bool);
+		List<Attempt> total = optionDAO.totalAttemptsOnQuestion(question);
+		List<Attempt> correct = optionDAO.totalCorrectAttemptsOnQuestion(question);
+		System.out.println(total);
+		System.out.println(correct);
+		totalAttempt.addAttribute("totalAttempt", total.size());
+		correctAttempt.addAttribute("correctAttempt", correct.size());
+		return "questionAnswer";
+	}
+	
+	@RequestMapping(path = "deleteUpvoteQuestionAnswer.do")
+	public String deleteQuestionUpvote(HttpSession session, Model likes, Model dislikes, Model boo, Model totalAttempt, Model correctAttempt, Model model, Model login,
+			int userId, int questionId, boolean bool) {
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);
+		userDAO.deleteQuestionLike(userId, questionId);
+		Question question = userDAO.findQuestionById(questionId);
+		model.addAttribute("displayQuestion", question);
+		likes.addAttribute("likes", userDAO.countLikes(question));
+		dislikes.addAttribute("dislikes", userDAO.countDislikes(question));
+		boo.addAttribute("bool", bool);
+		List<Attempt> total = optionDAO.totalAttemptsOnQuestion(question);
+		List<Attempt> correct = optionDAO.totalCorrectAttemptsOnQuestion(question);
+		System.out.println(total);
+		System.out.println(correct);
+		totalAttempt.addAttribute("totalAttempt", total.size());
+		correctAttempt.addAttribute("correctAttempt", correct.size());
+		return "questionAnswer";
 	}
 
 }

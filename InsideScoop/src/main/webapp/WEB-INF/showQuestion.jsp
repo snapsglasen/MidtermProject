@@ -10,67 +10,71 @@
 <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-<jsp:include page="createQuestionModal.jsp"/>
-<jsp:include page="universalNavbar.jsp"/>
-<div class="container-fluid">
-	<div class="row"></div>
-	
-	<!-- Header -->
-	<div class="row row-header">
-		<div class="div-header">
-			<div class="row text-center">
-			<h1 class="display-3">Questions</h1>
-			</div>
-			</div>
-		</div>
-		<div class="col"></div>
-	</div>
-	
-<c:if test="${not empty loginCheck }">
+	<jsp:include page="createQuestionModal.jsp" />
+	<jsp:include page="universalNavbar.jsp" />
 
-<!-- Search -->
-<div class="row m-3">
-	<form class="form-inlin" action="searchQuestions.do">
-	<div class="form-group row">
-				<div class="col"></div>
-				<div class="col-7">
-				
-		<input type="text" class="form-control" name="search" id="postSearch"
-			placeholder="Search Questions..." /> 
-			</div>
-				<div class="col-1">
-				<div class="row">
-				<input class="btn btn-secondary btn-search" type="submit" value="Search">
+
+
+
+
+	<div class="container-fluid">
+		<div class="row row-main">
+
+
+
+
+
+
+
+
+			<div class="col-sm">
+				<div class="row p-4 m-4 justify-content-center">
+					<div class="col-sm col-main d-flex justify-content-center">
+						<div class="div-content p-4 justify-self-center">
+							<div class="col-main">
+								<h1>Question</h1>
+							</div>
 						</div>
+					</div>
 				</div>
-				<div class="col"></div>
+				<div class="row p-4 justify-content-evenly">
+					<div class="col-sm col-main d-flex justify-content-center">
+						<div
+							class="div-content p-4 m-4 justify-self-center align-items-center">
+							<c:if test="${not empty loginCheck }">
+
+
+								<form class="form-inlin" action="searchQuestions.do">
+
+
+									<input type="text" class="form-control" name="search"
+										id="postSearch" placeholder="Search Questions..." /> <input
+										class="btn btn-secondary btn-search" type="submit"
+										value="Search">
+
+								</form>
+
+
+	<br/>
+								<a class="btn btn-secondary btn-sm" href="randomQuestion.do">Random
+									Question</a>
+								<button type="button" class="btn btn-primary btn-sm"
+									data-bs-toggle="modal" data-bs-target="#createQuestionModal">
+									Create</button>
+
+
+
+							</c:if>
+						</div>
+					</div>
+
+				</div>
 			</div>
-	</form>
-	</div>
-	<div class="row-1"></div>
-	
-	<!-- random/create buttons -->
-	<div class="row m-3">
-	
-	<article>
-<a class="btn btn-secondary btn-sm" href="randomQuestion.do">Random Question</a>
-<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#createQuestionModal">
-  		Create
-	</button>
-</article>
-	</div>
-	<!--Questions-->
-	<div class="row m-3">
-		<div class="col"></div>
-		<div class="col-6">
-			<jsp:include page="carouselQuestion.jsp"/>
 		</div>
-		<div class="col"></div>
-	</div>
-</c:if>
-		<br/>
-		<br/>
-		<br/>
-	<jsp:include page="bootstrapFoot.jsp" />
+
+</div>
+
+
+		<jsp:include page="bootstrapFoot.jsp" />
 </body>
 </html>

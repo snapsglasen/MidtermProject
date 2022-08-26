@@ -21,25 +21,47 @@
 
 	<main class="container-fluid">
 		
-		<div class="row row-header">
+		<div class="row-main">
+		<div class="col-main">
 		<div class="div-header">
-		<div class="div-header p-4">
-			<div class="row text-center">
-			<h1 class="display-3">${displayQuestion.questionText }</h1>
+		<div class="div-content">
+		<br/>
+			<h1>${displayQuestion.questionText }</h1>
+			<div class="text-center">
 		<a href="profile.do?id=${displayQuestion.user.id }">${displayQuestion.user.firstName} ${displayQuestion.user.lastName}</a>
-				<label for="category">Categories:</label>
+				<label for="category">Categories:</label></div>
+				<div class="text-center">
 				<c:forEach var="category" items="${displayQuestion.categories}">
-<div class="text-center">${category.name}</div>
+${category.name}
 </c:forEach>
 			</div>
 			</div>
 			</div>
+			</div>
+			</div>
+		<br/>
+		<div class="row">
+		
+<div class="col-sm">
+<div class="text-center">
+		<c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }">
+			<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateQuestionModal">
+  		Update
+	</button>
+
+			<form action="deleteQuestion.do" method="POST">
+				<input type="hidden" name="id" value=${displayQuestion.id } /> <br />
+				<button type="submit" class="btn btn-primary">Delete</button>
+			</form>
+		</c:if>
+		</div>
 		</div>
 		
-		<div class="row">
 <div class="col-sm">
-		<div class="row text-center">
+<div class="div-content">
+<br/>
 		<form action="questionAndAnswer.do">
+		Please select as many answers as you think are correct:<br/>
 			<c:forEach var="option" items="${displayQuestion.options}">
 
 				<input type="checkbox" id="option" value="${option.id}"
@@ -74,24 +96,18 @@
 		</div>
 		</div>
 
-		<div class="col-sm">
-		<c:if test="${loginCheck==displayQuestion.user || loginCheck.admin }">
-			<button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#updateQuestionModal">
-  		Update
-	</button>
 
-			<form action="deleteQuestion.do" method="POST">
-				<input type="hidden" name="id" value=${displayQuestion.id } /> <br />
-				<button type="submit" class="btn btn-primary">Delete</button>
-			</form>
-		</c:if>
+		<div class="col-sm">
+		<div class="div-content">
+		<br/>
 		<form action="randomQuestion.do">
-			<button type="submit" class="btn btn-primary">to random
+			<button type="submit" class="btn btn-primary">Random
 				question</button>
 		</form>
 		Your total attempts on this question: ${total} <br /> 
 		Your correct attempts on this question: ${correct}<br /> 
 		Your incorrect attempts on this question: ${incorrect}
+		</div>
 		</div>
 		</div>
 	</main>
