@@ -18,6 +18,11 @@ body {
     overflow: hidden;
 }
 
+.carousel-caption a {
+	text-decoration: none;
+	color: #A57E56;
+}
+
 .container {
 	display: flex;
 	flex-flow: row nowrap;
