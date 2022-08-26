@@ -36,6 +36,9 @@
 	</form>
 	<c:forEach var="o" items="${question.options }">
 	<li>${o.optionText} correct:${o.correct} </li>
+	<form action="deleteOption.do?optionId=${o.Id}" method="POST">
+		<button type="submit" class="btn btn-primary">Delete</button>
+	</form>
 	</c:forEach>
 
 	<form action="addOption.do" method="POST">

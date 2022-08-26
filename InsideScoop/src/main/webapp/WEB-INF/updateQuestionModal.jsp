@@ -47,7 +47,13 @@
 		</form>
 		
 		<c:forEach var="o" items="${displayQuestion.options }">
-	<li>${o.optionText} correct:${o.correct} </li>
+	<form action="deleteOption.do" method="POST">
+	<input type="hidden" name="optionId" value="${o.id}">
+	<input type="hidden" name="questionId" value="${displayQuestion.id}">
+	<input type="hidden" name="popup" value="true">
+		<button type="submit" class="btn btn-primary">${o.optionText} correct:${o.correct}</button>
+	</form>
+	
 	</c:forEach>
 	
 	<form action="addOption.do" method="POST">
