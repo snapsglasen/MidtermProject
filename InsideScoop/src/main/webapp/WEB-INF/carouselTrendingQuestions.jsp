@@ -26,7 +26,7 @@
     				<div class="d-flex h-100 align-items-center justify-content-center">
     				<img src="img/cream.png" class="d-block w-100">
       					<div class="carousel-caption h-75 pb-4 mb-4">
-        					<h5><a href="showQuestion.do?questionId=<c:out value="${question.id }"/>">${question.description }</a></h5>
+        					<h5><a href="question.do?questionId=<c:out value="${question.id }"/>">${question.description }</a></h5>
       					</div>
       				</div>
 				</div>
