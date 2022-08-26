@@ -310,6 +310,19 @@ public class UserController {
 		correct.addAttribute("correct", totalCor.size());
 		return "profile";
 	}
+	@RequestMapping(path = "updateProfileAttemptAdmin.do")
+	public String updatedProfileAdmin(HttpSession session, Model model, Model login, Model correct,int id, String firstName,
+			String lastName, String email, String username, String password, int category, String workRole,
+			String company, String profilePicture) {
+		User profile = userDAO.updateProfile(id, firstName, lastName, email, username, password, category, workRole,
+				company, profilePicture);
+		model.addAttribute("profile", profile);
+		User user = (User) session.getAttribute("loggedInUser");
+		login.addAttribute("loginCheck", user);		
+		List<Attempt> totalCor= optionDAO.userTotalCorrectAttempts(profile);
+		correct.addAttribute("correct", totalCor.size());
+		return "profile";
+	}
 
 	@RequestMapping(path = "updatePost.do")
 	public String updatePost(HttpSession session, Model model, Model login, Model cat, int id) {
